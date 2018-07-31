@@ -1,0 +1,14 @@
+/*主体*/
+.main{
+	margin: 0 auto;
+	margin-top: 150px;
+	max-width: 600px;
+	margin-bottom: 100px;
+}
+.ui.form {
+	margin: 0 auto;
+	max-width: 400px;
+}
+.mybutton{
+	float: right;
+}
