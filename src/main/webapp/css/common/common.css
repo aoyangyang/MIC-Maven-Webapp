@@ -1,0 +1,35 @@
+/*头部*/
+body{
+	background: #F5F6F7;
+}
+.ui.segment.fixed.menu{
+	height: 50px;
+}
+.top-main{
+	width: 80%;
+	margin: 0 auto;
+	margin-top: -10px;
+}
+.ui.image.logo>img{
+	max-height: 40px;
+	margin-top: -5px;
+}
+.top-main-right>a{
+	color:white;
+}
+.top-main-right{
+	float: right;
+}
+.large.ui.buttons.top{
+	margin-left: 50px;
+}
+
+/*脚部*/
+.ui.segment.inverted.foot{
+			margin-top: 100px;
+			margin-bottom: 0px;
+		}
+.foot-main{
+	width: 80%;
+	margin: 0 auto;
+}
