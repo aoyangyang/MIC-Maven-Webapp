@@ -1,0 +1,12 @@
+/*主体*/
+.main{
+			margin: 0 auto;
+			margin-top: 100px;
+			min-height: 1200px;
+			max-width: 1200px;
+		}
+		
+.ui.segment.basic.vertical.t{
+			margin-top: 80px;
+		}
+		
