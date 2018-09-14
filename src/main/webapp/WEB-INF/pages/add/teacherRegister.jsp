@@ -25,12 +25,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     </head>
   
-    <body>
+    <body id="box">
         <%@include file="../common/top.jsp" %>
      	<!--中间-->
 		<div class="main">
 			<div class="ui raised very padded segment">
-				<form class="ui form">
+				<form action="${basePath}/TeacherRegisterDo" class="ui form" method="post">
 					<h1 class="ui center aligned dividing header">老师注册</h1>
 					  	<div class="field">
 					    	<label>姓名</label>
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    		<label>确认密码</label>
 					    	<div class="ui fluid left icon input">
 						    	<i class="ui icon lock"></i>
-						    <input v-model="password2" name="password" type="password" placeholder="请再次输入密码" value="">
+						    <input v-model="password2" name="password1" type="password" placeholder="请再次输入密码" value="">
 						    <label class="message" style="float: right;color: red;">
 					    		{{passMessage}}
 					    	</label>
