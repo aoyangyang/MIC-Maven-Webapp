@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mic.dao.LoginUserDao">
+
+	<!-- 学生登录 -->
+	<select id="studentLogin" resultType="com.mic.bean.NameAndId" parameterType="com.mic.bean.LoginUser">
+		SELECT
+			id,username
+		FROM
+			student
+		WHERE
+			username = #{username} AND
+			password = #{password}
+		
+	</select>
+	
+	<!-- 老师登录 -->
+	<select id="teacherLogin" resultType="com.mic.bean.NameAndId" parameterType="com.mic.bean.LoginUser">
+		SELECT
+			id,username
+		FROM
+			teacher
+		WHERE
+			username = #{username} AND
+			password = #{password}
+		
+	</select>
+	
+	<!-- 管理者登录 -->
+	<select id="leaderLogin" resultType="com.mic.bean.NameAndId" parameterType="com.mic.bean.LoginUser">
+		SELECT
+			id,username
+		FROM
+			leader
+		WHERE
+			username = #{username} AND
+			password = #{password}
+		
+	</select>
+	
+	
+	<!-- 辅导员登录 -->
+	<select id="adClassLogin" resultType="Integer" parameterType="Integer">
+		SELECT
+			id
+		FROM
+			ad_class
+		WHERE
+			leader_id = #{no}
+	</select>
+	
+	<!-- 学工组登录 -->
+	<select id="adDepartmentLogin" resultType="Integer" parameterType="Integer">
+		SELECT
+			id
+		FROM
+			ad_departments
+		WHERE
+			leader_id = #{no}
+	</select>
+	
+	<!-- 院领导登录 -->
+	<select id="adSchoolLogin" resultType="Integer" parameterType="Integer">
+		SELECT
+			id
+		FROM
+			ad_school
+		WHERE
+			leader_id = #{no}
+	</select>
+	
+</mapper>  
