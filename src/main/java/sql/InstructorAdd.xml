@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mic.dao.InstructorAddDao">
+
+	<!-- 查出所有的学校 -->
+	<select id="findAllSchool" resultType="com.mic.bean.FindSchool">  
+		SELECT
+			id,s_name
+		FROM
+			school;
+	</select>  
+	
+	
+	<select id="findDepartments" parameterType="Integer" resultType="com.mic.bean.FindDepartments">  
+		SELECT 
+			id,d_name
+		FROM
+			departments
+		WHERE
+			school_id = #{id};
+		
+	</select>   
+	
+	<insert id="addClasss"  parameterType="com.mic.bean.AddClass" flushCache="true" 
+							useGeneratedKeys="true" keyProperty="id" keyColumn="id">  
+		INSERT INTO 
+			class(
+				classname,
+				departments_id,
+				enrolment,
+				class_size
+			)VALUES(
+				#{classname},
+				#{departments_id},
+				#{enrolment},
+				#{class_size}
+		)
+	</insert>  	
+	
+	<insert id="adClasss"  parameterType="com.mic.bean.AdClass" flushCache="true" >  
+		INSERT INTO 
+			ad_class(
+				leader_id,
+				class_id
+		)VALUES(
+				#{leaderId},
+				#{classId}
+		)
+	
+	
+		
+		
+	</insert>
+	
+</mapper>  
