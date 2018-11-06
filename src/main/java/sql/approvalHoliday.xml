@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mic.dao.approvalHolidayDao">
+
+	<select id="Getstudentname"  resultType="String">
+			 SELECT 
+	             username
+		     FROM
+				 student
+			 WHERE
+				 id = (
+				   SELECT
+				       student_id 
+				   FROM
+					   `leave`
+			       WHERE 
+			           id = #{id})
+	</select>
+	 
+	 <select id="GetstudentId"  resultType="Integer">
+			 SELECT
+				 student_id 
+			 FROM
+		        `leave`
+			 WHERE 
+			     id = #{id}
+	</select> 
+	
+	<select id="Getclassname"  resultType="String">
+			
+	        SELECT 
+	             classname 
+	        FROM
+			    class
+            WHERE
+                id = (
+		            SELECT 
+						 class_id 
+					FROM 
+						student
+					WHERE
+						id = ( 
+						 SELECT 
+						       student_id 
+						 FROM 
+						       `leave` 
+						 WHERE 
+						 id = #{id}))
+				
+	</select>
+	
+	 <select id="Getschoolname"  resultType="String">
+			 
+			 SELECT 
+			    d_name
+			 FROM
+				departments
+			 WHERE
+				id = (
+		            SELECT 
+			             departments_id 
+			        FROM
+					    class
+		            WHERE
+		                id = (
+				            SELECT 
+								 class_id 
+							FROM 
+								student
+							WHERE
+								id = ( 
+								 SELECT 
+								       student_id 
+								 FROM 
+								       `leave` 
+								 WHERE 
+								 id = #{id})))
+				
+	</select>
+
+	<select id="Getphone"  resultType="String">
+			 SELECT 
+			       s_phone
+			 FROM 
+			       `leave` 
+			 WHERE 
+			      id = #{id}			
+	</select>
+	
+	<select id="Getbtime"  resultType="String">
+			 SELECT 
+			       begin_time
+			 FROM 
+			       `leave` 
+			 WHERE 
+			      id = #{id}			
+	</select>
+	
+	<select id="Getetime"  resultType="String">
+			 SELECT 
+			       end_time
+			 FROM 
+			       `leave` 
+			 WHERE 
+			      id = #{id}			
+	</select>
+	
+    <select id="Getreason"  resultType="String">
+			 SELECT 
+			       reason
+			 FROM 
+			       `leave` 
+			 WHERE 
+			      id = #{id}			
+	</select>
+	
+	 <select id="modify1"  resultType="String">
+			 UPDATE
+                  `leave`
+	         SET 
+	              state = 1
+	         WHERE 
+	              id = #{id}			
+	</select>
+	
+	 <select id="GetcoursesId"  resultType="Integer">
+			 SELECT 
+			 distinct 	
+				 course_id 
+			 FROM
+				 elective
+			 WHERE
+				 student_id = #{studentid}			
+	</select>
+	
+	<select id="Getcbtime"  resultType="String">
+			 SELECT
+		        begin_time
+		     FROM
+		        course_note
+		     WHERE course_id = #{cid}			
+	</select>
+	
+	<select id="Getcoursename"  resultType="String">
+			 SELECT
+		        course_name
+		     FROM
+		        course
+		     WHERE id = #{courseid}			
+	</select>
+		
+</mapper> 
