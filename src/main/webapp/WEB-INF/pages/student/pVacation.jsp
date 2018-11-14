@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>请假</title>
 	<%@include file="../common/context.jsp" %>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/mic/pVacation.css"/>
-    <script src="${basePath}/js/layDate/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${basePath}/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -30,47 +30,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!--中间-->
     <div class="main">
         <div class="ui raised very padded segment">
-            <form class="ui form">
+            <form class="ui form" action="${basePath}/pVacation" method="post">
                 <h1 class="ui center aligned dividing header">请假</h1>
                 <div class="field">
                     <label>学生姓名</label>
                     <div class="ui fluid left icon input">
                         <i class="ui icon student"></i>
-                        <input name="" type="text" placeholder="请输入学生的姓名" value="">
+                        <input name="Sname" type="text" readonly="readonly" value="雷">
                     </div>
                 </div>
                 <div class="field">
                     <label>学号</label>
                     <div class="ui fluid left icon input">
                         <i class="ui info circle icon"></i>
-                        <input name="" type="text" v-model="sid" id="Studentid" placeholder="请输入学号" value="">
+                        <input name="Sid" type="text" v-model="sid" id="Studentid" placeholder="请输入学号" value="">
                     </div>
                 </div>
                 <div class="field">
                     <label>手机号码</label>
                     <div class="ui fluid left icon input">
                         <i class="ui icon phone"></i>
-                        <input name="" v-model="tel" type="text" id="phone" placeholder="请输入11位手机号码" value="">
+                        <input name="Pnum" v-model="tel" type="text" id="phone" placeholder="请输入11位手机号码" value="">
                     </div>
                 </div>
                 <div class="field">
                     <label>开始时间</label>
                     <div class="ui fluid left icon input">
                         <i class="calendar icon"></i>
-                        <input name="" type="text" value="" id="start1">
+                        <input name="Btime" type="text" value="" id="start1">
                     </div>
                 </div>
                 <div class="field">
                     <label>结束时间</label>
                     <div class="ui fluid left icon input">
                         <i class="calendar icon"></i>
-                        <input name="" type="text" value="" id="start2">
+                        <input name="Etime" type="text" value="" id="start2">
                     </div>
                 </div>
                 <div class="field">
                     <label>原因</label>
                     <div class="ui fluid left icon input">
-                        <textarea rows="2"></textarea>
+                        <textarea rows="2" name = "reson"></textarea>
                     </div>
                 </div>
                 <div class="B">
