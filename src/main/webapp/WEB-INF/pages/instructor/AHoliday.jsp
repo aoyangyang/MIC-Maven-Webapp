@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,10 +10,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>学生选课</title>
+    <title>批假</title>
 	<%@include file="../common/context.jsp" %>
-    <link rel="stylesheet" type="text/css" href="${basePath}/css/mic/select1.css"/>
-    <script src="${basePath}/js/layDate/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="${basePath}/css/mic/approvalHoliday.css"/>
+    <script src="${basePath}/js/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -27,28 +28,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
     <body id="box">
         <%@include file="../common/top.jsp" %>
+         <br> <br>
             <!--中间-->
     <div class="main">
         <div class="ui raised very padded segment">
-            <form class="ui form" action="${basePath}/select1" method="post">
-                <h1 class="ui center aligned dividing header" align="center">学生选课</h1>
+               <div class="ui list">
+               <h1 class="ui center aligned dividing header">批假</h1>
+               <form class="ui form" action="${basePath}/AHolidayWeb"  method="post">
+               <c:forEach items = "${aholidaybean}" var="aholidaybean" >
                 <div class="field">
-                    <label>学生姓名</label>
+                    <div class="ui input">
+                        <input name="id" type="hidden" value="${aholidaybean.id}">
+                    </div>
                     <div class="ui fluid left icon input">
-                        <input name="sname" type="text"  value="雷" readonly="readonly">
+						<i class="ui icon user"></i>
+                        <input name="teacherName" type="submit" value="姓名:${aholidaybean.studentname} 班级：${aholidaybean.classname}">
                     </div>
                 </div>
-                <div class="field">
-                    <label>课程ID</label>
-                    <div class="ui fluid left icon input">
-                        <input name="c_id" type="text"  placeholder="请输入课程ID" value="">
-                    </div>
-                </div>
-                <div class="B">
-                    <button class="ui teal button"><i class="ui sign in icon"></i>提交</button>
-                </div>
-				<br />
-            </form>
+				  <br>
+				  </c:forEach>
+				  </form>
+			   </div>  
         </div>
     </div>
         <%@include file="../common/food.jsp" %>

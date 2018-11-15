@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>院领导注册</title>
+    <title>学生选课</title>
 	<%@include file="../common/context.jsp" %>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/mic/select2.css"/>
     <script src="${basePath}/js/layDate/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
@@ -30,18 +30,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!--中间-->
     <div class="main">
         <div class="ui raised very padded segment">
-            <form class="ui form">
+            <form class="ui form" action="${basePath}/select2" method="post">
                 <h1 class="ui center aligned dividing header">课程信息</h1>
                 <div class="field">
                     <label>课程名</label>
                     <div class="ui fluid left icon input">
-                        <input name="" type="text"  value="" readonly="readonly">
+                        <input name="Cname" type="text"  value="${Cname}" readonly="readonly">
                     </div>
                 </div>
                 <div class="field">
                     <label>教师名</label>
                     <div class="ui fluid left icon input">
-                        <input name="" type="text"  readonly="readonly" value="">
+                        <input name="Tname" type="text"  readonly="readonly" value="${Tname}">
                     </div>
                 </div>
                 <div class="B">
