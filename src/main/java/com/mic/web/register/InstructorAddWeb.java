@@ -1,4 +1,4 @@
-package com.mic.web;
+package com.mic.web.register;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import net.sf.json.JSONArray;
 
 /**
  * 
- * 
+ * 辅导员跳转添加班级的页面
  * InstructorAddWeb
  * 创建人:Shanice
  * 时间：2018年10月18日-下午5:55:28 
@@ -106,12 +106,6 @@ public class InstructorAddWeb {
 		Integer adClassId = (Integer) re.getSession().getAttribute("adClassId");
 		
 		
-		System.out.println("我是classID"+classId+"=========="+"我的辅导员id"+adClassId);
-		
-		
-		
-		
-		//吧  105和106的两个数据写入数据库    可以参考上面的那个插入   不需要返回值
 		instructorAddDo.adClass(classId,adClassId);
 		
 		

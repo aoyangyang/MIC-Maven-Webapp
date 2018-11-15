@@ -6,7 +6,7 @@
  * 时间：2018年8月12日-下午8:38:21 
  * 2018陈鹏-版权所有
  */
-package com.mic.web;
+package com.mic.web.showMsg;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

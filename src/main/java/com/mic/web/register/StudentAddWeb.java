@@ -6,7 +6,7 @@
  * 时间：2018年8月5日-下午10:15:56 
  * 2018陈鹏-版权所有
  */
-package com.mic.web;
+package com.mic.web.register;
 
 import java.util.List;
 
@@ -29,6 +29,7 @@ import net.sf.json.JSONArray;
 
 /**
  * 
+ * 学生注册页面
  * StudentAddWeb
  * 创建人:chenPeng
  * 时间：2018年8月5日-下午10:15:56 

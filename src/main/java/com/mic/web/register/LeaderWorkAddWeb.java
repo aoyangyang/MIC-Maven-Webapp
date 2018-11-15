@@ -6,12 +6,11 @@
  * 时间：2018年8月4日-下午10:13:51 
  * 2018陈鹏-版权所有
  */
-package com.mic.web;
+package com.mic.web.register;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +27,7 @@ import net.sf.json.JSONArray;
 
 /**
  * 
+ * 学工组注册
  * LeaderWorkAddWeb
  * 创建人:chenPeng
  * 时间：2018年8月4日-下午10:13:51 

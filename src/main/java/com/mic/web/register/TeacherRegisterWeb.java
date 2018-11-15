@@ -6,7 +6,7 @@
  * 时间：2018年8月5日-下午7:44:01  
  * 2018李向阳-版权所有
  */
-package com.mic.web;
+package com.mic.web.register;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +22,7 @@ import com.mic.service.TeacherRegisterDo;
                                                      
 /**
  * 
- * 
+ * 老师注册
  * TeacherRegisterWeb
  * 创建人:Shanice
  * 时间：2018年8月5日-下午7:44:01 

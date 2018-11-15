@@ -6,7 +6,7 @@
  * 时间：2018年8月4日-下午3:34:46 
  * 2018陈鹏-版权所有
  */
-package com.mic.web;
+package com.mic.web.register;
 
  import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +22,7 @@ import com.mic.service.LeaderDepAddDo;
 
 /**
  * 
+ * 院领导注册
  * LeaderDepAddWeb
  * 创建人:chenPeng
  * 时间：2018年8月4日-下午3:34:46 
