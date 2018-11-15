@@ -47,7 +47,7 @@ public class LoginUserWeb {
 	@RequestMapping("/Login")
 	public ModelAndView loginUser(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("Login");
+		modelAndView.setViewName("login");
 		return modelAndView;
 	}
 	
@@ -82,7 +82,7 @@ public class LoginUserWeb {
 			return loginUserDo.departmentLogin(username,password);
 		}else {
 			re.getSession().setAttribute("errorMessage", "选择有误");
-			return new ModelAndView("redirect:/500.jsp");
+			return new ModelAndView("redirect:/stuIndex");
 		}
 	}
 }

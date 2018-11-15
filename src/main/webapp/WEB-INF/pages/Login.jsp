@@ -74,8 +74,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<div class="mybutton">
 				  		<button class="ui teal right floated button" type="submit"><i class="ui sign in icon"></i>登录</button>
-						<a href="#" target="_blank">
-					  		<button class="ui red button" type=""><i class="ui write square icon"></i>注册</button>
+						<a href="${basePath}/selectAdd" target="_blank">
+					  		<button class="ui red button" type="button"><i class="ui write square icon"></i>注册</button>
 						</a>
 					</div><br /><br />
 				</form>

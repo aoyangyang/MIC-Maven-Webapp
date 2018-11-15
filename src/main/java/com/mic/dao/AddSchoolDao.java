@@ -59,4 +59,6 @@ public interface AddSchoolDao {
 	 * @since  1.0.0
 	 */
 	public void AddDepartments(AddSchool addschool);
+	
+	
 }

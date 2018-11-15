@@ -8,11 +8,6 @@
 			<div class="ui image logo">
 				<img src="img/logo.png"/>
 			</div>
-			<div class="large ui buttons inverted blue  top">
-				<button class="ui button">学生登录</button>
-				<button class="ui button">教师登录</button>
-				<button class="ui button">辅导员登录</button>
-			</div>
 			
 			<!--用户状态-->
 			<div class="top-main-right">

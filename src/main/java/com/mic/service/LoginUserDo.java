@@ -25,6 +25,7 @@ public class LoginUserDo {
 	@Autowired
 	private HttpServletRequest re;
 	
+	
 	/**
 	 * 
 	 * 学生登录
@@ -39,8 +40,6 @@ public class LoginUserDo {
 	 * @since  1.0.0
 	 */
 	public ModelAndView studentLogin(String username, String password){
-		ModelAndView andView = new ModelAndView();
-		
 		
 		LoginUser loginUser = new LoginUser();
 		loginUser.setPassword(password);
@@ -51,12 +50,11 @@ public class LoginUserDo {
 			re.getSession().setAttribute("errorMessage", "账号或者密码错误");
 			return new ModelAndView("redirect:/500.jsp");
 		}  
-
+		
 		re.getSession().setAttribute("studentId", nameAndId.getId());
 		re.getSession().setAttribute("studentName", nameAndId.getUsername());
 		
-		andView.setViewName("/Student的页面");
-		return andView;
+		return new ModelAndView("redirect:/stuIndex");
 	}
 	
 	/**
@@ -73,8 +71,6 @@ public class LoginUserDo {
 	 * @since  1.0.0
 	 */
 	public ModelAndView teacherLogin(String username, String password){
-		ModelAndView andView = new ModelAndView();
-		
 		LoginUser loginUser = new LoginUser();
 		loginUser.setUsername(username);
 		loginUser.setPassword(password);
@@ -88,8 +84,7 @@ public class LoginUserDo {
 		re.getSession().setAttribute("teacherId", nameAndId.getId());
 		re.getSession().setAttribute("teacherName", nameAndId.getUsername());
 		
-		andView.setViewName("Teacher的界面");
-		return andView;
+		return new ModelAndView("redirect:/TeaIndex");
 	}
 	
 	/**
@@ -135,27 +130,25 @@ public class LoginUserDo {
 	 * @since  1.0.0
 	 */
 	public ModelAndView getAd(NameAndId nameAndId){
-		ModelAndView andView = new ModelAndView();
-		
-		
 		Integer adClass = loginUserDao.adClassLogin(nameAndId.getId());
 		Integer adDepartment = loginUserDao.adDepartmentLogin(nameAndId.getId());
 		Integer adSchool = loginUserDao.adSchoolLogin(nameAndId.getId());
 		if(adClass != null){
 			re.getSession().setAttribute("adClassId", nameAndId.getId());
 			re.getSession().setAttribute("adClassName", nameAndId.getUsername());
-			andView.setViewName("/辅导员页面");
+			return new ModelAndView("redirect:/InsIndex");
 		}
 		if(adDepartment != null){
 			re.getSession().setAttribute("adDepartmentId", nameAndId.getId());
 			re.getSession().setAttribute("adDepartmentName", nameAndId.getUsername());
-			andView.setViewName("/学工组页面");
+			return new ModelAndView("redirect:/DepIndex");
 		}
 		if(adSchool != null){
 			re.getSession().setAttribute("adSchoolId", nameAndId.getId());
 			re.getSession().setAttribute("adSchoolName", nameAndId.getUsername());
-			andView.setViewName("/院领导页面");
+			return new ModelAndView("redirect:/SchIndex");
 		}
-		return andView;
+		re.getSession().setAttribute("errorMessage", "账户或者密码错误");
+		return new ModelAndView("redirect:/500.jsp");
 	}
 }

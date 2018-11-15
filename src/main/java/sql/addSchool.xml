@@ -20,7 +20,7 @@
 				s_name=#{schoolName};
 	</select>
 	
-	
+	<!-- 写入学部 -->
 	<insert id="AddDepartments"  parameterType="com.mic.bean.AddSchool" flushCache="true">  
 			INSERT INTO 
 				departments(d_name,school_id)

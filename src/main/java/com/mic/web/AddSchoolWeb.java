@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mic.core.NoteIsNull;
 import com.mic.service.AddSchoolDo;
 
 /**
@@ -48,27 +49,50 @@ public class AddSchoolWeb {
 	@RequestMapping("/admin/addSchool")
 	public ModelAndView initAddSchool(){
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("122");
 		modelAndView.setViewName("admin/addSchool");
 		return modelAndView;
 	}
 	
-	
+	/**
+	 * 执行添加学校
+	 * 方法名：addSchoolDo
+	 * 创建人：chenPeng
+	 * 时间：2018年8月4日-下午1:40:59 
+	 * 手机:17673111810
+	 * @param re
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
 	@RequestMapping(value="/admin/addSchoolDo",method = RequestMethod.POST)
 	public ModelAndView addSchoolDo(HttpServletRequest re){
 		ModelAndView modelAndView = new ModelAndView();
-		String schoolName = re.getParameter("schoolName");
+		NoteIsNull noteIsNull = new NoteIsNull();
 		int numbers = 0;
 		String name = "";
+		
+		String schoolName = re.getParameter("schoolName");
+		//学校名为空
+		if(!noteIsNull.noteIsNull(schoolName)){
+			re.getSession().setAttribute("errorMessage", "学校名为空");
+			return new ModelAndView("redirect:/500.jsp");
+		}
+		
 		List<String> nameList = new ArrayList<String>();
 		for (int i = 0;;i++) {
 			name = re.getParameter("button"+i);
+			//为空即未添加到这里
 			if(name == null){
 				break;
 			}
+			//值为空那么用户添加数据有问题
+			if(!noteIsNull.noteIsNull(name)){
+				//提示错误信息
+				re.getSession().setAttribute("errorMessage", "学院/学部名称有值为空");
+				return new ModelAndView("redirect:/500.jsp");	
+			}
 			nameList.add(name);
 		}
-		
 		addSchoolDo.addSchool(schoolName, nameList);
 		
 		return modelAndView;
