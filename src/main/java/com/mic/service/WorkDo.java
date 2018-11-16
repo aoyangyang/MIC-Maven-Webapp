@@ -42,7 +42,7 @@ public class WorkDo {
 		Integer adDepartmentsId = 
 				(Integer) re.getSession().getAttribute("adDepartmentsId");
 		//得到全部的班级
-		List<Classs> classList = workDao.getAllClass(8);
+		List<Classs> classList = workDao.getAllClass(adDepartmentsId);
 		//实列化一个饼图List
 		List<PancakeDate> pancakeList = new ArrayList<PancakeDate>();
 		

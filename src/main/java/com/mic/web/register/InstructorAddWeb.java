@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mic.bean.AddClass;
 import com.mic.bean.FindDepartments;
 import com.mic.bean.FindSchool;
+import com.mic.bean.Leader;
 import com.mic.service.InstructorAddDo;
 
 import net.sf.json.JSONArray;
@@ -21,7 +22,7 @@ import net.sf.json.JSONArray;
 /**
  * 
  * 辅导员跳转添加班级的页面
- * InstructorAddWeb
+ * InstructorAddWeb 
  * 创建人:Shanice
  * 时间：2018年10月18日-下午5:55:28 
  * @version 1.0.0
@@ -34,6 +35,54 @@ public class InstructorAddWeb {
 	
 	@Autowired
 	private InstructorAddDo instructorAddDo;
+	
+	
+	/**
+	 * 
+	 * 跳转到辅导员注册页面
+	 * 方法名：initInsAdd
+	 * 创建人：chenPeng
+	 * 时间：2018年11月16日-下午10:03:59 
+	 * 手机:17673111810
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping("/insAdd")
+	public ModelAndView initInsAdd(){
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("add/insAdd");
+		return andView;
+	}
+	
+	@RequestMapping(value="/insAddDo",method=RequestMethod.POST)
+	public ModelAndView insAddDo(
+				String username,
+				String tel,
+				String password1,
+				String password2,
+				String address,
+				String email
+			){
+		/*
+		 * 判断两次密码是否相同
+		 */
+		if(!password1.equals(password2)){
+			re.getSession().setAttribute("errorMessage", "两次密码不一致");
+			return new ModelAndView("redirect:/500.jsp");
+		}
+		
+		Leader leader= new Leader();
+		leader.setAddress(address);
+		leader.setEmail(email);
+		leader.setPassword(password1);
+		leader.setPhone(tel);
+		leader.setUsername(username);
+		
+		instructorAddDo.insAdd(leader);
+		
+		return new ModelAndView("redirect:/Login");
+	}
 	
 	/**
 	 * 
@@ -87,6 +136,21 @@ public class InstructorAddWeb {
 	}
 	
 	
+	/**
+	 * 
+	 * 执行添加学校操作
+	 * 方法名：instructorAddClass
+	 * 创建人：chenPeng
+	 * 时间：2018年11月16日-下午9:31:53 
+	 * 手机:17673111810
+	 * @param addClass
+	 * @param departments
+	 * @param AddYear
+	 * @param user
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
 	@RequestMapping(value="/InstructorAddDo",method=RequestMethod.POST)
 	public ModelAndView instructorAddClass(
 			String addClass,
@@ -94,7 +158,6 @@ public class InstructorAddWeb {
 			Integer AddYear,
 			Integer user
 			){
-		ModelAndView andView = new ModelAndView();
 		
 		AddClass addCLass = new AddClass();
 		addCLass.setDepartments_id(departments);
@@ -108,10 +171,7 @@ public class InstructorAddWeb {
 		
 		instructorAddDo.adClass(classId,adClassId);
 		
-		
-		
-		andView.setViewName("辅导员首页");
-		return andView;
+		return new ModelAndView("redirect:/InsIndex");
 	}
 	
 	

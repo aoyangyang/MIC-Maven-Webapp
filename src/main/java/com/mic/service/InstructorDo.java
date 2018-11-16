@@ -53,7 +53,7 @@ public class InstructorDo {
 		//get辅导员id
 		Integer adClassId = 
 				(Integer) re.getSession().getAttribute("adClassId");
-		return instructorDao.getClasss(1);
+		return instructorDao.getClasss(adClassId);
 	}
 	
 	public ModelAndView addDate(TimeAndId timeAndId){

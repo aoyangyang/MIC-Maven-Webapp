@@ -9,6 +9,7 @@ import com.mic.bean.AdClass;
 import com.mic.bean.AddClass;
 import com.mic.bean.FindDepartments;
 import com.mic.bean.FindSchool;
+import com.mic.bean.Leader;
 import com.mic.dao.InstructorAddDao;
 
 /**
@@ -24,6 +25,23 @@ import com.mic.dao.InstructorAddDao;
 public class InstructorAddDo {
 	@Autowired
 	private InstructorAddDao instructorAddDao;
+	
+	/**
+	 * 
+	 * 管理员注册
+	 * 方法名：insAdd
+	 * 创建人：chenPeng
+	 * 时间：2018年11月16日-下午10:58:33 
+	 * 手机:17673111810
+	 * @param leader void
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public void insAdd(Leader leader){
+		instructorAddDao.insAddLeader(leader);
+		instructorAddDao.insAddAdClass(leader.getId());
+	}
+	
 	
 	/**
 	 * 初始化添加页面的全部学校

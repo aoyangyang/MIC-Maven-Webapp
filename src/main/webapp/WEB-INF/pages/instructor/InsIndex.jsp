@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ui img">
 						<img alt="" src="${basePath}/img/logo.png" class="ui img">
 					</div>
-					<a>
+					<a href="${basePath}/instructor">
 						<input class="ui primary button" value="查看到课情况">
 					</a>
 				</div>
@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ui img">
 						<img alt="" src="${basePath}/img/logo.png" class="ui img">
 					</div>
-					<a>
+					<a href="${basePath}/add/instructorAdd">
 						<input class="ui  red button" value="新建班级">
 					</a>
 				</div>

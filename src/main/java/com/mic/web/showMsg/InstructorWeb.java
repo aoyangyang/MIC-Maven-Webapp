@@ -54,7 +54,6 @@ public class InstructorWeb {
 	public ModelAndView instructorFond(
 			String date,Integer classs,Integer section){
 		
-		ModelAndView andView = new ModelAndView();
 		NoToClass noToClass = new NoToClass();
 		TimeAndId timeAndId = new TimeAndId();
 		

@@ -6,8 +6,43 @@ import com.mic.bean.AdClass;
 import com.mic.bean.AddClass;
 import com.mic.bean.FindDepartments;
 import com.mic.bean.FindSchool;
+import com.mic.bean.Leader;
 
 public interface InstructorAddDao {
+	
+	/**
+	 * 辅导员注册写入leader
+	 * 方法名：insAddLeader
+	 * 创建人：chenPeng
+	 * 时间：2018年11月16日-下午10:39:46 
+	 * 手机:17673111810
+	 * @param leader
+	 * @return void
+	 * @exception 
+	 * @since  1.0.0
+	 */
+    public void insAddLeader(Leader leader);
+	
+    
+    
+    
+    
+    /**
+     * 辅导员注册预先写入 ad_class表
+     * 方法名：insAddAdClass
+     * 创建人：chenPeng
+     * 时间：2018年11月16日-下午10:40:13 
+     * 手机:17673111810
+     * @param id
+     * @return int
+     * @exception 
+     * @since  1.0.0
+     */
+	public int insAddAdClass(Integer id);
+	
+	
+	
+	
 	/**
 	 * 索引出全部学校
 	 * 方法名：findAllSchool
@@ -19,6 +54,9 @@ public interface InstructorAddDao {
 	 * @since  1.0.0
 	 */
 	public List<FindSchool> findAllSchool();
+	
+	
+	
 	
 	/**
 	 *
@@ -33,6 +71,9 @@ public interface InstructorAddDao {
 	 */
 	public List<FindDepartments> findDepartments(Integer id); 
 	
+	
+	
+	
 	/**
 	 * 
 	 * 添加班级
@@ -46,6 +87,9 @@ public interface InstructorAddDao {
 	 */
 	public void addClasss(AddClass addClass);
 	
+	
+	
+	
 	/**
 	 * 
 	 * 检索名字
@@ -58,6 +102,9 @@ public interface InstructorAddDao {
 	 * @since  1.0.0
 	 */
 	public void addClassDo(String classname);
+	
+	
+	
 	
 	/**
 	 *

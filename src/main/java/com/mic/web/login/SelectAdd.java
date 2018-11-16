@@ -6,7 +6,7 @@
  * 时间：2018年10月14日-下午2:51:32 
  * 2018陈鹏-版权所有
  */
-package com.mic.web;
+package com.mic.web.login;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 
+ * 注册页面
  * SelectAdd
  * 创建人:chenPeng
  * 时间：2018年10月14日-下午2:51:32 

@@ -53,7 +53,7 @@ public class DepLeadertestDo {
 		Integer adSchoolId = 
 				(Integer) re.getSession().getAttribute("adSchoolId");
 		
-		return depLeadertestDao.getAllDepart(4);
+		return depLeadertestDao.getAllDepart(adSchoolId);
 	}
 	/**
 	 * 得到饼状图

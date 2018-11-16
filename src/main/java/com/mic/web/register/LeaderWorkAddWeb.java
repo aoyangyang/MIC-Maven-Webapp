@@ -128,8 +128,6 @@ public class LeaderWorkAddWeb {
 		}
 		
 		
-		
-		
 		Leader leader = new Leader();
 		leader.setAddress(home);
 		leader.setEmail(email);

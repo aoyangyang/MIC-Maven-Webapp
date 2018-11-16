@@ -48,6 +48,7 @@
 			ad_class
 		WHERE
 			leader_id = #{no}
+		LIMIT 1
 	</select>
 	
 	<!-- 学工组登录 -->
@@ -58,6 +59,7 @@
 			ad_departments
 		WHERE
 			leader_id = #{no}
+		LIMIT 1
 	</select>
 	
 	<!-- 院领导登录 -->
@@ -68,6 +70,7 @@
 			ad_school
 		WHERE
 			leader_id = #{no}
+		LIMIT 1
 	</select>
 	
 </mapper>  
