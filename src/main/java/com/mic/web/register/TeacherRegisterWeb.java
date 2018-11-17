@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mic.bean.TeacherRegister;
-import com.mic.service.TeacherRegisterDo;
+import com.mic.service.register.TeacherRegisterDo;
 
                                                      
 /**

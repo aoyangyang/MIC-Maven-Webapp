@@ -1,4 +1,4 @@
-package com.mic.service;
+package com.mic.service.register;
 
 import java.util.List;
 

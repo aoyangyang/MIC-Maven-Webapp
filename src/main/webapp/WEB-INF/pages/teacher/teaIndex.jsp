@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -35,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ui img">
 						<img alt="" src="${basePath}/img/logo.png" class="ui img">
 					</div>
-					<a>
+					<a href="${basePath }/teacher/classList">
 						<input class="ui primary button" value="进入课堂">
 					</a>
 				</div>
@@ -45,6 +46,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<a>
 						<input class="ui primary button" value="课后交流">
+					</a>
+				</div>
+				<div class="boxs">
+					<div class="ui img">
+						<img alt="" src="${basePath}/img/logo.png" class="ui img">
+					</div>
+					<a href="${basePath}/tBCourse">
+						<input class="ui primary button" value="新建课程">
 					</a>
 				</div>
 				<div class="boxs">

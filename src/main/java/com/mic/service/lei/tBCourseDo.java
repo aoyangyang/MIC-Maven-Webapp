@@ -7,7 +7,7 @@
  * 2018雷-版权所有
  */
 
-package com.mic.service;
+package com.mic.service.lei;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,15 +41,18 @@ public class tBCourseDo {
 	 * @exception
 	 * @since  1.0.0
 	 */
-	public Integer tBCourse(String teacherName,String className,Integer classNum,String classTime,String classAddress)
+	public Integer tBCourse(Integer teacherID,String className,Integer classNum,String classTime,String classAddress)
 	{
         tBCourseBean tbcoursebean = new tBCourseBean();
-        tbcoursebean.setTeacherName(teacherName);
+        
+        tbcoursebean.setTeacherId(teacherID);
         tbcoursebean.setC_name(className);
         tbcoursebean.setO_time(classTime);
         tbcoursebean.setSize(classNum);
         tbcoursebean.setAddress(classAddress);
+        
         tbcoursedao.addCourse(tbcoursebean);
+        
         return tbcoursebean.getId();
 	}
 	

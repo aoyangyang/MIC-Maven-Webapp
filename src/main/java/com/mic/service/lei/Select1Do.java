@@ -6,7 +6,7 @@
  * 时间：2018年9月30日-下午13:03:04 
  * 2018雷-版权所有
  */
-package com.mic.service;
+package com.mic.service.lei;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,13 +39,12 @@ public class Select1Do {
 	 * @exception
 	 * @since  1.0.0
 	 */
-	public Select1Bean Select1(String sname, Integer Cid )
-	{
+	public Select1Bean Select1(String sname, Integer Cid ){
 		Select1Bean select1bean = new Select1Bean();
 		select1bean.setCid(Cid);
 		select1bean.setCname(select1.getCouresname(Cid));
-		//select1bean.setsName(sname);
 		select1bean.setS_id(select1.getStudentId(sname));
+		
 		select1bean.setTname(select1.getTeachername(Cid));
 		return select1bean;
 	}

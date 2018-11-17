@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mic.core.NoteIsNull;
-import com.mic.service.AddSchoolDo;
+import com.mic.service.register.AddSchoolDo;
 
 /**
  * 

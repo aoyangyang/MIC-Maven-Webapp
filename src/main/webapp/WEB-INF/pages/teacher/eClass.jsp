@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -31,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="main">
         <div class="ui raised very padded segment">
             <form class="ui form" action="${basePath}/eClassWeb"  method="post" enctype="multipart/form-data">
-                <h1 class="ui center aligned dividing header">上课信息</h1>
+                <h1 class="ui center aligned dividing header">上课信息——id：${C_id}</h1>
                 <div class="field">
                     <label>课程名</label>
                     <div class="ui fluid left icon input">

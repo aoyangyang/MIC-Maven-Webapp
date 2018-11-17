@@ -24,11 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mic.core.FileUp1;
-import com.mic.service.eClassDo;
+import com.mic.service.lei.eClassDo;
 
 
 /**
- * 
+ * 老师建立课程执行
  * eClassWeb
  * 创建人:lei
  * 时间：2018年9月28日-下午21:03:04  
@@ -42,19 +42,21 @@ public class eClassWeb {
 	
 	@Autowired
 	private HttpSession se;
+
 	/**
-	 * 老师添加学校的页面
+	 * 老师添加每堂课信息
 	 * 方法名：eClassDo
-	 * 创建人：lei
-	 * 时间：2018年9月28日-下午21:03:04 
+	 * 创建人：chenPeng
+	 * 时间：2018年11月17日-下午4:56:21 
 	 * 手机:17673111810
-	 * @return ModelAndView
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * @param file
+	 * @param re
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException ModelAndView
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	
 	@RequestMapping(value="/eClassWeb", method = RequestMethod.POST)
 	public ModelAndView eClassDo(@RequestParam MultipartFile file, HttpServletRequest re) throws IllegalStateException, IOException{
 		ModelAndView modelandview = new ModelAndView();
@@ -66,7 +68,7 @@ public class eClassWeb {
 							re.getParameter("Introduction"), 
 							re.getParameter("begintime"), 
 							re.getParameter("endtime"), Path);
-		modelandview.setViewName("student/pVacation");
+		modelandview.setViewName("老师首页");
 		return modelandview;
 	}
 }

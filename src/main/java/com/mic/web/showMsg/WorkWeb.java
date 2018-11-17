@@ -20,8 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mic.bean.PancakeDate;
 import com.mic.bean.TimeAndId;
 import com.mic.core.NoToClass;
-import com.mic.service.InstructorDo;
-import com.mic.service.WorkDo;
+import com.mic.service.showMsg.InstructorDo;
+import com.mic.service.showMsg.WorkDo;
 
 /**
  * 学工组

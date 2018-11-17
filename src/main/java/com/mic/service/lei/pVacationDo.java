@@ -6,7 +6,7 @@
  * 时间：2018年9月29日-下午17:28:04 
  * 2018雷-版权所有
  */
-package com.mic.service;
+package com.mic.service.lei;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

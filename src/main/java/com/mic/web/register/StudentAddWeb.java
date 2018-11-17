@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mic.bean.Classs;
 import com.mic.bean.Student;
 import com.mic.core.NoteIsNull;
-import com.mic.service.StudentAddDo;
+import com.mic.service.register.StudentAddDo;
 
 import net.sf.json.JSONArray;
 

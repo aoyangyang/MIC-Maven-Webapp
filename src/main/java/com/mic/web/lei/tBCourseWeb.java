@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.service.tBCourseDo;
+import com.mic.service.lei.tBCourseDo;
 
 /**
- * 
+ * 老师建立课程
  * tBCourseWeb
  * 创建人:lei
  * 时间：2018年9月26日-下午21:39:04 
@@ -52,18 +52,30 @@ public class tBCourseWeb {
 	@RequestMapping(value="/tBCourseWeb", method = RequestMethod.POST)
 	public ModelAndView tBCourseDo(HttpServletRequest re){
 		ModelAndView modelandview = new ModelAndView();
+		
 		String teacherName = re.getParameter("teacherName");
 		String className = re.getParameter("className");
 		Integer classNum = Integer.parseInt(re.getParameter("classNum"));
 		String classTime = re.getParameter("classTime");
 		String classAddress = re.getParameter("classAddress");
-		Integer C_id = tbcoursedo.tBCourse(teacherName, className, classNum, classTime, classAddress);
+		
+		//拿到老师id
+		Integer teacherID = (Integer) re.getSession().getAttribute("teacherId");
+		
+		
+		Integer C_id = tbcoursedo.tBCourse(teacherID, className, classNum, classTime, classAddress);
+		
+		
 		modelandview.addObject("teacherName", teacherName);
 		modelandview.addObject("className", className);
 		modelandview.addObject("classNum", classNum);
 		modelandview.addObject("classAddress", classAddress);
 		re.getSession().setAttribute("C_id", C_id);	
-		modelandview.setViewName("teacher/eClass");
-		return modelandview;
+		//modelandview.setViewName("teacher/eClass");
+		
+		modelandview.setViewName("teacher/classList");
+		
+		
+		return new ModelAndView("redirect:/teacher/classList");
 	}
 }

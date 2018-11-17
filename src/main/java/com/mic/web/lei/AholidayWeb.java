@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.service.AholidayDo;
 import com.mic.bean.AholidayBean;
-import com.mic.service.approvalHolidayDo;
+import com.mic.service.lei.AholidayDo;
+import com.mic.service.lei.approvalHolidayDo;
 import com.mic.bean.approvalHolidayBean;
 
 /**
- * 
+ * 批假
  * AholidayWeb
  * 创建人:lei
  * 时间：2018年11月03日-下午7:44:04
@@ -40,13 +40,18 @@ public class AholidayWeb {
 	private AholidayDo aholidaydo;
 	@Autowired
 	private approvalHolidayDo approvalHolidaydo;
+	@Autowired
+	private HttpServletRequest re;
+	
 	
 	@RequestMapping("/AHoliday")
 	public ModelAndView AHoliday(){
-		String username = "陈鹏";
 		ModelAndView mo = new ModelAndView();
-		mo.setViewName("instructor/AHoliday");
-    	List<AholidayBean> aholidayBean = aholidaydo.AholidayDo(username);
+		
+		Integer caClassId = (Integer) re.getSession().getAttribute("adClassId");
+    	List<AholidayBean> aholidayBean = aholidaydo.AholidayDos(caClassId);
+    	
+    	mo.setViewName("instructor/AHoliday");
     	mo.addObject("aholidaybean", aholidayBean);
 		return mo;
 	}

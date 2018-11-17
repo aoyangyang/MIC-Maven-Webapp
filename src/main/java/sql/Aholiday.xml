@@ -3,25 +3,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mic.dao.AholidayDao">
 
-	<select id="GetStudentIds"  resultType="Integer">
+	<select id="GetStudentIds"  resultType="Integer"  parameterType="Integer">
 			 SELECT 
 			    id 
 			 FROM 
 			    student 
 			 WHERE 
-			       class_id = (
+			       class_id IN (
 			         SELECT  
 			             class_id 
 			         FROM  
 			             ad_class 
 			         WHERE 
-			             leader_id = (
-			               SELECT 
-			                   id 
-			               FROM 
-			                   leader 
-			               WHERE 
-			                   username = #{username}))
+			             leader_id = #{caClassId})
 	</select>
 	 
 	 <select id="GetleaveId"  resultType="Integer">

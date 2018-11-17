@@ -1,4 +1,4 @@
-package com.mic.service;
+package com.mic.service.login;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -133,17 +133,17 @@ public class LoginUserDo {
 		Integer adClass = loginUserDao.adClassLogin(nameAndId.getId());
 		Integer adDepartment = loginUserDao.adDepartmentLogin(nameAndId.getId());
 		Integer adSchool = loginUserDao.adSchoolLogin(nameAndId.getId());
-		if(adClass != null){
+		if(adClass != null){ //辅导员
 			re.getSession().setAttribute("adClassId", nameAndId.getId());
 			re.getSession().setAttribute("adClassName", nameAndId.getUsername());
 			return new ModelAndView("redirect:/InsIndex");
 		}
-		if(adDepartment != null){
+		if(adDepartment != null){//学工组
 			re.getSession().setAttribute("adDepartmentId", nameAndId.getId());
 			re.getSession().setAttribute("adDepartmentName", nameAndId.getUsername());
 			return new ModelAndView("redirect:/DepIndex");
 		}
-		if(adSchool != null){
+		if(adSchool != null){//院领导
 			re.getSession().setAttribute("adSchoolId", nameAndId.getId());
 			re.getSession().setAttribute("adSchoolName", nameAndId.getUsername());
 			return new ModelAndView("redirect:/SchIndex");

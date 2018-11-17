@@ -24,7 +24,7 @@ import com.mic.bean.DepLeaderDetail;
 import com.mic.bean.Departments;
 import com.mic.bean.PancakeDate;
 import com.mic.core.CpDate;
-import com.mic.service.DepLeadertestDo;
+import com.mic.service.showMsg.DepLeadertestDo;
 
 /**
  * 院领导

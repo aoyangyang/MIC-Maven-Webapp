@@ -5,7 +5,6 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -34,21 +33,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="ui raised very padded segment">
                <div class="ui list">
                <h1 class="ui center aligned dividing header">批假</h1>
-               <form class="ui form" action="${basePath}/AHolidayWeb"  method="post">
-               <c:forEach items = "${aholidaybean}" var="aholidaybean" >
-                <div class="field">
-                    <div class="ui input">
-                        <input name="id" type="hidden" value="${aholidaybean.id}">
-                    </div>
-                    <div class="ui fluid left icon input">
-						<i class="ui icon user"></i>
-                        <input name="teacherName" type="submit" value="姓名:${aholidaybean.studentname} 班级：${aholidaybean.classname}">
-                    </div>
-                </div>
-				  <br>
-				  </c:forEach>
-				  </form>
-			   </div>  
+
+				<c:if test="${empty aholidaybean}">
+					 <h3 class="ui  red  header" style="margin-left: 10%">无批假请求！</h3>
+					 <a href="${basePath}/InsIndex">
+						 <button class="ui button inverted blue" style="float: right;">
+							 返回
+						 </button>
+					 </a>
+					 <br><br>
+				</c:if>
+				
+				<c:if test="${!empty aholidaybean}">
+					<form class="ui form" action="${basePath}/AHolidayWeb" method="post">
+						<c:forEach items="${aholidaybean}" var="aholidaybean">
+							<div class="field">
+								<div class="ui input">
+									<input name="id" type="hidden" value="${aholidaybean.id}">
+								</div>
+								<div class="ui fluid left icon input">
+									<i class="ui icon user"></i> <input name="teacherName"
+										type="submit"
+										value="姓名:${aholidaybean.studentname} 班级：${aholidaybean.classname}">
+								</div>
+							</div>
+							<br>
+						</c:forEach>
+					</form>
+				</c:if>
+				
+			</div>  
         </div>
     </div>
         <%@include file="../common/food.jsp" %>

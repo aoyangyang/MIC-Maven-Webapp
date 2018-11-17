@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.service.approvalHolidayDo;;
+import com.mic.service.lei.approvalHolidayDo;;
 
 /**
  * 
@@ -34,8 +34,8 @@ public class approvalHolidayWeb {
 	
 	@RequestMapping(value="/approvalHolidayWeb", method = RequestMethod.POST)
 	public ModelAndView AHoliday(HttpServletRequest re){
-		ModelAndView mo = new ModelAndView();
 		approvalHolidaydo.modify(Integer.parseInt(re.getSession().getAttribute("id").toString()), re.getParameter("state"));
-		return mo;
+		
+		return new ModelAndView("redirect:/InsIndex");
 	}
 }

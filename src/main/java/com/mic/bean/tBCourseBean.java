@@ -19,12 +19,20 @@ package com.mic.bean;
  */
 public class tBCourseBean {
 	private Integer id;
+	private Integer teacherId;
 	private String teacherName;
 	private Integer size;
 	private String c_name;
 	private String o_time;
 	private String address;
 	
+	
+	public Integer getTeacherId() {
+		return teacherId;
+	}
+	public void setTeacherId(Integer teacherId) {
+		this.teacherId = teacherId;
+	}
 	public Integer getId() {
 		return id;
 	}

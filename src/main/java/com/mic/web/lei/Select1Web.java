@@ -8,24 +8,20 @@
  */
 package com.mic.web.lei;
 
-import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mic.bean.Select1Bean;
-import com.mic.service.Select1Do;
+import com.mic.service.lei.Select1Do;
 
 /**
- * 
+ * 学生选课
  * Select1Web
  * 创建人:lei
  * 时间：2018年9月30日-下午13:19:04
@@ -37,22 +33,28 @@ public class Select1Web {
 	@Autowired
 	private Select1Do select1do;
 	
-	@RequestMapping("/select1")
+	@RequestMapping("/student/selectClass")
 	public ModelAndView select1(){
 		ModelAndView mo = new ModelAndView();
 		mo.setViewName("/student/select1");
 		return mo;
 	}
 	
-	@RequestMapping(value="/select1", method = RequestMethod.POST)
+	@RequestMapping(value="/student/selectClassDo", method = RequestMethod.POST)
 	public ModelAndView eClassDo(HttpServletRequest re){
     	ModelAndView modelandview = new ModelAndView();
+    	
     	Select1Bean select1bean = new Select1Bean();
-    	select1bean =  select1do.Select1(re.getParameter("sname"), Integer.parseInt(re.getParameter("c_id")));
+    	
+    	select1bean =  select1do.Select1(re.getParameter("sname"), 
+    						Integer.parseInt(re.getParameter("c_id")));
+    	
     	modelandview.addObject("Cname", select1bean.getCname());
     	modelandview.addObject("Tname", select1bean.getTname());
+    	
     	re.getSession().setAttribute("C_id", select1bean.getCid());	
     	re.getSession().setAttribute("S_id", select1bean.getS_id());	
+    	
     	modelandview.setViewName("/student/select2");
 		return modelandview;
 	}

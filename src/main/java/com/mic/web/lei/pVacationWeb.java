@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.service.pVacationDo;
+import com.mic.service.lei.pVacationDo;
 
 /**
- * 
+ * 学生请假页面
  * pVacationWeb
  * 创建人:lei
  * 时间：2018年9月29日-下午17:38:04  

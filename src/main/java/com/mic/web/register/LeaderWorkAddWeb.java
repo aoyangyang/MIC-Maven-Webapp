@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mic.bean.Departments;
 import com.mic.bean.Leader;
-import com.mic.service.LeaderWorkAddDo;
+import com.mic.service.register.LeaderWorkAddDo;
 
 import net.sf.json.JSONArray;
 

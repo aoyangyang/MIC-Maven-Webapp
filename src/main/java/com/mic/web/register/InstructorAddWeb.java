@@ -15,7 +15,7 @@ import com.mic.bean.AddClass;
 import com.mic.bean.FindDepartments;
 import com.mic.bean.FindSchool;
 import com.mic.bean.Leader;
-import com.mic.service.InstructorAddDo;
+import com.mic.service.register.InstructorAddDo;
 
 import net.sf.json.JSONArray;
 

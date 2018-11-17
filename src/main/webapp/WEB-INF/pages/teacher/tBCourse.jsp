@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -12,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>老师建立课程</title>
 	<%@include file="../common/context.jsp" %>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/mic/tBCourse.css"/>
-    <script src="${basePath}/js/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${basePath}/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -36,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <label>教师姓名</label>
                     <div class="ui fluid left icon input">
 						<i class="ui icon user"></i>
-                        <input name="teacherName" type="text"  placeholder="请输入老师的姓名" value="">
+                        <input name="teacherName" type="text" readonly="readonly" value="${teacherName}">
                     </div>
                 </div>
                 <div class="field">
@@ -78,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <script type="text/javascript">
             laydate.render({
                 elem: '#start1',
-                type: 'datetime'
+                value:new Date()
             });
         </script>
     </body>
