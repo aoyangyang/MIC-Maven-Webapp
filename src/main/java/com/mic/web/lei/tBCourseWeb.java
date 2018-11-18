@@ -51,9 +51,7 @@ public class tBCourseWeb {
 	
 	@RequestMapping(value="/tBCourseWeb", method = RequestMethod.POST)
 	public ModelAndView tBCourseDo(HttpServletRequest re){
-		ModelAndView modelandview = new ModelAndView();
 		
-		String teacherName = re.getParameter("teacherName");
 		String className = re.getParameter("className");
 		Integer classNum = Integer.parseInt(re.getParameter("classNum"));
 		String classTime = re.getParameter("classTime");
@@ -62,18 +60,7 @@ public class tBCourseWeb {
 		//拿到老师id
 		Integer teacherID = (Integer) re.getSession().getAttribute("teacherId");
 		
-		
-		Integer C_id = tbcoursedo.tBCourse(teacherID, className, classNum, classTime, classAddress);
-		
-		
-		modelandview.addObject("teacherName", teacherName);
-		modelandview.addObject("className", className);
-		modelandview.addObject("classNum", classNum);
-		modelandview.addObject("classAddress", classAddress);
-		re.getSession().setAttribute("C_id", C_id);	
-		//modelandview.setViewName("teacher/eClass");
-		
-		modelandview.setViewName("teacher/classList");
+		tbcoursedo.tBCourse(teacherID, className, classNum, classTime, classAddress);
 		
 		
 		return new ModelAndView("redirect:/teacher/classList");

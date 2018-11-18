@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>教师课程信息</title>
+    <title>教师单门课程信息</title>
 	<%@include file="../common/context.jsp" %>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/mic/sutIndex.css"/>
     
@@ -31,36 +31,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!--中间-->
 		<div class="main">
 			<div class="ui raised very padded segment">
-				<h2>教师课程信息</h2><span>点击课程ID进入课程操作</span>
+				<h2>教师单门课程信息</h2>
 				<table class="ui celled table">
 					<thead>
 						<tr>
 							<th style="color: red;">课程ID</th>
 							<th>课程名</th>
-							<th>班级人数</th>
-							<th>开课时间</th>
-							<th>上课地点</th>
+							<th>开始时间</th>
+							<th>结束时间</th>
+							<th>上课内容</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody id="tbo">
-						<c:forEach items="${classList}" var="classs" >
+						<c:forEach items="${coureList}" var="coure" >
 							<tr>
+								<td>${coure.getCourse_id() }</td>
+								<td>${coure.getName() }</td>
+								<td>${coure.getBegin_time() }</td>
+								<td>${coure.getEnd_time() }</td>
+								<td>${coure.getIntroduction() }</td>
 								<td>
-									<a href="${basePath}/teacher/class/${classs.getId() }">
-										${classs.getId() }
-									</a>
+									<button class="ui button inverted red">
+										修改
+									</button>
 								</td>
-								<td>${classs.getCourse_name() }</td>
-								<td>${classs.getSize() }</td>
-								<td>${classs.getOpen_time() }</td>
-								<td>${classs.getAddress() }</td>
+								<td>
+									<button class="ui button inverted blue">
+										设置问题
+									</button>
+								</td>
 							</tr>
 						</c:forEach>
 					
 					</tbody>
 					<tfoot>
 						<tr>
-							<th colspan="5">
+							<th colspan="7">
 								<div class="ui right floated pagination menu">
 									<c:forEach begin="1" end="${no}" var="i">
 										<a class="item" onclick="doIt(${i})">${i}</a> 
@@ -89,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						for(i in val){
 							dHtml += '<tr><td>'+
 									 '<a href="'+'${basePath}'+
-									 '/teacher/class/'+val[i].id+
+									 '/teacher/classMsg/'+val[i].id+
 									 '">'+
 									 val[i].id+
 									 '</a>'+

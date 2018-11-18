@@ -33,6 +33,49 @@
 			
 	</select>
 	
-
+	<!-- 查询出详情信息 -->
+	<select id="getCourMsg" resultType="com.mic.bean.Course" parameterType="com.mic.bean.IdAndNo">
+			SELECT					 
+				id,
+				course_name,
+				size,
+				address
+			FROM
+				course
+			WHERE
+				teacher_id = #{id} AND
+				id = #{no}
+	</select>
 	
+	<!-- 判断是不是这个老师 -->
+		<select id="testTeacher" resultType="Integer"
+													parameterType="com.mic.bean.IdAndNo">
+				SELECT
+					id
+				FROM
+					course
+				WHERE
+					id = #{no} AND
+					teacher_id = #{id}
+		</select>
+	
+		<!-- 查询该门课程的详情信息 -->
+	<select id="getClsList" resultType="com.mic.bean.CourseNote" 
+													parameterType="com.mic.bean.IdAndNo">
+				SELECT
+					id,
+					course_id,
+					name,
+					Introduction,
+					begin_time,
+					end_time,
+					courseware
+				FROM
+					course_note
+				WHERE
+					course_id = #{id}
+				ORDER BY id DESC
+				LIMIT
+					#{no},10
+	</select>
 </mapper>  

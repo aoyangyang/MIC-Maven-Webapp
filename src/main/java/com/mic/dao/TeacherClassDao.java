@@ -11,6 +11,7 @@ package com.mic.dao;
 import java.util.List;
 
 import com.mic.bean.Course;
+import com.mic.bean.CourseNote;
 import com.mic.bean.IdAndNo;
 
 /**
@@ -48,6 +49,46 @@ public interface TeacherClassDao {
 	 * @since  1.0.0
 	 */
 	public Integer getLength(Integer teaId);
+
+
+	/**
+	 * 拿到课程信息
+	 * 方法名：getCourMsg
+	 * 创建人：chenPeng
+	 * 时间：2018年11月18日-上午11:17:38 
+	 * 手机:17673111810
+	 * @param idAndNo
+	 * @return Course
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public Course getCourMsg(IdAndNo idAndNo);
 	
+	/**
+	 * 
+	 * 判断是不是这个老师的课程
+	 * 方法名：testTeacher
+	 * 创建人：chenPeng
+	 * 时间：2018年11月18日-下午3:22:34 
+	 * 手机:17673111810
+	 * @param idAndNo
+	 * @return Integer
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public Integer testTeacher(IdAndNo idAndNo);
 	
+	/**
+	 * 
+	 * 得到指定页码的课程信息
+	 * 方法名：getClsList
+	 * 创建人：chenPeng
+	 * 时间：2018年11月18日-下午3:34:51 
+	 * 手机:17673111810
+	 * @param idAndNo
+	 * @return List<CourseNote>
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public List<CourseNote> getClsList(IdAndNo idAndNo);
 }

@@ -36,20 +36,22 @@ public class eClassDo {
 	 * 创建人：lei
 	 * 时间：2018年9月28日-下午20:20:04
 	 * 手机:15873169121
+	 * @param path 
 	 * @param 
 	 * @return void
 	 * @exception
 	 * @since  1.0.0
 	 */
-     public void eClassDo(Integer C_id, String name,String Introduction, String b_time, String e_time, String courseware)
-     {
+     public void esClassDo(Integer C_id, String name,String Introduction, 
+    		 	String b_time, String begain, String end, String path){
+    	 
     	 eClassBean eclassbean = new eClassBean();
     	 eclassbean.setId(C_id);
     	 eclassbean.setName(name);
     	 eclassbean.setIntroduction(Introduction);
-    	 eclassbean.setBegin_time(b_time);
-    	 eclassbean.setEnd_time(e_time);
-    	 eclassbean.setCourseware(courseware);
+    	 eclassbean.setBegin_time(b_time+"/"+begain);
+    	 eclassbean.setEnd_time(b_time+"/"+end);
+    	 eclassbean.setCourseware(path);
     	 eclassdao.addCourseNote(eclassbean);
      }
 }

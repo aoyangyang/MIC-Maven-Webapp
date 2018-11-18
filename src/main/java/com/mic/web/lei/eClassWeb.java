@@ -63,12 +63,14 @@ public class eClassWeb {
 		String path = se.getServletContext().getRealPath("/ppt");
         FileUp1 fileup1 = new FileUp1();
         String Path = fileup1.fileUp(file, path);
-		eclassdo.eClassDo(Integer.parseInt(re.getSession().getAttribute("C_id").toString()),
+		eclassdo.esClassDo(Integer.parseInt(re.getSession().getAttribute("C_id").toString()),
 				            re.getParameter("className"),
 							re.getParameter("Introduction"), 
 							re.getParameter("begintime"), 
-							re.getParameter("endtime"), Path);
-		modelandview.setViewName("老师首页");
+							re.getParameter("begain"),
+							re.getParameter("end"),
+							Path);
+		modelandview.setViewName("teacher/teaClassList");
 		return modelandview;
 	}
 }
