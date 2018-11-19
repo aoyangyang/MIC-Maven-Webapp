@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -74,8 +75,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<div class="mybutton">
 				  		<button class="ui teal right floated button" type="submit"><i class="ui sign in icon"></i>登录</button>
-						<a href="#" target="_blank">
-					  		<button class="ui red button" type=""><i class="ui write square icon"></i>注册</button>
+						<a href="${basePath}/selectAdd" target="_blank">
+					  		<button class="ui red button" type="button"><i class="ui write square icon"></i>注册</button>
 						</a>
 					</div><br /><br />
 				</form>

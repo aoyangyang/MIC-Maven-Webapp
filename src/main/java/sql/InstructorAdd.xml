@@ -3,6 +3,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mic.dao.InstructorAddDao">
 
+<!-- 辅导员注册写入leader -->
+	<insert id="insAddLeader"  parameterType="com.mic.bean.Leader" flushCache="true" 							
+											useGeneratedKeys="true" keyProperty="id" keyColumn="id">  
+		INSERT
+			leader(
+				username,
+				password,
+				address,
+				email,
+				phone
+			)VALUES(
+				#{username},
+				#{password},
+				#{address},
+				#{email},
+				#{phone}
+			);
+	</insert>
+
+
+<!-- 辅导员注册预先写入 ad_class表 -->
+	<insert id="insAddAdClass"  parameterType="Integer" flushCache="true" 	>  
+		INSERT
+			ad_class(
+				leader_id
+			)VALUES(
+				#{id}
+			);
+	</insert>
+	
+	
+
 	<!-- 查出所有的学校 -->
 	<select id="findAllSchool" resultType="com.mic.bean.FindSchool">  
 		SELECT
@@ -10,7 +42,7 @@
 		FROM
 			school;
 	</select>  
-	
+
 	
 	<select id="findDepartments" parameterType="Integer" resultType="com.mic.bean.FindDepartments">  
 		SELECT 
@@ -47,10 +79,6 @@
 				#{leaderId},
 				#{classId}
 		)
-	
-	
-		
-		
 	</insert>
 	
 </mapper>  

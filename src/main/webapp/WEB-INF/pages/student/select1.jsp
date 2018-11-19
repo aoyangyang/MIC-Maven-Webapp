@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>院领导注册</title>
+    <title>学生选课</title>
 	<%@include file="../common/context.jsp" %>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/mic/select1.css"/>
     <script src="${basePath}/js/layDate/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
@@ -30,18 +31,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!--中间-->
     <div class="main">
         <div class="ui raised very padded segment">
-            <form class="ui form">
+            <form class="ui form" action="${basePath}/student/selectClassDo" method="post">
                 <h1 class="ui center aligned dividing header" align="center">学生选课</h1>
                 <div class="field">
                     <label>学生姓名</label>
                     <div class="ui fluid left icon input">
-                        <input name="" type="text"  value="" readonly="readonly">
+                        <input name="sname" type="text"  value="雷" readonly="readonly">
                     </div>
                 </div>
                 <div class="field">
                     <label>课程ID</label>
                     <div class="ui fluid left icon input">
-                        <input name="" type="text"  placeholder="请输入课程ID" value="">
+                        <input name="c_id" type="text"  placeholder="请输入课程ID" value="">
                     </div>
                 </div>
                 <div class="B">

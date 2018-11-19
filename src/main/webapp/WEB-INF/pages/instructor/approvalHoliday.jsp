@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -12,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>批假</title>
 	<%@include file="../common/context.jsp" %>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/mic/approvalHoliday.css"/>
-    <script src="${basePath}/js/layDate/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${basePath}/js/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -30,69 +32,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!--中间-->
     <div class="main">
         <div class="ui raised very padded segment">
-            <form class="ui form">
+            <form class="ui form" action="${basePath}/approvalHolidayWeb" method="post">
                 <h1 class="ui center aligned dividing header">批假</h1>
                 <div class="field">
                     <label>学生姓名</label>
                     <div class="ui fluid left icon input">
                         <i class="ui icon student"></i>
-                        <input name="" type="text" width="" placeholder="请输入学生的姓名" value="">
+                        <input name="" type="text" width="" readonly="readonly" value="${studentname}">
                     </div>
                 </div>
                 <div class="field">
                     <label>学号</label>
                     <div class="ui fluid left icon input">
 						<i class="ui info circle icon"></i>
-                        <input name="" type="text" width="" v-model="sid" id="Studentid" placeholder="请输入学号" value="">
+                        <input name="id" type="text" width="" v-model="sid" readonly="readonly" value="${id}" >
                     </div>
                 </div>
                 <div class="field">
                     <label>学院专业班级</label>
                     <div class="ui fluid icon input">
-                        <input name="" type="text" width="" placeholder="请输入学院专业班级,如:东方科技学院-计算机16-1" value="">
+                        <input name="" type="text" width="" readonly="readonly"  value="${school}-${classname}">
                     </div>
                 </div>
                 <div class="field">
                     <label>手机号码</label>
                     <div class="ui fluid left icon input">
                         <i class="ui icon phone"></i>
-                        <input name="" v-model="tel" type="text" width="" id="phone" placeholder="请输入11位手机号码" value="">
+                        <input name="" v-model="tel" type="text" width="" readonly="readonly" value="${s_phone}">
                     </div>
                 </div>
                 <div class="field">
                     <label>开始时间</label>
                     <div class="ui fluid left icon input">
-						<i class="calendar icon"></i>
-                        <input name="" type="text" width="" value="" id="start1">
+                        <i class="calendar icon"></i>
+                        <input name="" type="text" width="" value="${b_time}">
                     </div>
                 </div>
                 <div class="field">
                     <label>结束时间</label>
                     <div class="ui fluid left icon input">
 						<i class="calendar icon"></i>
-                        <input name="" type="text" width="" value="" id="start2">
+                        <input name="" type="text" width="" value="${e_time}">
                     </div>
                 </div>
                 <div class="field">
                     <label>原因</label>
                     <div class="ui fluid left icon input">
-                        <textarea rows="2"></textarea>
+                        <textarea rows="2">${reason}</textarea>
                     </div>
                 </div>
                 <div class="field">
-                    <label>未上的课程信息</label>
-                    <div class="ui fluid icon input">
-                        <input name="" type="text" width="" placeholder="未上的课程信息" value="">
+                   <label>未上的课程信息</label>
+                    <div class="ui fluid left icon input">
+                        <textarea rows="2">
+                        <c:forEach items = "${CourseName}" var="CourseName">
+                        <c:out value="${CourseName},"></c:out>
+                        </c:forEach>
+                        </textarea>
                     </div>
                 </div>
                 <div class="field">
                     <label>是否同意</label>
                     <div class="ui selection dropdown">
-                        <input name="" type="hidden" value="">
+                        <input name="state" type="hidden" value="">
                         <div class="default text">是否同意</div>
                         <div class="menu">
-                            <div class="item" data-value="是">是</div>
-                            <div class="item" data-value="否">否</div>
+                            <div class="item">是</div>
+                            <div class="item">否</div>
                         </div>
                     </div>
                 </div>
@@ -108,14 +114,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <script type="text/javascript">
             $('.ui.dropdown')
                 .dropdown();
-            laydate.render({
-                elem: '#start1',
-                type: 'datetime'
-            });
-            laydate.render({
-                elem: '#start2',
-                type: 'datetime'
-            });
             var vm = new Vue({
                 el: "#phone",
                 data: {

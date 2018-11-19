@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mic.dao.tBCourseDao">
+    <!-- 课程名称录入 -->
+	<insert id="addCourse"  parameterType="com.mic.bean.tBCourseBean" useGeneratedKeys="true" keyProperty="id" flushCache="true">
+
+	INSERT INTO course(
+		teacher_id, course_name, size, open_time, address)
+	VALUE(
+		#{teacherId},
+		#{c_name},
+		#{size},
+		#{o_time},
+		#{address});
+	</insert>
+
+</mapper>

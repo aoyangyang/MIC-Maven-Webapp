@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -34,7 +35,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="ui raised segment">
 				<h2 class="ui left floated header">学生注册</h2>
 				<div class="ui clearing divider"></div>
-				<form class="ui form">
+				<form class="ui form" 
+					action="${basePath}/studentAddDo" 
+						enctype="multipart/form-data"
+							method="post">
 					
 					<div class="field">
 						<div class="two fields">
@@ -49,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<label>电话号码</label>
 								<div class="ui left icon input">
 									<i class="ui icon phone"></i>
-									<input name="username" type="text" placeholder="请输入电话号码" value="">
+									<input name="phone" type="text" placeholder="请输入电话号码" value="">
 								</div>
 							</div>
 						</div>
@@ -61,14 +65,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <label>密码</label>
 						    <div class="ui left icon input">
 						    	<i class="ui icon lock"></i>
-								<input name="password" type="text" placeholder="请输入密码" value="">
+								<input name="password1" type="text" placeholder="请输入密码" value="">
 							</div>
 						</div>
 						<div class="field">
 						    <label>请再次输入密码</label>
 						    <div class="ui left icon input">
 						    	<i class="ui icon lock"></i>
-								<input name="password" type="text" placeholder="请再次输入密码" value="">
+								<input name="password2" type="text" placeholder="请再次输入密码" value="">
 							</div>
 						</div>
 					</div>
@@ -78,12 +82,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <label>家庭地址</label>
 						    <div class="ui left icon input">
 						    	<i class="ui icon home"></i>
-								<input name="name" type="text" placeholder="请输入家庭地址" value="">
+								<input name="address" type="text" placeholder="请输入家庭地址" value="">
 							</div>
 						</div>
 						<div class="field">
 						    <label>性别</label>
-						    <select name="" class="ui dropdown">
+						    <select name="sex" class="ui dropdown">
 						    	<option value="">请选择性别</option>
 						    	<option value="1">
 						    		<i class="ui icon male"></i>
@@ -101,15 +105,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="two fields">
 							<div class="field">
 								<label>年级</label>
-								<select name="" class="ui dropdown">
+								<select name="enrolment" id="enrolment" class="ui dropdown">
 							    	<option value="">请选择年级</option>
-							    	<option value="1">
+							    	<option value="2015">
+							    		<i class="ui icon male"></i>
+										2015
+							    	</option>
+							    	<option value="2016">
 							    		<i class="ui icon male"></i>
 										2016
 							    	</option>
-							    	<option value="0">
+							    	<option value="2017">
 							    		<i class="ui female icon"></i>
 										2017
+							    	</option>
+							    	<option value="2018">
+							    		<i class="ui female icon"></i>
+										2018
 							    	</option>
 					   			</select>
 							</div>
@@ -122,43 +134,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label>班级学校信息</label>
 						<div class="three fields">
 							<div class="field">
-								 <select name="" class="ui dropdown">
+								 <select name="schoolName" id="schoolName" class="ui dropdown">
 							    	<option value="">学校</option>
-							    	<option value="1">
-							    		<i class="ui icon male"></i>
-										湖南农业大学东方科技学院
-							    	</option>
-							    	<option value="0">
-							    		<i class="ui female icon"></i>
-										湖南大学
-							    	</option>
+							    	<c:forEach items="${schoolList}" var="school">
+								    	<option value="${school.getId()}">
+								    		<i class="ui icon male"></i>
+											${school.getS_name()}
+								    	</option>
+							    	</c:forEach>
 							    </select>
 							</div>
 							<div class="field">
-								 <select name="" class="ui dropdown">
+								 <select name="departments" id="departments" class="ui dropdown">
 							    	<option value="">学院/学部</option>
-							    	<option value="1">
-							    		<i class="ui icon male"></i>
-										理工学部
-							    	</option>
-							    	<option value="0">
-							    		<i class="ui female icon"></i>
-										人文学部
-							    	</option>
 							    </select>
 							</div>
 							<div class="field">
 								<div class="field">
-									<select name="" class="ui dropdown">
+									<select name="classs" id="classs" class="ui dropdown">
 								    	<option value="">班级</option>
-								    	<option value="1">
-								    		<i class="ui icon male"></i>
-											计算机一班
-								    	</option>
-								    	<option value="0">
-								    		<i class="ui female icon"></i>
-											计算机二班
-								    	</option>
 						   			</select>
 								</div>
 							</div>
@@ -171,14 +165,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <label>邮箱</label>
 						    <div class="ui left icon input">
 						    	<i class="ui icon mail"></i>
-								<input name="name" type="text" placeholder="请输入邮箱" value="">
+								<input name="email" type="text" placeholder="请输入邮箱" value="">
 							</div>
 						</div>
-						<div class="field">
+						<div class="field"  id="pic">
 						    <label>上传图片</label>
-							 <a class="file">
-		                        <input type="file" name="" id="">上传头像
+							 <a class="file" onclick="clean()">
+		                        <input type="file" name="file" id="file">上传头像
 		                    </a>
+		                    
 						</div>
 					</div>
 					
@@ -189,6 +184,84 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <%@include file="../common/food.jsp" %>
         <script type="text/javascript">
 			$('.ui.dropdown').dropdown();
+        	//图片预览
+        	$("#file").change(function() {
+        		var objUrl = getObjectURL(this.files[0]);
+        		console.log("objUrl = " + objUrl);
+        		if (objUrl) {
+        			$("#img0").remove();
+        			$("#pic").append('<img class="ui centered small rounded image" src="" id="img0" >');
+        			$("#img0").attr("src", objUrl);
+        			$("#img0").removeClass("hide");
+        		}
+        	}) ;
+        
+        	function clean() {
+        		$("#img0").remove();
+        	}
+        	function getObjectURL(file) {
+        		var url = null;
+        		if (window.createObjectURL != undefined) {
+        			url = window.createObjectURL(file);
+        		} else if (window.URL != undefined) {
+        			url = window.URL.createObjectURL(file);
+        		} else if (window.webkitURL != undefined) {
+        			url = window.webkitURL.createObjectURL(file);
+        		}
+        		return url;
+        	}
+        	//通过选择学校得到学院、学部
+        	$("#schoolName").change(function(){
+				var schoolName=$("#schoolName").val();
+			    $.ajax({
+					type:"post",
+					url:"${basePath}/getDepartments",
+					data:{"schoolName":schoolName},
+					success:function(data){
+						val=eval(data);
+						var dHtml = '<option value="">学院/学部</option>';
+						for(i in val){
+							
+							dHtml += '<option value="'+
+									val[i].id+
+									'">'+
+							    	'<i class="ui icon male"></i>'+
+										val[i].d_name
+							    	'</option>';
+						}
+						
+						$("#departments *").remove();
+						$("#departments").html(dHtml);
+					}
+				});
+			});
+			
+			//通过学院、学部得到班级
+			$("#departments").change(function(){
+				var departments=$("#departments").val();
+				var enrolment = $("#enrolment").val();
+			    $.ajax({
+					type:"post",
+					url:"${basePath}/getClass",
+					data:{"departments":departments,
+						  "enrolment":enrolment},
+					success:function(data){
+						val=eval(data);
+						var dHtml = '<option value="">班级</option>';
+						for(i in val){
+							dHtml += '<option value="'+
+									val[i].id+
+									'">'+
+							    	'<i class="ui icon male"></i>'+
+										val[i].classname
+							    	'</option>';
+						}
+						
+						$("#classs *").remove();
+						$("#classs").html(dHtml);
+					}
+				});
+			});
 		</script>
     </body>
 </html>
