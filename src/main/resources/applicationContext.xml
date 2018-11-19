@@ -24,8 +24,9 @@
 		p:location="classpath:jdbc.properties" p:fileEncoding="utf-8"/>
 
 	<!-- 开启注解 -->
-	<context:component-scan base-package="com.mic.service"/>
-	<context:component-scan base-package="com.mic.web"/>
+	<context:component-scan base-package="com.mic.service.**"/>
+	<context:component-scan base-package="com.mic.web.**"/>
+	
 	<!-- proxool连接池 -->
 	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
 		<!-- 驱动的名字，mysql -->

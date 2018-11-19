@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -32,50 +33,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="ui segment raised very padded">
 				<h2 class="ui left floated header">辅导员查看考勤统计</h2>
 		  		<div class="ui clearing divider"></div>
-		  		<form class="ui form">
+		  		<form class="ui form" action="${basePath}/instructor/fond" method="post">
 			  		<div class="two fields">
 			  			<div class="field">
 			  				<div class="ui left icon input">
-								<input id="test1" type="text" placeholder="请输入日期" value="">
+								<input id="date" name="date" type="text" placeholder="请输入日期" value="">
 								<i class="time icon"></i>
 							</div>	
 			  			</div>
 			  			<div class="field">
-							 <select name="" class="ui dropdown">
-						    	<option value="">班级</option>
-						    	<option value="1">
-									计算机1班
-						    	</option>
-						    	<option value="0">
-									计算机2班
-						    	</option>
+							 <select name="classs" class="ui dropdown">
+						    	<option value="">请选择班级</option>
+						    	<c:forEach items="${ClasssList}" var="classs">
+							    	<option value="${classs.getId()}">
+										${classs.getClassname()}
+							    	</option>
+						    	</c:forEach>
 						    </select>
 						</div>
 			  		</div>
 			  		<div class="two fields">
 			  			<div class="field">
-			  				<select name="" class="ui dropdown">
-						    	<option value="">第几节课</option>
-						    	<option value="1">
-						    		<i class="ui icon male"></i>
-									第一节
-						    	</option>
-						    	<option value="0">
-						    		<i class="ui female icon"></i>
-									第二节
-						    	</option>
-						    	<option value="0">
-						    		<i class="ui female icon"></i>
-									第三节
-						    	</option>
-						    	<option value="0">
-						    		<i class="ui female icon"></i>
-									第四节
-						    	</option>
-						    	<option value="0">
-						    		<i class="ui female icon"></i>
-									第五节
-						    	</option>
+			  				<select name="section" class="ui dropdown">
+						    	<option value="">请选择第几节课</option>
+						    	<c:forEach begin="1" end="5" var="temp"> 
+							    	<option value="${temp}">
+							    		<i class="ui icon male"></i>
+										第${temp}节
+							    	</option>
+						    	</c:forEach>
 						    </select>
 			  			</div>
 			  			<div class="field">
@@ -89,7 +75,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
         <%@include file="../common/food.jsp" %>
         <script type="text/javascript">
-			laydate.render({elem: '#test1'});
+			laydate.render({
+				elem: '#date',
+				value: new Date()
+				});
 			$('.ui.dropdown').dropdown();
 		</script>
     </body>

@@ -1,0 +1,26 @@
+/*主体*/
+.main{
+	margin: 0 auto;
+	margin-top: 150px;
+	width: 80%;
+	margin-bottom: 100px;
+}
+.ui.form {
+	margin: 0 auto;
+	max-width: 400px;
+}
+.mybutton{
+	float: right;
+}
+
+.ui.raised.very.padded.segment{
+	min-height: 300px;
+}
+
+.boxs{
+	margin-top:100px;
+	float: left;
+}
+.boxs img{
+	width: 200px;
+}

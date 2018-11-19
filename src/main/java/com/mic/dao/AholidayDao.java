@@ -32,7 +32,7 @@ public interface AholidayDao {
 	 * @exception
 	 * @since  1.0.0
 	 */
-	public List<Integer> GetStudentIds(String username);
+	public List<Integer> GetStudentIds(Integer caClassId);
 	
 	/**
 	 *

@@ -10,4 +10,15 @@
 			VALUE(#{id},#{name}, #{Introduction}, #{begin_time}, #{end_time}, #{courseware});
 	</insert>
 
+	<update id="upCourseNote"  parameterType="com.mic.bean.eClassBean" flushCache="true">  
+			UPDATE
+				course_note
+			SET
+				Introduction = #{Introduction},
+				begin_time = #{begin_time},
+				end_time = #{end_time},
+				courseware = #{courseware}
+			WHERE
+				id = #{noteId}
+	</update>
 </mapper>

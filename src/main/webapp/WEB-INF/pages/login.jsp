@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -30,13 +31,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!--中间-->
 		<div class="main">
 			<div class="ui raised very padded segment">
-				<form class="ui form">
+				<form action="${basePath}/loginDo" method="post" class="ui form">
 					<h1 class="ui center aligned dividing header">登录</h1>
 				  	<div class="field">
 				  		<label>用户名</label>
 				    		<div class="ui fluid left icon input">
 						    	<i class="ui icon user"></i>
-			    			<input name="user" type="text" placeholder="请输入用户名" value="">
+			    			<input name="username" type="text" placeholder="请输入用户名" value="">
 			    			</div>
 				    	</div>
 				  	<div class="field">
@@ -54,19 +55,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <label for="defined">选择你的身份</label>
 					    <div class="defined">
 					      <div class="ui radio checkbox">
-					        <input name="defined" tabindex="0" class="hidden" type="radio" checked="">
+					        <input name="defined" tabindex="0" value="1" class="hidden" type="radio" checked="">
 					        <label>部门&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					      </div>
 					    </div>
 					    <div class="field">
 					      <div class="ui radio checkbox">
-					        <input name="defined" tabindex="1" class="hidden" type="radio">
+					        <input name="defined" tabindex="0" value="2" class="hidden" type="radio" >
 					        <label>教师</label>
 					      </div>
 					    </div>
 					    <div class="field">
 					      <div class="ui radio checkbox">
-					        <input name="defined" tabindex="2" class="hidden" type="radio">
+					        <input name="defined" tabindex="0" value="3" class="hidden" type="radio" >
 					        <label>学生</label>
 					      </div>
 					    </div>
@@ -74,8 +75,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<div class="mybutton">
 				  		<button class="ui teal right floated button" type="submit"><i class="ui sign in icon"></i>登录</button>
-						<a href="#">
-					  		<button class="ui red button" type="submit"><i class="ui write square icon"></i>注册</button>
+						<a href="${basePath}/selectAdd" target="_blank">
+					  		<button class="ui red button" type="button"><i class="ui write square icon"></i>注册</button>
 						</a>
 					</div><br /><br />
 				</form>

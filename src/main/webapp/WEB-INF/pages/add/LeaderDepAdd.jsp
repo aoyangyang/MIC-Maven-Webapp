@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -35,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 <h2 class="ui left floated header">院领导注册</h2>
 				 <div class="ui clearing divider"></div>
 
-				<form class="ui form">
+				<form action="${basePath}/LeaderDepAddDo" class="ui form" method="post">
 					<div class="field">
 						<div class="two fields">
 							<div class="field">
@@ -49,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<label>电话号码</label>
 								<div class="ui left icon input">
 									<i class="ui icon phone"></i>
-									<input name="username" type="text" placeholder="请输入电话号码" value="">
+									<input name="tel" type="text" placeholder="请输入电话号码" value="">
 								</div>
 							</div>
 						</div>
@@ -61,14 +62,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <label>密码</label>
 						    <div class="ui left icon input">
 						    	<i class="ui icon lock"></i>
-								<input name="password" type="text" placeholder="请输入密码" value="">
+								<input name="password1" type="text" placeholder="请输入密码" value="">
 							</div>
 						</div>
 						<div class="field">
 						    <label>请再次输入密码</label>
 						    <div class="ui left icon input">
 						    	<i class="ui icon lock"></i>
-								<input name="password" type="text" placeholder="请再次输入密码" value="">
+								<input name="password2" type="text" placeholder="请再次输入密码" value="">
 							</div>
 						</div>
 					</div>
@@ -79,14 +80,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <label>家庭地址</label>
 						    <div class="ui left icon input">
 						    	<i class="ui icon home"></i>
-								<input name="name" type="text" placeholder="请输入家庭地址" value="">
+								<input name="address" type="text" placeholder="请输入家庭地址" value="">
 							</div>
 						</div>
 						<div class="field">
 						    <label>邮箱</label>
 						    <div class="ui left icon input">
 						    	<i class="ui icon mail"></i>
-								<input name="name" type="text" placeholder="请输入邮箱" value="">
+								<input name="email" type="text" placeholder="请输入邮箱" value="">
 							</div>
 						</div>
 					</div>
@@ -95,16 +96,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label>学校信息</label>
 						<div class="two fields">
 							<div class="field">
-								 <select name="" class="ui dropdown">
+								 <select name="school" class="ui dropdown">
 							    	<option value="">学校</option>
-							    	<option value="1">
-							    		<i class="ui icon male"></i>
-										湖南农业大学东方科技学院
-							    	</option>
-							    	<option value="0">
-							    		<i class="ui female icon"></i>
-										湖南大学
-							    	</option>
+							    	<c:forEach items="${schoolList}" var="school"> 
+								    	<option value="${school.getId()}">
+								    		<i class="ui icon male"></i>
+											${school.getS_name()}
+								    	</option>
+							    	</c:forEach>
 							    </select>
 							</div>
 						</div>
@@ -122,19 +121,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var vm = new Vue({
 				el:"#box",
 				data:{
-					texts:""
 				},
 				methods:{
 					
 				},
 				watch:{
-					texts: function(){
-						if(200-this.texts.length<0){
-							alert('超出字数限制');
-							$('#texts').val($('#texts').val().substr(0,200));
-						}
-						
-					}
 				}
 			});
 		</script>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mic.dao.WorkDao">
+
+<!-- 得到班级 -->
+	<select id="getAllClass"  parameterType="Integer"  resultType="com.mic.bean.Classs">
+				SELECT
+					id,
+					classname
+				FROM
+					class
+				WHERE
+					departments_id IN(
+						SELECT
+							id
+						FROM
+							departments
+						WHERE
+							id IN(
+								SELECT
+									departments_id
+								FROM
+									ad_departments
+								WHERE
+									leader_id = #{id}
+							)
+					)
+	</select>
+	<select id="getInfmTion"  parameterType="com.mic.bean.TimeAndId"  resultType="com.mic.bean.Information">
+				SELECT
+					attendance_id,student_id,status
+				FROM
+					information
+				WHERE
+					attendance_id IN(
+						SELECT
+							id
+						FROM
+							attendance
+						WHERE
+							time LIKE #{time}
+					)AND student_id IN(
+							SELECT
+								student.id
+							FROM
+								student
+							WHERE
+								class_id = #{id}
+					)
+	</select>
+    
+</mapper>  

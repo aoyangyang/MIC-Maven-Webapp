@@ -19,13 +19,22 @@ package com.mic.bean;
  */
 
 public class eClassBean {
+	private Integer noteId;
 	private Integer id;
 	private String name;
     private String Introduction;
     private String begin_time;
     private String end_time;
     private String courseware;
-    public Integer getId() {
+    
+    
+    public Integer getNoteId() {
+		return noteId;
+	}
+	public void setNoteId(Integer noteId) {
+		this.noteId = noteId;
+	}
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
