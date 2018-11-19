@@ -91,4 +91,17 @@ public interface TeacherClassDao {
 	 * @since  1.0.0
 	 */
 	public List<CourseNote> getClsList(IdAndNo idAndNo);
+	
+	/**
+	 * 指定课程的数量
+	 * 方法名：getMsgLength
+	 * 创建人：chenPeng
+	 * 时间：2018年11月18日-下午10:20:07 
+	 * 手机:17673111810
+	 * @param claId
+	 * @return Integer
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public Integer getMsgLength(Integer claId);
 }

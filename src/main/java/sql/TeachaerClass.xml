@@ -78,4 +78,16 @@
 				LIMIT
 					#{no},10
 	</select>
+	
+	<!-- 拿到信息的数量 -->
+		<select id="getMsgLength" resultType="Integer" parameterType="Integer">
+			SELECT
+				COUNT(*) length
+			FROM
+				course_note
+			WHERE
+				course_id = #{claId}
+	</select>
+
+
 </mapper>  

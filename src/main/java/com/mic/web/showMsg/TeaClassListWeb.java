@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mic.bean.Course;
 import com.mic.bean.CourseNote;
-import com.mic.bean.Departments;
 import com.mic.service.showMsg.TeacherClassDo;
 
 import net.sf.json.JSONArray;
@@ -66,6 +65,7 @@ public class TeaClassListWeb {
 	}
 	
 	
+	
 	/**
 	 * ajax刷新得到课程信息
 	 * 方法名：getClassList
@@ -105,10 +105,13 @@ public class TeaClassListWeb {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	@RequestMapping("teacher/class/{no}")
+	@RequestMapping("/teacher/class/{no}")
 	public ModelAndView getClasss(@PathVariable Integer no){
 		ModelAndView andView = new ModelAndView();
+		
+		//拿到信息列表
 		List<CourseNote> coureList = teacherClassDo.getCourList(no,1);
+		
 		
 		//判断老师是否也权限
 		if (coureList == null) {
@@ -116,13 +119,50 @@ public class TeaClassListWeb {
 			return new ModelAndView("redirect:/500.jsp");
 		}
 		
+		//拿到长度
+		Integer length = teacherClassDo.getClsLenth(no);
+		
+		//如果长度为0那么他添加课程
+		if (length==0) {
+			return new ModelAndView("redirect:/teacher/classMsg/"+no);
+		}
+		
+		andView.addObject("length", (length/10)+1);
 		andView.addObject("coureList", coureList);
 		andView.setViewName("teacher/teaClass");
 		
 		return andView;
 	}
 	
-	
+	/**
+	 * ajax刷新得到某门课程信息列表
+	 * 方法名：getClassList
+	 * 创建人：chenPeng
+	 * 时间：2018年11月17日-下午9:48:39 
+	 * 手机:17673111810
+	 * @param request
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping(method = RequestMethod.POST, 
+						value = "/teacher/classNo", 
+							produces = "application/String; charset=utf-8")
+	@ResponseBody
+	public String getClassListN(HttpServletRequest request) {
+		JSONArray jsonArray = new JSONArray();
+		Integer number = Integer.parseInt(request.getParameter("number"));
+		Integer no = Integer.parseInt(request.getParameter("no"));
+		
+		
+		//拿到信息列表
+		List<CourseNote> coureList = teacherClassDo.getCourList(no,number);
+		
+		for (CourseNote course : coureList) {
+			jsonArray.add(course);
+		}
+		return jsonArray.toString();
+	}
 	
 	
 	/**
@@ -161,6 +201,61 @@ public class TeaClassListWeb {
 		return andView;
 	}
 	
+	/**
+	 * 
+	 * 修改课程信息
+	 * 方法名：upClassMsg
+	 * 创建人：chenPeng
+	 * 时间：2018年11月19日-下午1:02:36 
+	 * 手机:17673111810
+	 * @param no
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping("/teacher/classUpMsg/{no}/{noteId}")
+	public ModelAndView upClassMsg(@PathVariable Integer no,@PathVariable Integer noteId){
+		ModelAndView andView = new ModelAndView();
+		
+		//拿到老师的name和id
+		Integer teacherId = (Integer) re.getSession().getAttribute("teacherId");
+		String teacherName = (String) re.getSession().getAttribute("teacherName");
+		
+		//拿到课程信息
+		Course cou = teacherClassDo.getCourMsg(teacherId,no);
+		
+		if (cou == null) {
+			re.getSession().setAttribute("errorMessage", "您无权限管理该课程或未建立此课程");
+			return new ModelAndView("redirect:/500.jsp");
+		}
+		
+		andView.addObject("cou", cou);
+		andView.addObject("teacherName", teacherName);
+		re.getSession().setAttribute("C_id", cou.getId());
+		re.getSession().setAttribute("noteId", noteId);
+		
+		andView.setViewName("teacher/upDateEClass");
+		
+		return andView;
+	}
 	
+	
+	/**
+	 * 开放中------------------------------------------------------------------------
+	 * 方法名：upClassMsg
+	 * 创建人：chenPeng
+	 * 时间：2018年11月19日-下午1:01:15 
+	 * 手机:17673111810
+	 * @param no
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping("/teacher/problem/{no}")
+	public ModelAndView problem(@PathVariable Integer no){
+		ModelAndView andView = new ModelAndView();
+		System.out.println("TeaClassListWeb最后一个函数"+no);
+		return andView;
+	}
 	
 }

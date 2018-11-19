@@ -42,6 +42,9 @@ public class eClassWeb {
 	
 	@Autowired
 	private HttpSession se;
+	
+	@Autowired
+	private HttpServletRequest re;
 
 	/**
 	 * 老师添加每堂课信息
@@ -59,18 +62,63 @@ public class eClassWeb {
 	 */
 	@RequestMapping(value="/eClassWeb", method = RequestMethod.POST)
 	public ModelAndView eClassDo(@RequestParam MultipartFile file, HttpServletRequest re) throws IllegalStateException, IOException{
-		ModelAndView modelandview = new ModelAndView();
 		String path = se.getServletContext().getRealPath("/ppt");
         FileUp1 fileup1 = new FileUp1();
         String Path = fileup1.fileUp(file, path);
-		eclassdo.esClassDo(Integer.parseInt(re.getSession().getAttribute("C_id").toString()),
+
+        Integer cId = Integer.parseInt(re.getSession().getAttribute("C_id").toString());
+		eclassdo.esClassDo( cId,
 				            re.getParameter("className"),
 							re.getParameter("Introduction"), 
 							re.getParameter("begintime"), 
 							re.getParameter("begain"),
 							re.getParameter("end"),
 							Path);
-		modelandview.setViewName("teacher/teaClassList");
-		return modelandview;
+		
+		return  new ModelAndView("redirect:/teacher/class/"+cId);
+	}
+	
+	
+	
+	/**
+	 * 修改课程信息
+	 * 方法名：upClassDo
+	 * 创建人：chenPeng
+	 * 时间：2018年11月19日-下午1:15:46 
+	 * 手机:17673111810
+	 * @param file
+	 * @param className
+	 * @param Introduction
+	 * @param begintime
+	 * @param begain
+	 * @param end
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping(value="/teacher/upDateClass", method = RequestMethod.POST)
+	public ModelAndView upClassDo(
+						@RequestParam MultipartFile file,
+						String className,
+						String Introduction,
+						String begintime,
+						String begain,
+						String end
+			){
+		
+		String path = se.getServletContext().getRealPath("/ppt");
+        FileUp1 fileup1 = new FileUp1();
+        String Path = fileup1.fileUp(file, path);
+
+        Integer cId = Integer.parseInt(re.getSession().getAttribute("C_id").toString());
+		eclassdo.upClassDo( cId,
+							className,
+							Introduction, 
+							begintime, 
+							begain,
+							end,
+							Path);
+		
+		return  new ModelAndView("redirect:/teacher/class/"+cId);
 	}
 }

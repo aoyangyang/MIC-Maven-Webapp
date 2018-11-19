@@ -118,8 +118,22 @@ public class TeacherClassDo {
 		
 		return teacherClassDao.getClsList(idAndNo2);
 	}
-	
-	
+
+
+	/**
+	 * 得到页码
+	 * 方法名：getClsLenth
+	 * 创建人：chenPeng
+	 * 时间：2018年11月18日-下午10:21:48 
+	 * 手机:17673111810
+	 * @param no
+	 * @return Integer
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public Integer getClsLenth(Integer no) {
+		return teacherClassDao.getMsgLength(no);
+	}
 	
 	
 }

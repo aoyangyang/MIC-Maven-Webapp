@@ -33,4 +33,18 @@ public interface eClassDao {
 	 * @since  1.0.0
 	 */
 	public void addCourseNote(eClassBean eclassbean);
+	
+	
+	
+	/**
+	 * 修改已经建立的课程
+	 * 方法名：upCourseNote
+	 * 创建人：chenPeng
+	 * 时间：2018年11月19日-下午1:29:09 
+	 * 手机:17673111810
+	 * @param eclassbean void
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public void upCourseNote(eClassBean eclassbean);
 }

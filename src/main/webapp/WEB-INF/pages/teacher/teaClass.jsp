@@ -44,39 +44,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<th></th>
 						</tr>
 					</thead>
-					<tbody id="tbo">
-						<c:forEach items="${coureList}" var="coure" >
-							<tr>
-								<td>${coure.getCourse_id() }</td>
-								<td>${coure.getName() }</td>
-								<td>${coure.getBegin_time() }</td>
-								<td>${coure.getEnd_time() }</td>
-								<td>${coure.getIntroduction() }</td>
-								<td>
-									<button class="ui button inverted red">
-										修改
-									</button>
-								</td>
-								<td>
-									<button class="ui button inverted blue">
-										设置问题
-									</button>
-								</td>
-							</tr>
-						</c:forEach>
 					
-					</tbody>
-					<tfoot>
-						<tr>
-							<th colspan="7">
-								<div class="ui right floated pagination menu">
-									<c:forEach begin="1" end="${no}" var="i">
-										<a class="item" onclick="doIt(${i})">${i}</a> 
-									</c:forEach>
-								</div>
-							</th>
-						</tr>
-					</tfoot>
+					<c:if test="${!empty coureList }">
+						<tbody id="tbo">
+							<c:forEach items="${coureList}" var="coure" >
+								<tr>
+									<td>${coure.getCourse_id() }</td>
+									<td>${coure.getName() }</td>
+									<td>${coure.getBegin_time() }</td>
+									<td>${coure.getEnd_time() }</td>
+									<td>${coure.getIntroduction() }</td>
+									<td>
+										<a onclick="gotoUpdate(${coure.getId() })">
+											<button class="ui button inverted red">
+												修改
+											</button>
+										</a>
+									</td>
+									<td>
+										<a onclick="gotoQu(${coure.getId() })">
+											<button class="ui button inverted blue">
+												设置问题
+											</button>
+										</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="7">
+									<div class="ui right floated pagination menu">
+										<c:forEach begin="1" end="${length}" var="i">
+											<a class="item" onclick="doIt(${i})">${i}</a> 
+										</c:forEach>
+									</div>
+								</th>
+							</tr>
+						</tfoot>
+					</c:if>
+					<c:if test="${empty coureList }">
+						此课程还无课程信息，请添加
+					</c:if>
+					
+					
 				</table>
 			</div>
 		</div>
@@ -89,30 +100,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	function doIt(number){
         		$.ajax({
 					type:"post",
-					url:"${basePath}/getClassList",
-					data:{"number":number},
+					url:"${basePath}/teacher/classNo",
+					data:{"number":number,"no":${coureList.get(0).getCourse_id()}},
 					success:function(data){
 						val=eval(data);
 						var dHtml = '';
 						for(i in val){
-							dHtml += '<tr><td>'+
-									 '<a href="'+'${basePath}'+
-									 '/teacher/classMsg/'+val[i].id+
-									 '">'+
-									 val[i].id+
-									 '</a>'+
-									 '</td>'+
-									 '<td>'+val[i].course_name+'</td>'+
-									 '<td>'+val[i].size+'</td>'+
-									 '<td>'+val[i].open_time+'</td>'+
-									 '<td>'+val[i].address+'</td></tr>';
+							dHtml += '<tr><td>'+val[i].course_id+'</td>'+
+									 '<td>'+val[i].name+'</td>'+
+									 '<td>'+val[i].begin_time+'</td>'+
+									 '<td>'+val[i].end_time+'</td>'+
+									 '<td>'+val[i].introduction+'</td>'+
+									 '<td><a onclick="gotoUpdate('+val[i].id+')">'+
+									 '<button class="ui button inverted red">修改</button>'+
+									 '</a></td>'+
+									 '<td><a onclick="gotoQu('+val[i].id+')">'+
+									 '<button class="ui button inverted blue">设置问题</button>'+
+									 '</a></td></tr>';
 						}
 						$("#tbo *").remove();
 						$("#tbo").html(dHtml);
 					}
 				});
         	}
-        	
+        	function gotoUpdate(id){
+        		var courseId = ${coureList.get(0).getCourse_id()};
+        		var temp = confirm("修改课程信息需要重新上传课件!!\n是否继续？");
+        		if(temp){
+        			window.location.replace("${basePath}/teacher/classUpMsg/"+courseId+"/"+id);
+        		}
+        	}
+        	function gotoQu(id){
+        		alert("gotoQu"+id);
+        		window.location.replace("${basePath}/teacher/problem/"+id);
+        	}
         </script>
     </body>
 </html>
