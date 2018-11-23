@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.Course;
-import com.mic.bean.CourseNote;
+import com.mic.bean.course.Course;
+import com.mic.bean.course.CourseNote;
 import com.mic.service.showMsg.TeacherClassDo;
 
 import net.sf.json.JSONArray;

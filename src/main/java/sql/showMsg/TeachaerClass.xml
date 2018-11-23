@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mic.dao.showMsg.TeacherClassDao">
+
+
+	<!-- 分页查询 -->
+	<select id="getLength" resultType="Integer" parameterType="Integer">
+		SELECT
+			COUNT(*) length
+		FROM
+			course
+		WHERE
+			teacher_id = #{teaId};
+	</select>
+	
+	
+	<!-- 查询出全部的课程 -->
+	<select id="fondClassList" resultType="com.mic.bean.course.Course" parameterType="com.mic.bean.other.IdAndNo">
+			SELECT					 
+				id,
+				course_name,
+				size,
+				open_time,
+				address
+			FROM
+				course
+			WHERE
+				teacher_id = #{id}
+			ORDER BY id DESC
+			LIMIT
+				#{no},10
+			
+	</select>
+	
+	<!-- 查询出详情信息 -->
+	<select id="getCourMsg" resultType="com.mic.bean.course.Course" parameterType="com.mic.bean.other.IdAndNo">
+			SELECT					 
+				id,
+				course_name,
+				size,
+				address
+			FROM
+				course
+			WHERE
+				teacher_id = #{id} AND
+				id = #{no}
+	</select>
+	
+	<!-- 判断是不是这个老师 -->
+		<select id="testTeacher" resultType="Integer"
+													parameterType="com.mic.bean.other.IdAndNo">
+				SELECT
+					id
+				FROM
+					course
+				WHERE
+					id = #{no} AND
+					teacher_id = #{id}
+		</select>
+	
+		<!-- 查询该门课程的详情信息 -->
+	<select id="getClsList" resultType="com.mic.bean.course.CourseNote" 
+													parameterType="com.mic.bean.other.IdAndNo">
+				SELECT
+					id,
+					course_id,
+					name,
+					Introduction,
+					begin_time,
+					end_time,
+					courseware
+				FROM
+					course_note
+				WHERE
+					course_id = #{id}
+				ORDER BY id DESC
+				LIMIT
+					#{no},10
+	</select>
+	
+	<!-- 拿到信息的数量 -->
+		<select id="getMsgLength" resultType="Integer" parameterType="Integer">
+			SELECT
+				COUNT(*) length
+			FROM
+				course_note
+			WHERE
+				course_id = #{claId}
+	</select>
+
+
+</mapper>  

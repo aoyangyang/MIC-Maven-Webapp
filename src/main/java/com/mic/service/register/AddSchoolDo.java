@@ -13,8 +13,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.AddSchool;
-import com.mic.dao.AddSchoolDao;
+import com.mic.bean.school.AddSchool;
+import com.mic.dao.register.AddSchoolDao;
 
 /**
  * 

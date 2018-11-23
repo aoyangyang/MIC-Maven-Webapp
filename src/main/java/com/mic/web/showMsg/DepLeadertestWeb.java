@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.Classs;
-import com.mic.bean.DepLeaderDetail;
-import com.mic.bean.Departments;
-import com.mic.bean.PancakeDate;
+import com.mic.bean.classs.Classs;
+import com.mic.bean.departments.DepLeaderDetail;
+import com.mic.bean.departments.Departments;
+import com.mic.bean.departments.PancakeDate;
 import com.mic.core.CpDate;
 import com.mic.service.showMsg.DepLeadertestDo;
 

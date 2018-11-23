@@ -14,8 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.eClassBean;
-import com.mic.dao.eClassDao;
+import com.mic.bean.classs.eClassBean;
+import com.mic.bean.course.Course;
+import com.mic.dao.lei.eClassDao;
 
 
 /**
@@ -33,6 +34,12 @@ public class eClassDo {
 	private eClassDao eclassdao;
 	@Autowired
 	private HttpServletRequest re;
+	
+	
+	public Course getCourse(Integer cId){
+		return eclassdao.getCourse(cId);
+	}
+	
 	
 	/**
 	 *

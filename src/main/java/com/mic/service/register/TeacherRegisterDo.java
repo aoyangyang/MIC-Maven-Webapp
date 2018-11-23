@@ -11,8 +11,8 @@ package com.mic.service.register;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.TeacherRegister;
-import com.mic.dao.TeacherRegisterDao;
+import com.mic.bean.teacher.TeacherRegister;
+import com.mic.dao.register.TeacherRegisterDao;
 
 /**
  * 

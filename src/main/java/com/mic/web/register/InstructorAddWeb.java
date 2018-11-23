@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.AddClass;
-import com.mic.bean.FindDepartments;
-import com.mic.bean.FindSchool;
-import com.mic.bean.Leader;
+import com.mic.bean.classs.AddClass;
+import com.mic.bean.departments.FindDepartments;
+import com.mic.bean.departments.Leader;
+import com.mic.bean.school.FindSchool;
 import com.mic.service.register.InstructorAddDo;
 
 import net.sf.json.JSONArray;

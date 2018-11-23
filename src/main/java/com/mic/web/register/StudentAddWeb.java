@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.Classs;
-import com.mic.bean.Student;
+import com.mic.bean.classs.Classs;
+import com.mic.bean.student.Student;
 import com.mic.core.NoteIsNull;
 import com.mic.service.register.StudentAddDo;
 

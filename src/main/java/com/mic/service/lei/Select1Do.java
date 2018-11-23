@@ -11,8 +11,8 @@ package com.mic.service.lei;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.Select1Bean;
-import com.mic.dao.Select1Dao;
+import com.mic.bean.lei.Select1Bean;
+import com.mic.dao.lei.Select1Dao;
 
 /**
  * 

@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ui img">
 						<img alt="" src="${basePath}/img/logo.png" class="ui img">
 					</div>
-					<a>
+					<a href="${basePath}/pVacation">
 						<input class="ui  red button" value="请假">
 					</a>
 				</div>

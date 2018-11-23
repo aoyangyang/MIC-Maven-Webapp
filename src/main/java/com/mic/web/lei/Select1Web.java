@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.Select1Bean;
+import com.mic.bean.lei.Select1Bean;
 import com.mic.service.lei.Select1Do;
 
 /**

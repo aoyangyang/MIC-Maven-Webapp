@@ -11,9 +11,9 @@ package com.mic.service.lei;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.eClassBean;
-import com.mic.bean.pVacationBean;
-import com.mic.dao.pVacationDao;
+import com.mic.bean.classs.eClassBean;
+import com.mic.bean.lei.pVacationBean;
+import com.mic.dao.lei.pVacationDao;
 
 /**
  * 

@@ -8,3 +8,4 @@
 <script type="text/javascript" src="${basePath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${basePath}/js/semantic.js"></script>
 <script type="text/javascript" src="${basePath}/js/vue1.js"></script>
+<script type="text/javascript" src="${basePath}/js/cp.js"></script>
