@@ -56,8 +56,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<button class="ui massive circular red facebook icon button" onclick="stop()" >
 					  	<i class="stop icon"></i>&nbsp;结束点到 
 					</button>
+					<div class="inline field">
+					    <div class="ui toggle checkbox"><br>
+					    <input type="checkbox" tabindex="0" class="hidden" id="cBox"  >
+					    <label>开启人脸识别</label>
+						</div>
+					</div>
 				</div>
-				
 				<div class="ui segment" id="lodingMsg">
 					<div class="ui active dimmer">
 						<div class="ui text loader">
@@ -95,7 +100,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</script>
 	</body>
 	<script type="text/javascript">
+		$('.ui.checkbox').checkbox();
 		/* 得到GPS信号 */
+		var mylat = 0;
+		var mylong = 0;
+		var Gtemp = 0;
 		function getGps(){
 			x = navigator.geolocation;
 			x.getCurrentPosition(success,failure,{
@@ -104,22 +113,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	maximumAge:0
 			});
 			function success(position){
-				var mylat = position.coords.latitude;
-				var mylong = position.coords.longitude;
-				var temp = position.coords.accuracy;
-				alert(mylat+'   '+mylong);
-				alert(temp);
+				mylat = position.coords.latitude;
+				mylong = position.coords.longitude;
+				Gtemp = position.coords.accuracy;
 			}
 			function failure(err){
 				alert( err.code );
 				alert("请打开定位功能！！");
 			}
-		}
+		};
 
 	
 		var temp = 0;
 		/*开始点到*/
 		function play() {
+			var state = $('#cBox').is(":checked") ? 1:0;
 			getGps();
 			temp = 1;
 			var r = confirm("是否开始点到？");
@@ -128,7 +136,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					type: "post",
 					url: "${basePath}/teacher/atendnc/play",
 					data: {
-						"noteId": ${noteId}
+						"noteId": ${noteId},
+						"mylat":mylat,
+						"mylong":mylong,
+						"temp":Gtemp,
+						"state":state
+						
 					},
 					success: function(data) {
 						$("#lodingMsg").remove();

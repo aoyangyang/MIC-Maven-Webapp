@@ -10,6 +10,7 @@ package com.mic.dao.atendnc;
 
 import java.util.List;
 
+import com.mic.bean.atendnc.Attendance;
 import com.mic.bean.course.CourseNote;
 import com.mic.bean.departments.Information;
 
@@ -65,7 +66,7 @@ public interface TeacherAtendncDao{
 
 
 	/**
-	 * (这里用一句话描述这个方法的作用)
+	 * 得到时间信息
 	 * 方法名：getTimeMsg
 	 * 创建人：chenPeng
 	 * 时间：2018年11月23日-下午2:06:30 
@@ -76,4 +77,17 @@ public interface TeacherAtendncDao{
 	 * @since  1.0.0
 	*/
 	public CourseNote getTimeMsg(Integer noteId);
+	
+	/**
+	 * 
+	 * 建立考情信息
+	 * 方法名：addAtendnc
+	 * 创建人：chenPeng
+	 * 时间：2018年11月25日-上午2:00:30 
+	 * 手机:17673111810
+	 * @param atd void
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public void addAtendnc(Attendance atd);
 }

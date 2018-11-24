@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mic.bean.atendnc.Attendance;
 import com.mic.bean.course.CourseNote;
 import com.mic.bean.departments.Information;
 import com.mic.bean.departments.PancakeDate;
@@ -166,13 +167,12 @@ public class TeacherAtendncDo {
 	*/
 	public List<Integer> getStuIdList(Integer noteId) {
 		// TODO Auto-generated method stub
-		
 		return teacherAtendncDao.getStuIdList(noteId);
 	}
 
 
 	/**
-	 * (这里用一句话描述这个方法的作用)
+	 * 去到某堂课的上课时间信息
 	 * 方法名：getTimeMsg
 	 * 创建人：chenPeng
 	 * 时间：2018年11月23日-下午2:06:07 
@@ -185,5 +185,22 @@ public class TeacherAtendncDo {
 	public CourseNote getTimeMsg(Integer noteId) {
 		// TODO Auto-generated method stub
 		return teacherAtendncDao.getTimeMsg(noteId);
+	}
+	
+	/**
+	 * 
+	 * 插入考勤并得到id
+	 * 方法名：addAtendnc
+	 * 创建人：chenPeng
+	 * 时间：2018年11月25日-上午2:41:52 
+	 * 手机:17673111810
+	 * @param atd
+	 * @return Integer
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public Integer addAtendnc(Attendance atd){
+		teacherAtendncDao.addAtendnc(atd);
+		return atd.getId();
 	}
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mic.bean.atendnc.Attendance;
 import com.mic.bean.course.CourseNote;
 import com.mic.bean.departments.Information;
 import com.mic.bean.departments.PancakeDate;
@@ -62,9 +63,13 @@ public class TeacherAtendncWeb {
 		NoToClass noToClass = new NoToClass();
 		//拿到课堂id
 		Integer noteId = Integer.parseInt(re.getParameter("noteId"));
-		
-		
-		//建立考勤数据
+		//拿到gps信息
+		Integer mylat = Integer.parseInt(re.getParameter("mylat"));
+		Integer mylong = Integer.parseInt(re.getParameter("mylong"));
+		Integer temp = Integer.parseInt(re.getParameter("temp"));
+		//获取状态
+		Integer state = Integer.parseInt("1"+re.getParameter("state"));
+		//----建立考勤数据-------
 		//查询出课堂时间
 		CourseNote couNote = teacherAtendncDo.getTimeMsg(noteId);
 		
@@ -73,14 +78,27 @@ public class TeacherAtendncWeb {
 		String time = noToClass.getTime(beginTime)+"/"+
 						noToClass.getNo(beginTime)+"-"+
 							noToClass.getNo(endTime);
+		//记录地理位置
+		String gpsMsg = mylat+"/"+mylong+"/"+temp;
+		//写入数据库 并得到id
+		Attendance atd = new Attendance();
+		atd.setClassroom(gpsMsg);
+		atd.setCourse_note_id(noteId);
+		atd.setState(state);
+		atd.setTime(time);
+		Integer atdId = teacherAtendncDo.addAtendnc(atd);
 		
-		
-		
+		System.out.println("========"+atdId);
 		//先填充全学生为缺勤
 		//如果学生在这段时间有请假那么填充为请假
 		//学生段可以选择考勤 然后替换为到课
-		List<Integer> stuIdList = teacherAtendncDo.getStuIdList(noteId);
+		List<Integer> stuIdList = 
+					teacherAtendncDo.getStuIdList(noteId);
 		for (Integer integer : stuIdList) {
+			
+			
+			
+			
 			System.out.println(integer);
 		}
 		

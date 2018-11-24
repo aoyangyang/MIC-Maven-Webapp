@@ -49,5 +49,20 @@
 				WHERE
 					id = #{noteId}
   		</select>
-  		
+  		<!-- 新建考勤 -->
+  		<insert id="addAtendnc" parameterType="com.mic.bean.atendnc.Attendance" 
+  				flushCache="true" useGeneratedKeys="true" keyProperty="id"> 
+  			INSERT 
+			INTO attendance(
+				course_note_id,
+				time,
+				classroom,
+				state
+			)VALUES(
+				#{course_note_id},
+				#{time},
+				#{classroom},
+				#{state}
+			)
+  		</insert>
   </mapper>
