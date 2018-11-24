@@ -33,6 +33,11 @@ public class NoToClass {
 		return time.substring(0, i);
 	}
 	
+	public Integer getNo(String time){
+		int i = time.lastIndexOf("/");
+		return Integer.parseInt(time.substring(i+1,time.length()));
+	}
+	
 	/**
 	 * 时间转换为自己的课程节数编号
 	 * 方法名：classToNo

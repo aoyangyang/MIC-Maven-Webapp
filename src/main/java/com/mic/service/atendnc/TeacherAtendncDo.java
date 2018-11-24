@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mic.bean.course.CourseNote;
 import com.mic.bean.departments.Information;
 import com.mic.bean.departments.PancakeDate;
 import com.mic.bean.student.StudentArrive;
@@ -50,9 +51,6 @@ public class TeacherAtendncDo {
 		return teacherAtendncDao.getAtendncID(noteId);
 	}
 
-	
-	
-	
 	
 	/**
 	 * 得到全部的考情信息
@@ -151,5 +149,41 @@ public class TeacherAtendncDo {
 					List<Information> ifomtionList){
 		
 		return null;
+	}
+
+
+
+	/**
+	 * 通过课堂id 得到全部的学生id
+	 * 方法名：getStuIdList
+	 * 创建人：chenPeng
+	 * 时间：2018年11月23日-下午1:51:03 
+	 * 手机:17673111810
+	 * @param noteId
+	 * @return List<Integer>
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public List<Integer> getStuIdList(Integer noteId) {
+		// TODO Auto-generated method stub
+		
+		return teacherAtendncDao.getStuIdList(noteId);
+	}
+
+
+	/**
+	 * (这里用一句话描述这个方法的作用)
+	 * 方法名：getTimeMsg
+	 * 创建人：chenPeng
+	 * 时间：2018年11月23日-下午2:06:07 
+	 * 手机:17673111810
+	 * @param noteId
+	 * @return CourseNote
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public CourseNote getTimeMsg(Integer noteId) {
+		// TODO Auto-generated method stub
+		return teacherAtendncDao.getTimeMsg(noteId);
 	}
 }

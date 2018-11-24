@@ -50,10 +50,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h2>教师点到</h2>
 				<div class="ui divider"></div>
 				<div class="ui segment basic  center aligned">
-					<button class="ui massive circular facebook icon button" onclick="play()">
+					<button class="ui massive circular facebook icon button" onclick="play()" >
 					  	<i class="play icon"></i>&nbsp;开始点到 
 					</button>
-					<button class="ui massive circular red facebook icon button" onclick="stop()">
+					<button class="ui massive circular red facebook icon button" onclick="stop()" >
 					  	<i class="stop icon"></i>&nbsp;结束点到 
 					</button>
 				</div>
@@ -95,10 +95,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</script>
 	</body>
 	<script type="text/javascript">
+		/* 得到GPS信号 */
+		function getGps(){
+			x = navigator.geolocation;
+			x.getCurrentPosition(success,failure,{
+				enableHighAccuracy:true,
+		    	timeout:5000,
+		    	maximumAge:0
+			});
+			function success(position){
+				var mylat = position.coords.latitude;
+				var mylong = position.coords.longitude;
+				var temp = position.coords.accuracy;
+				alert(mylat+'   '+mylong);
+				alert(temp);
+			}
+			function failure(err){
+				alert( err.code );
+				alert("请打开定位功能！！");
+			}
+		}
+
+	
 		var temp = 0;
-			
 		/*开始点到*/
 		function play() {
+			getGps();
 			temp = 1;
 			var r = confirm("是否开始点到？");
 			if(r){

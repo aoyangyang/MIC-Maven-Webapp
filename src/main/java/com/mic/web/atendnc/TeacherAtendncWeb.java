@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mic.bean.course.CourseNote;
 import com.mic.bean.departments.Information;
 import com.mic.bean.departments.PancakeDate;
 import com.mic.bean.student.StudentArrive;
+import com.mic.core.NoToClass;
 import com.mic.service.atendnc.TeacherAtendncDo;
 
 /**
@@ -57,33 +59,36 @@ public class TeacherAtendncWeb {
 						produces = "application/String; charset=utf-8")
 	@ResponseBody
 	public String play(HttpServletRequest re){
+		NoToClass noToClass = new NoToClass();
+		//拿到课堂id
 		Integer noteId = Integer.parseInt(re.getParameter("noteId"));
-		System.out.println(noteId);
+		
+		
+		//建立考勤数据
+		//查询出课堂时间
+		CourseNote couNote = teacherAtendncDo.getTimeMsg(noteId);
+		
+		String beginTime = couNote.getBegin_time();
+		String endTime = couNote.getEnd_time();
+		String time = noToClass.getTime(beginTime)+"/"+
+						noToClass.getNo(beginTime)+"-"+
+							noToClass.getNo(endTime);
+		
+		
+		
+		//先填充全学生为缺勤
+		//如果学生在这段时间有请假那么填充为请假
+		//学生段可以选择考勤 然后替换为到课
+		List<Integer> stuIdList = teacherAtendncDo.getStuIdList(noteId);
+		for (Integer integer : stuIdList) {
+			System.out.println(integer);
+		}
+		
+		
+		
 		return null;
 	}
 	
-	
-	/**
-	 * 
-	 * 停止点到
-	 * 方法名：stop
-	 * 创建人：chenPeng
-	 * 时间：2018年11月22日-下午7:17:44 
-	 * 手机:17673111810
-	 * @param re
-	 * @return String
-	 * @exception 
-	 * @since  1.0.0
-	 */
-	@RequestMapping(method = RequestMethod.POST, 
-			value = "/teacher/atendnc/stop", 
-				produces = "application/String; charset=utf-8")
-	@ResponseBody
-	public String stop(HttpServletRequest re){
-		Integer noteId = Integer.parseInt(re.getParameter("noteId"));
-		System.out.println(noteId);
-		return null;
-	}
 	
 	
 	/**

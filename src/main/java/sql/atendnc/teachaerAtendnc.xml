@@ -23,6 +23,31 @@
 				WHERE
 					attendance_id = #{atendncId}
   		</select>
-  		
+  		<!-- 拿到全部选了这门课的学生的id -->
+  		<select id="getStuIdList" parameterType="Integer"  resultType="Integer">
+  				SELECT
+					student_id
+				FROM	
+					elective
+				WHERE
+					course_id = (
+						SELECT
+							course_id
+						FROM
+							course_note 
+						WHERE
+							id = #{noteId}
+					)
+  		</select>
+  		<!-- 通过课堂id拿到课堂时间信息  -->
+  		<select id="getTimeMsg" parameterType="Integer" resultType="com.mic.bean.course.CourseNote">
+	  			SELECT
+					begin_time,
+					end_time
+				FROM	
+					course_note
+				WHERE
+					id = #{noteId}
+  		</select>
   		
   </mapper>

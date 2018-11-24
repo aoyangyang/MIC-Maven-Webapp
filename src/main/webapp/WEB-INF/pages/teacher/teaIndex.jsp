@@ -56,14 +56,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input class="ui primary button" value="新建课程">
 					</a>
 				</div>
-				<div class="boxs">
-					<div class="ui img">
-						<img alt="" src="${basePath}/img/logo.png" class="ui img">
-					</div>
-					<a>
-						<input class="ui  red button" value="请假">
-					</a>
-				</div>
 			</div>
 		</div>
         <%@include file="../common/food.jsp" %>
