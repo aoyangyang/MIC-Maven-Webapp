@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.Classs;
-import com.mic.bean.Information;
-import com.mic.bean.PancakeDate;
-import com.mic.bean.TimeAndId;
-import com.mic.dao.WorkDao;
+import com.mic.bean.classs.Classs;
+import com.mic.bean.departments.Information;
+import com.mic.bean.departments.PancakeDate;
+import com.mic.bean.other.TimeAndId;
+import com.mic.dao.showMsg.WorkDao;
 
 /**
  * 学工组
@@ -40,7 +40,7 @@ public class WorkDo {
 	public List<PancakeDate> fond(String time){
 		//得到登陆的人是谁
 		Integer adDepartmentsId = 
-				(Integer) re.getSession().getAttribute("adDepartmentsId");
+				(Integer) re.getSession().getAttribute("adDepartmentId");
 		//得到全部的班级
 		List<Classs> classList = workDao.getAllClass(adDepartmentsId);
 		//实列化一个饼图List

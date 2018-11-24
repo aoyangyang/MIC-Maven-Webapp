@@ -56,6 +56,8 @@ public class pVacationWeb {
     	modelandview.addObject("Pnum", Pnum);
     	modelandview.addObject("Btime", Btime);
     	modelandview.addObject("Etime", Etime);
+    	
+    	modelandview.setViewName("student/stuIndex");
 		return modelandview;
 	}
 }

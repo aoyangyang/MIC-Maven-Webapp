@@ -23,7 +23,7 @@
 				<c:if test="${!empty studentName || !empty teacherName 
 							|| !empty adClassName || !empty adDepartmentName || !empty adSchoolName}">
 					<a>
-						<button class="ui button inverted blue  ">
+						<button class="ui button inverted blue">
 							${studentName}${teacherName}${adClassName}${adDepartmentName}${adSchoolName}
 						</button>
 					</a>

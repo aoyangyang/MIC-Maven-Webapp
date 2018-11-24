@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.Course;
-import com.mic.bean.CourseNote;
-import com.mic.bean.IdAndNo;
-import com.mic.dao.TeacherClassDao;
+import com.mic.bean.course.Course;
+import com.mic.bean.course.CourseNote;
+import com.mic.bean.other.IdAndNo;
+import com.mic.dao.showMsg.TeacherClassDao;
 
 /**
  * 得到该老师的全部信息

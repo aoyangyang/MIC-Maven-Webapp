@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mic.dao.lei.Select1Dao">
+
+	<select id="getStudentId"  resultType="Integer">
+			SELECT 
+				id
+			FROM 
+				student
+			WHERE 
+				username=#{sname};
+	</select>
+	 
+	 <select id="getCouresname"  resultType="String">
+			SELECT 
+				course_name
+			FROM 
+				course
+			WHERE 
+				id=#{cid};
+	</select> 
+	
+	 <select id="getTeachername"  resultType="String">
+			SELECT
+			   username
+		    FROM
+		        teacher
+		    WHERE
+		        id = (
+			SELECT  
+			    teacher_id
+			FROM 
+				course
+			WHERE 
+				id=#{cid});  
+				
+	</select>
+	
+	 
+	
+</mapper>  

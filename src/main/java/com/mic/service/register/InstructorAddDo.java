@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.AdClass;
-import com.mic.bean.AddClass;
-import com.mic.bean.FindDepartments;
-import com.mic.bean.FindSchool;
-import com.mic.bean.Leader;
-import com.mic.dao.InstructorAddDao;
+import com.mic.bean.classs.AdClass;
+import com.mic.bean.classs.AddClass;
+import com.mic.bean.departments.FindDepartments;
+import com.mic.bean.departments.Leader;
+import com.mic.bean.school.FindSchool;
+import com.mic.dao.register.InstructorAddDao;
 
 /**
  * 

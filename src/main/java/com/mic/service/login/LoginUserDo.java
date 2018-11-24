@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.LoginUser;
-import com.mic.bean.NameAndId;
-import com.mic.dao.LoginUserDao;
+import com.mic.bean.other.LoginUser;
+import com.mic.bean.other.NameAndId;
+import com.mic.dao.login.LoginUserDao;
 /**
  * 
  * 

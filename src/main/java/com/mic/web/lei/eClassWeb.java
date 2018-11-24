@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mic.bean.course.Course;
 import com.mic.core.FileUp1;
 import com.mic.service.lei.eClassDo;
 
@@ -40,12 +41,37 @@ public class eClassWeb {
 	@Autowired
 	private eClassDo eclassdo;
 	
+	
+	
 	@Autowired
 	private HttpSession se;
 	
 	@Autowired
 	private HttpServletRequest re;
 
+	/**
+	 * 
+	 * 初始化添加每堂课程信息页面
+	 * 方法名：initEclass
+	 * 创建人：chenPeng
+	 * 时间：2018年11月22日-下午1:16:44 
+	 * 手机:17673111810
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping(value="/teacher/eClass",method = RequestMethod.POST)
+	public ModelAndView initEclass(Integer cId){
+		ModelAndView andView = new ModelAndView();
+		//拿到数据
+		Course course = eclassdo.getCourse(cId);
+		
+		andView.addObject("cou", course);
+		andView.setViewName("teacher/eClass");
+		return andView;
+	}
+	
+	
 	/**
 	 * 老师添加每堂课信息
 	 * 方法名：eClassDo

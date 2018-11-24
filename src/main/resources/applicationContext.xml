@@ -62,10 +62,10 @@
 	<!-- 初始化mybatis文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource"  p:configLocation="classpath:mybatis-config.xml"
-		p:mapperLocations="classpath:sql/*.xml" p:typeAliasesPackage="com.mic.bean">
+		p:mapperLocations="classpath:sql/**/*.xml" p:typeAliasesPackage="com.mic.bean.**">
 	</bean>
 	<!-- mybatis的mapper转换器 也就是说的接口，里面原理是采用的jdk的动态代理实现的-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-		p:basePackage="com.mic.dao"
+		p:basePackage="com.mic.dao.**"
 	/>
 </beans>

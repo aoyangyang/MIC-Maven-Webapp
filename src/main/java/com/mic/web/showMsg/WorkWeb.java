@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.PancakeDate;
-import com.mic.bean.TimeAndId;
+import com.mic.bean.departments.PancakeDate;
+import com.mic.bean.other.TimeAndId;
 import com.mic.core.NoToClass;
 import com.mic.service.showMsg.InstructorDo;
 import com.mic.service.showMsg.WorkDo;
@@ -80,10 +80,6 @@ public class WorkWeb {
 		//得到表图List
 		List<PancakeDate> pancakeList = workDo.fond(time);
 		
-		for (PancakeDate pancakeDate : pancakeList) {
-			System.out.println(pancakeDate.getPanckeName());
-			System.out.println(pancakeDate.getAbsence());
-		}
 		
 		andView.addObject("pancakeList", pancakeList);
 		andView.addObject("classs", classs);

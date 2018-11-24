@@ -17,14 +17,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.Classs;
-import com.mic.bean.EvAndDepartments;
-import com.mic.bean.School;
-import com.mic.bean.Student;
+import com.mic.bean.classs.Classs;
+import com.mic.bean.departments.EvAndDepartments;
+import com.mic.bean.school.School;
+import com.mic.bean.student.Student;
 import com.mic.core.CpJudge;
 import com.mic.core.FileUp;
 import com.mic.core.NoteIsNull;
-import com.mic.dao.StudentAddDao;
+import com.mic.dao.register.StudentAddDao;
 
 /**
  * 

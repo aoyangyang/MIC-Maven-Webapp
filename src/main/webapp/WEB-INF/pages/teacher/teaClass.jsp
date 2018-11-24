@@ -32,14 +32,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="main">
 			<div class="ui raised very padded segment">
 				<h2>教师单门课程信息</h2>
+				<button style="float: right; margin-top: -20px" 
+								onclick="toPost()"
+										class="ui button inverted blue">
+					添加信息
+				</button>
 				<table class="ui celled table">
 					<thead>
 						<tr>
-							<th style="color: red;">课程ID</th>
+							<!-- <th style="color: red;">课程ID</th> -->
 							<th>课程名</th>
 							<th>开始时间</th>
 							<th>结束时间</th>
 							<th>上课内容</th>
+							<th></th>
 							<th></th>
 							<th></th>
 						</tr>
@@ -49,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tbody id="tbo">
 							<c:forEach items="${coureList}" var="coure" >
 								<tr>
-									<td>${coure.getCourse_id() }</td>
+									<%-- <td>${coure.getCourse_id() }</td> --%>
 									<td>${coure.getName() }</td>
 									<td>${coure.getBegin_time() }</td>
 									<td>${coure.getEnd_time() }</td>
@@ -65,6 +71,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<a onclick="gotoQu(${coure.getId() })">
 											<button class="ui button inverted blue">
 												设置问题
+											</button>
+										</a>
+									</td>
+									<td>
+										<a onclick="gotoCheck(${coure.getId() })">
+											<button class="ui button inverted blue">
+												点到
 											</button>
 										</a>
 									</td>
@@ -92,48 +105,74 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		
-        <%@include file="../common/food.jsp" %>
         <script type="text/javascript">
         	$('.ui.radio.checkbox')
-        		.checkbox()
-        	;
-        	function doIt(number){
-        		$.ajax({
-					type:"post",
-					url:"${basePath}/teacher/classNo",
-					data:{"number":number,"no":${coureList.get(0).getCourse_id()}},
-					success:function(data){
-						val=eval(data);
-						var dHtml = '';
-						for(i in val){
-							dHtml += '<tr><td>'+val[i].course_id+'</td>'+
-									 '<td>'+val[i].name+'</td>'+
-									 '<td>'+val[i].begin_time+'</td>'+
-									 '<td>'+val[i].end_time+'</td>'+
-									 '<td>'+val[i].introduction+'</td>'+
-									 '<td><a onclick="gotoUpdate('+val[i].id+')">'+
-									 '<button class="ui button inverted red">修改</button>'+
-									 '</a></td>'+
-									 '<td><a onclick="gotoQu('+val[i].id+')">'+
-									 '<button class="ui button inverted blue">设置问题</button>'+
-									 '</a></td></tr>';
-						}
-						$("#tbo *").remove();
-						$("#tbo").html(dHtml);
-					}
-				});
-        	}
-        	function gotoUpdate(id){
-        		var courseId = ${coureList.get(0).getCourse_id()};
-        		var temp = confirm("修改课程信息需要重新上传课件!!\n是否继续？");
+.checkbox();
+
+function doIt(number) {
+	$.ajax({
+		type: "post",
+		url: "${basePath}/teacher/classNo",
+		data: {
+			"number": number,
+			"no": ${coureList.get(0).getCourse_id()}
+		},
+		success: function(data) {
+			val = eval(data);
+			var dHtml = '';
+			for(i in val) {
+				dHtml += /* '<tr><td>'+val[i].course_id+'</td>'+ */
+					'<tr>' +
+					'<td>' + val[i].name + '</td>' +
+					'<td>' + val[i].begin_time + '</td>' +
+					'<td>' + val[i].end_time + '</td>' +
+					'<td>' + val[i].introduction + '</td>' +
+					'<td><a onclick="gotoUpdate(' + val[i].id + ')">' +
+					'<button class="ui button inverted red">修改</button>' +
+					'</a></td>' +
+					'<td><a onclick="gotoQu(' + val[i].id + ')">' +
+					'<button class="ui button inverted blue">设置问题</button>' +
+					'</a></td>' +
+					'<td><a onclick="gotoCheck(' + val[i].id + ')">' +
+					'<button class="ui button inverted blue">点到</button>' +
+					'</a></td></tr>';
+			}
+			$("#tbo *").remove();
+			$("#tbo").html(dHtml);
+		}
+	});
+}
+
+function gotoUpdate(id) {
+	var courseId = ${coureList.get(0).getCourse_id()};
+	var temp = confirm("修改课程信息需要重新上传课件!!\n是否继续？");
         		if(temp){
         			window.location.replace("${basePath}/teacher/classUpMsg/"+courseId+"/"+id);
         		}
         	}
+        	/* 跳转到设置问题页面 */
         	function gotoQu(id){
-        		alert("gotoQu"+id);
-        		window.location.replace("${basePath}/teacher/problem/"+id);
+        		var temp = confirm("gotoQu"+id);
+        		if(temp){
+	        		window.location.replace("${basePath}/teacher/problem/"+id);
+        		}
         	}
+        	
+        	/* 跳转到点到页面 */
+        	function gotoCheck(id){
+        		var temp = confirm("是否点到");
+        		if(temp){
+	        		//window.location.replace("/"+id);
+	        		post('${basePath}/teacher/atendnc', {'noteId':id});
+        		}
+        	}
+			
+			/* 跳转到添加这门课程的页面 */
+			function toPost(){
+				var cId = ${coureList.get(0).getCourse_id()};
+				post("${basePath}/teacher/eClass", {'cId':cId});
+			}
         </script>
+        <%@include file="../common/food.jsp" %>
     </body>
 </html>

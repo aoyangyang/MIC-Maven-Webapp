@@ -16,12 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.AdSchool;
-import com.mic.bean.Leader;
-import com.mic.bean.School;
+import com.mic.bean.departments.Leader;
+import com.mic.bean.school.AdSchool;
+import com.mic.bean.school.School;
 import com.mic.core.CpJudge;
 import com.mic.core.NoteIsNull;
-import com.mic.dao.LeaderDepAddDao;
+import com.mic.dao.register.LeaderDepAddDao;
 
 /**
  * 

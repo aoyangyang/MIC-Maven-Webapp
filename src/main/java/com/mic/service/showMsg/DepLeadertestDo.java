@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.Classs;
-import com.mic.bean.DepLeaderDetail;
-import com.mic.bean.Departments;
-import com.mic.bean.Information;
-import com.mic.bean.PancakeDate;
-import com.mic.bean.TimeAndId;
-import com.mic.dao.DepLeadertestDao;
+import com.mic.bean.classs.Classs;
+import com.mic.bean.departments.DepLeaderDetail;
+import com.mic.bean.departments.Departments;
+import com.mic.bean.departments.Information;
+import com.mic.bean.departments.PancakeDate;
+import com.mic.bean.other.TimeAndId;
+import com.mic.dao.showMsg.DepLeadertestDao;
 
 /**
  * 院领导

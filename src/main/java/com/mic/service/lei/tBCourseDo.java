@@ -12,8 +12,8 @@ package com.mic.service.lei;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mic.bean.tBCourseBean;
-import com.mic.dao.tBCourseDao;
+import com.mic.bean.lei.tBCourseBean;
+import com.mic.dao.lei.tBCourseDao;
 
 /**
  * 

@@ -17,13 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mic.bean.Classs;
-import com.mic.bean.Information;
-import com.mic.bean.PancakeDate;
-import com.mic.bean.StudentArrive;
-import com.mic.bean.TimeAndId;
+import com.mic.bean.classs.Classs;
+import com.mic.bean.departments.Information;
+import com.mic.bean.departments.PancakeDate;
+import com.mic.bean.other.TimeAndId;
+import com.mic.bean.student.StudentArrive;
 import com.mic.core.NoToClass;
-import com.mic.dao.InstructorDao;
+import com.mic.dao.showMsg.InstructorDao;
 
 /**
  * 辅导员

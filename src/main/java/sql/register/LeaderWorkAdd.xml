@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mic.dao.register.LeaderWorkAddDao">
+
+	<!-- 查询出all的学校 -->
+	<select id="getSchool"  resultType="com.mic.bean.school.School">
+			SELECT 
+				id,s_name
+			FROM
+				school
+	</select>
+	
+	<!-- 查询出指定的学院、学部 -->
+	<select id="getDepartments"  parameterType="Integer"  resultType="com.mic.bean.departments.Departments">
+			SELECT
+				id,d_name
+			FROM
+				departments
+			WHERE
+				school_id = #{schoolNo}
+	</select>
+	
+	
+	<!-- 写入leader -->
+	 <insert id="setLeader"  parameterType="com.mic.bean.departments.Leader" useGeneratedKeys="true"  keyProperty="id" >
+			INSERT INTO leader(
+				username,
+				password,
+				address,
+				email,
+				phone
+			)VALUE(
+				#{username},
+				#{password},
+				#{address},
+				#{email},
+				#{phone}
+			)
+    </insert>
+     
+    
+  <!--  写入setAdDepartments -->
+    <insert id="setAdDepartments"  parameterType="com.mic.bean.departments.AdDepartments"  >
+			INSERT INTO ad_departments(
+				leader_id,
+				departments_id
+			)VALUE(
+				#{leader_id},
+				#{departments_id}
+			)
+    </insert>
+</mapper>  
