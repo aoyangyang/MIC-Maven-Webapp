@@ -88,19 +88,22 @@ public class TeacherAtendncWeb {
 		atd.setTime(time);
 		Integer atdId = teacherAtendncDo.addAtendnc(atd);
 		
-		System.out.println("========"+atdId);
+		
+		//2700000为45min
 		//先填充全学生为缺勤
 		//如果学生在这段时间有请假那么填充为请假
 		//学生段可以选择考勤 然后替换为到课
+		//得到时钟周期
+		long bTime = teacherAtendncDo.getClockTimeDo(beginTime);
+		long eTime = teacherAtendncDo.getClockTimeDo(endTime)+2700000;
 		List<Integer> stuIdList = 
 					teacherAtendncDo.getStuIdList(noteId);
-		for (Integer integer : stuIdList) {
-			
-			
-			
-			
+		//执行操作 将信息核对并写入 考勤信息 表
+		teacherAtendncDo.addInFoMation(stuIdList,atdId,bTime,eTime);
+		
+		/*for (Integer integer : stuIdList) {
 			System.out.println(integer);
-		}
+		}*/
 		
 		
 		

@@ -78,6 +78,7 @@ public class CpDate {
 
 	
 	/**
+	 * yyyy-MM-dd HH:mm:ss
 	 * 得到格式化时间
 	 * y	年; M	年中的月份; 
 	 * w 年中的周数;

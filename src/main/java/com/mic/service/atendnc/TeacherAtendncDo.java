@@ -18,6 +18,8 @@ import com.mic.bean.course.CourseNote;
 import com.mic.bean.departments.Information;
 import com.mic.bean.departments.PancakeDate;
 import com.mic.bean.student.StudentArrive;
+import com.mic.core.CpDate;
+import com.mic.core.NoToClass;
 import com.mic.dao.atendnc.TeacherAtendncDao;
 
 
@@ -202,5 +204,36 @@ public class TeacherAtendncDo {
 	public Integer addAtendnc(Attendance atd){
 		teacherAtendncDao.addAtendnc(atd);
 		return atd.getId();
+	}
+	
+	/**
+	 * 输入时间2018-11-26/1得到时钟时间
+	 * 方法名：getClockTimeDo
+	 * 创建人：chenPeng
+	 * 时间：2018年11月25日-上午4:39:13 
+	 * 手机:17673111810
+	 * @param time
+	 * @return long
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public long getClockTimeDo(String time){
+		NoToClass noToClass = new NoToClass();
+		CpDate cpDate = new CpDate();
+		
+		Integer no = noToClass.getNo(time);
+		String hour = noToClass.noToTime(no);
+		String date = noToClass.getTime(time);
+		String stime = date+" "+hour;
+		long lTime = cpDate.getClockTime("yyyy-MM-dd HH:mm:ss", stime);
+		return lTime;
+	}
+
+
+	public void addInFoMation(List<Integer> stuIdList, Integer atdId, long bTime, long eTime) {
+		// TODO Auto-generated method stub
+		for (Integer stu : stuIdList) {
+			System.out.println(stu);
+		}
 	}
 }
