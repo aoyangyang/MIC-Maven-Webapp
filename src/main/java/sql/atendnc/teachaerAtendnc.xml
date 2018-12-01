@@ -65,4 +65,42 @@
 				#{state}
 			)
   		</insert>
+  		<!-- 得到考情信息 -->
+  		<select id="getStuLeave" parameterType="Integer"  resultType="com.mic.bean.atendnc.Leave">
+  			SELECT
+				begin_time,
+				end_time
+			FROM
+				`leave`
+			WHERE
+				student_id = #{stu}
+				AND
+				state = 1
+  		</select>
+  		
+  		<!-- 将单个学生信息写入考情信息中去 -->
+  		<insert id="addInformation" parameterType="com.mic.bean.departments.Information" flushCache="true">
+  				INSERT INTO
+				information(
+					attendance_id,
+					student_id,
+					`status`
+				)VALUES(
+					#{attendance_id},
+					#{student_id},
+					#{status}
+				)
+  		</insert>
+  		
+  		<select id="getStuArrive"  parameterType="Integer"  resultType="com.mic.bean.student.StudentArrive">
+				SELECT
+					username,
+					phone
+				FROM
+					student
+				WHERE
+					id =#{student_id}
+  		</select>
+  		
+  		
   </mapper>

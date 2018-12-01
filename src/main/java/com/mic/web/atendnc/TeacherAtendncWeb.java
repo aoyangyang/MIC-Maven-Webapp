@@ -46,6 +46,8 @@ public class TeacherAtendncWeb {
 	
 	/**
 	 * 开始点到
+	 * 添加考情表
+	 * 添加考情信息表
 	 * 方法名：play
 	 * 创建人：chenPeng
 	 * 时间：2018年11月22日-下午7:18:12 
@@ -101,11 +103,6 @@ public class TeacherAtendncWeb {
 		//执行操作 将信息核对并写入 考勤信息 表
 		teacherAtendncDo.addInFoMation(stuIdList,atdId,bTime,eTime);
 		
-		/*for (Integer integer : stuIdList) {
-			System.out.println(integer);
-		}*/
-		
-		
 		
 		return null;
 	}
@@ -145,7 +142,6 @@ public class TeacherAtendncWeb {
 			//传入考勤id拿到该节课的全部考勤信息
 			List<Information> ifomtionList = 
 					teacherAtendncDo.getAMsg(atendncId);	
-			
 			//拿到饼图
 			PancakeDate pancakeDate = 
 					teacherAtendncDo.getPancakeDate(ifomtionList);

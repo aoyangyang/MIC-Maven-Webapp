@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<img alt="" src="${basePath}/img/logo.png" class="ui img">
 					</div>
 					<a>
-						<input class="ui primary button" value="进入课堂">
+						<button class="ui primary button" >进入课堂</button>
 					</a>
 				</div>
 				<div class="boxs">
@@ -45,15 +45,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<img alt="" src="${basePath}/img/logo.png" class="ui img">
 					</div>
 					<a>
-						<input class="ui primary button" value="课后交流">
+						<button class="ui primary button" >课后交流</button>
 					</a>
 				</div>
 				<div class="boxs">
 					<div class="ui img">
 						<img alt="" src="${basePath}/img/logo.png" class="ui img">
 					</div>
-					<a href="${basePath}/pVacation">
-						<input class="ui  red button" value="请假">
+					<a href="${basePath}/student/pVacation">
+						<button class="ui  red button" >请假</button>
 					</a>
 				</div>
 			</div>

@@ -31,27 +31,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!--中间-->
     <div class="main">
         <div class="ui raised very padded segment">
-            <form class="ui form" action="${basePath}/pVacation" method="post">
+            <form class="ui form" action="${basePath}/student/pVacationDo" method="post">
                 <h1 class="ui center aligned dividing header">请假</h1>
                 <div class="field">
                     <label>学生姓名</label>
                     <div class="ui fluid left icon input">
                         <i class="ui icon student"></i>
-                        <input name="Sname" type="text" readonly="readonly" value="雷">
+                        <input name="Sname" type="text" readonly="readonly" value="${studentName }">
                     </div>
                 </div>
                 <div class="field">
                     <label>学号</label>
                     <div class="ui fluid left icon input">
                         <i class="ui info circle icon"></i>
-                        <input name="Sid" type="text" v-model="sid" id="Studentid" placeholder="请输入学号" value="">
+                        <input name="Sid" type="text" v-model="sid" id="Studentid" readonly="readonly" value="${studentId }">
                     </div>
                 </div>
                 <div class="field">
                     <label>手机号码</label>
                     <div class="ui fluid left icon input">
                         <i class="ui icon phone"></i>
-                        <input name="Pnum" v-model="tel" type="text" id="phone" placeholder="请输入11位手机号码" value="">
+                        <input name="Pnum" v-model="tel" type="text" id="phone"  value="${phone }">
                     </div>
                 </div>
                 <div class="field">

@@ -8,12 +8,14 @@
  */
 package com.mic.service.atendnc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mic.bean.atendnc.Attendance;
+import com.mic.bean.atendnc.Leave;
 import com.mic.bean.course.CourseNote;
 import com.mic.bean.departments.Information;
 import com.mic.bean.departments.PancakeDate;
@@ -98,7 +100,6 @@ public class TeacherAtendncDo {
 		//正常
 		Integer attendance = 0;
 		
-		
 		for (Information information : ifomtionList) {
 			staus = information.getStatus();
 			if (staus.equals("到课")) {
@@ -109,7 +110,6 @@ public class TeacherAtendncDo {
 				absence++;
 			}
 		}
-		
 		//放入饼图
 		date.setAbsence(absence);
 		date.setLeave(leave);
@@ -132,8 +132,20 @@ public class TeacherAtendncDo {
 	 */
 	public List<StudentArrive> getAbsenceList(
 					List<Information> ifomtionList){
+		//状态
+		String staus = "";
+		//学生列表
+		List<StudentArrive> absenceList = new ArrayList<StudentArrive>();
+		StudentArrive stuA;
 		
-		return null;
+		for (Information information : ifomtionList) {
+			staus = information.getStatus();
+			if (staus.equals("缺勤")) {
+				stuA = teacherAtendncDao.getStuArrive(information.getStudent_id());
+				absenceList.add(stuA);
+			}
+		}
+		return absenceList;
 	}
 	
 	/**
@@ -151,7 +163,20 @@ public class TeacherAtendncDo {
 	public List<StudentArrive> getLeaveList(
 					List<Information> ifomtionList){
 		
-		return null;
+		//状态
+		String staus = "";
+		//学生列表
+		List<StudentArrive> leaveList = new ArrayList<StudentArrive>();
+		StudentArrive stuA;
+		
+		for (Information information : ifomtionList) {
+			staus = information.getStatus();
+			if (staus.equals("请假")) {
+				stuA = teacherAtendncDao.getStuArrive(information.getStudent_id());
+				leaveList.add(stuA);
+			}
+		}
+		return leaveList;
 	}
 
 
@@ -229,11 +254,71 @@ public class TeacherAtendncDo {
 		return lTime;
 	}
 
-
+	/**
+	 * 判断请假是否成功
+	 * 方法名：isLeave
+	 * 创建人：chenPeng
+	 * 时间：2018年11月25日-下午4:27:42 
+	 * 手机:17673111810
+	 * @param leaveList
+	 * @param bTime
+	 * @param eTime
+	 * @return boolean
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public boolean isLeave(List<Leave> leaveList,
+								long bTime, long eTime){
+		CpDate cpDate = new CpDate();
+		for (Leave leave : leaveList) {
+			long lBTime = cpDate.getClockTime("yyyy-MM-dd HH:mm:ss", leave.getBegin_time());
+			long lETime = cpDate.getClockTime("yyyy-MM-dd HH:mm:ss", leave.getEnd_time());
+			
+			if (lBTime<bTime&&lETime>eTime) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	/**
+	 * 
+	 * 写入考情信息
+	 * 方法名：addInFoMation
+	 * 创建人：chenPeng
+	 * 时间：2018年11月25日-下午3:18:08 
+	 * 手机:17673111810
+	 * @param stuIdList
+	 * @param atdId
+	 * @param bTime
+	 * @param eTime void
+	 * @exception 
+	 * @since  1.0.0
+	 */
 	public void addInFoMation(List<Integer> stuIdList, Integer atdId, long bTime, long eTime) {
 		// TODO Auto-generated method stub
+		boolean temp;
+		Information inf;
+
 		for (Integer stu : stuIdList) {
-			System.out.println(stu);
+			temp = false;
+			//得到该学生的请假信息
+			List<Leave> leaveList = teacherAtendncDao.getStuLeave(stu);
+			//判断是否请假
+			if (leaveList.size()!=0) {
+				temp = isLeave(leaveList,bTime,eTime);
+			}
+			
+			//将数据写入数据库
+			inf = new Information();
+			inf.setAttendance_id(atdId);
+			inf.setStatus(temp? "请假":"缺勤");
+			inf.setStudent_id(stu);
+			
+			teacherAtendncDao.addInformation(inf);
+			
 		}
 	}
 }

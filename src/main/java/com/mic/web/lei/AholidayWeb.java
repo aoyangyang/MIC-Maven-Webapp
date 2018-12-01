@@ -60,10 +60,11 @@ public class AholidayWeb {
 	public ModelAndView ID(HttpServletRequest re){
 		ModelAndView modelandview = new ModelAndView();
 		List<String> CourseName = new ArrayList<String>();
+		
+		
 		Integer id = Integer.parseInt(re.getParameter("id"));
 		re.getSession().setAttribute("id", id);
-		approvalHolidayBean aholidaybean = approvalHolidaydo.approvalHolidayDo(
-				Integer.parseInt(re.getSession().getAttribute("id").toString()));
+		approvalHolidayBean aholidaybean = approvalHolidaydo.approvalHolidayDo(id);
 		CourseName = approvalHolidaydo.GetCoursename(aholidaybean.getId(), aholidaybean.getE_time());
 		modelandview.addObject("CourseName", CourseName);
 		modelandview.addObject("studentname", aholidaybean.getStudentname());

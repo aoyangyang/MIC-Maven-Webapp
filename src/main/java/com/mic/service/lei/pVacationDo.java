@@ -39,7 +39,7 @@ public class pVacationDo {
 	 * @exception
 	 * @since  1.0.0
 	 */
-	 public void pVacationDo(Integer student_id, String reason, String s_phone, String begin_time, String end_time)
+	 public void pVacationdo(Integer student_id, String reason, String s_phone, String begin_time, String end_time)
      {
     	 pVacationBean pvacation = new pVacationBean();
     	 pvacation.setStudent_id(student_id);
@@ -50,4 +50,20 @@ public class pVacationDo {
     	 pvacation.setState(0);
     	 pvacationdao.addPVacation(pvacation);
      }
+	 
+	 
+	/**
+	 * 得到电话号码
+	 * 方法名：getPhone
+	 * 创建人：chenPeng
+	 * 时间：2018年11月26日-下午10:49:39 
+	 * 手机:17673111810
+	 * @param studentId
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public String getPhone(Integer studentId) {
+		return pvacationdao.fondTel(studentId);
+	}
 }
