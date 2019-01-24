@@ -135,6 +135,27 @@ public class TeaClassListWeb {
 	}
 	
 	/**
+	 * 老师补签
+	 * 方法名：supplementDo
+	 * 创建人：chenPeng
+	 * 时间：2018年12月29日-上午1:11:20 
+	 * 手机:17673111810
+	 * @param attId
+	 * @param stuId
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping(value="/teacher/supplementDo",method = RequestMethod.POST, 
+								produces = "application/String; charset=utf-8")
+	@ResponseBody
+	public String supplementDo(Integer attId,Integer stuId){
+		return teacherClassDo.supplementDo(attId,stuId);
+	}
+	
+	
+	
+	/**
 	 * ajax刷新得到某门课程信息列表
 	 * 方法名：getClassList
 	 * 创建人：chenPeng
@@ -241,7 +262,7 @@ public class TeaClassListWeb {
 	
 	
 	/**
-	 * 开放中------------------------------------------------------------------------
+	 * 开发中------------------------------------------------------------------------
 	 * 方法名：upClassMsg
 	 * 创建人：chenPeng
 	 * 时间：2018年11月19日-下午1:01:15 

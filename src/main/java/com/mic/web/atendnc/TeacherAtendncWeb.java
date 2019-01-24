@@ -27,6 +27,8 @@ import com.mic.bean.student.StudentArrive;
 import com.mic.core.NoToClass;
 import com.mic.service.atendnc.TeacherAtendncDo;
 
+import net.sf.json.JSONArray;
+
 /**
  * 先判断这堂课点到了没
  * 如果点到了 那么久调到点到页面去
@@ -66,14 +68,16 @@ public class TeacherAtendncWeb {
 		//拿到课堂id
 		Integer noteId = Integer.parseInt(re.getParameter("noteId"));
 		//拿到gps信息
-		Integer mylat = Integer.parseInt(re.getParameter("mylat"));
-		Integer mylong = Integer.parseInt(re.getParameter("mylong"));
-		Integer temp = Integer.parseInt(re.getParameter("temp"));
+		String mylat = re.getParameter("mylat");
+		String mylong = re.getParameter("mylong");
+		String temp = re.getParameter("temp");
 		//获取状态
 		Integer state = Integer.parseInt("1"+re.getParameter("state"));
 		//----建立考勤数据-------
 		//查询出课堂时间
 		CourseNote couNote = teacherAtendncDo.getTimeMsg(noteId);
+		
+		
 		
 		String beginTime = couNote.getBegin_time();
 		String endTime = couNote.getEnd_time();
@@ -83,13 +87,15 @@ public class TeacherAtendncWeb {
 		//记录地理位置
 		String gpsMsg = mylat+"/"+mylong+"/"+temp;
 		//写入数据库 并得到id
+		
+		
 		Attendance atd = new Attendance();
 		atd.setClassroom(gpsMsg);
 		atd.setCourse_note_id(noteId);
 		atd.setState(state);
 		atd.setTime(time);
 		Integer atdId = teacherAtendncDo.addAtendnc(atd);
-		
+		re.getSession().setAttribute("atdId", atdId);
 		
 		//2700000为45min
 		//先填充全学生为缺勤
@@ -102,11 +108,45 @@ public class TeacherAtendncWeb {
 					teacherAtendncDo.getStuIdList(noteId);
 		//执行操作 将信息核对并写入 考勤信息 表
 		teacherAtendncDo.addInFoMation(stuIdList,atdId,bTime,eTime);
-		
-		
 		return null;
 	}
 	
+	/**
+	 * 实时刷新课程 信息
+	 * 方法名：getMsg
+	 * 创建人：chenPeng
+	 * 时间：2018年12月29日-上午12:45:42 
+	 * 手机:17673111810
+	 * @param re
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping(value="/teacher/atendnc/getMsg",method = RequestMethod.POST,
+			produces = "application/String; charset=utf-8")
+	@ResponseBody
+	public String getMsg(HttpServletRequest re){
+		JSONArray json = new JSONArray();
+		Integer noteId = (Integer)re.getSession().getAttribute("atdId");
+		Integer[] msg = {0,0,0};
+		
+		List<Information> ifomtionList = 
+				teacherAtendncDo.getAMsg(noteId);
+		for (Information information : ifomtionList) {
+			if (information.getStatus().equals("到课")) {
+				msg[0]++;
+			}else if (information.getStatus().equals("请假")) {
+				msg[1]++;
+			}else{
+				msg[2]++;
+			}
+		}
+		json.add(msg[0]);
+		json.add(msg[1]);
+		json.add(msg[2]);
+		return json.toString();
+	}
+
 	
 	
 	/**

@@ -25,36 +25,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
     </head>
-  
+  <style>
+  	.myBox{
+  		width: 100%;
+  	}
+  	.myBox img{
+  		margin-bottom: 5px;
+  	}
+  	.myBox p{
+  		margin-bottom: 10%;
+  	}
+  </style>
     <body id="box">
         <%@include file="../common/top.jsp" %>
             <!--中间-->
 		<div class="main">
 			<div class="ui raised very padded segment">
 				<h2>辅导员首页</h2>
-				<div class="boxs">
-					<div class="ui img">
-						<img alt="" src="${basePath}/img/logo.png" class="ui img">
-					</div>
-					<a href="${basePath}/AHoliday">
-						<input class="ui primary button" value="查看请假情况">
-					</a>
+				<div class="ui divider"></div>
+				<div class="myBox">
+					<img class="ui  rounded image" src="${basePath}/img/stu/stu3.jpg"></img>
+					<p>
+						<a href="${basePath}/AHoliday"><button class="ui primary fluid   button" >查看请假情况</button></a>
+					</p>
 				</div>
-				<div class="boxs">
-					<div class="ui img">
-						<img alt="" src="${basePath}/img/logo.png" class="ui img">
-					</div>
-					<a href="${basePath}/instructor">
-						<input class="ui primary button" value="查看到课情况">
-					</a>
+				<div class="myBox">
+					<img class="ui  rounded image" src="${basePath}/img/ins/ins1.jpg"></img>
+					<p>
+						<a href="${basePath}/instructor"><button class="ui primary fluid   button" >查看到课情况</button></a>
+					</p>
 				</div>
-				<div class="boxs">
-					<div class="ui img">
-						<img alt="" src="${basePath}/img/logo.png" class="ui img">
-					</div>
-					<a href="${basePath}/add/instructorAdd">
-						<input class="ui  red button" value="新建班级">
-					</a>
+				<div class="myBox">
+					<img class="ui  rounded image" src="${basePath}/img/ins/ins2.jpg"></img>
+					<p>
+						<a href="${basePath}/add/instructorAdd"><button class="ui primary fluid   button" >新建班级</button></a>
+					</p>
 				</div>
 			</div>
 		</div>

@@ -35,6 +35,7 @@ public class CpDate {
 	 * @since  1.0.0
 	 */
 	public long getClockTime(String format,String time) {
+		System.out.println(format+"==222="+time);
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat(format);
 		try {
 			date = bartDateFormat.parse(time);
@@ -43,6 +44,12 @@ public class CpDate {
 			System.out.println("传入的格式与时间格式不符合");
 		}
 		return date.getTime();
+	}
+	
+	public static void main(String[] args) {
+		CpDate cpDate = new CpDate();
+		System.out.println(cpDate.getClockTime("yyyy-MM-dd HH:mm:ss", "2018-12-29 08:55:00"));
+		
 	}
 	
 	/**

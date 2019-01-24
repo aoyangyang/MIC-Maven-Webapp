@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="field">
                     <label>学生姓名</label>
                     <div class="ui fluid left icon input">
-                        <input name="sname" type="text"  value="雷" readonly="readonly">
+                        <input name="sname" type="text"  value="${studentName }" readonly="readonly">
                     </div>
                 </div>
                 <div class="field">

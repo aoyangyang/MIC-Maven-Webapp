@@ -80,11 +80,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												点到
 											</button>
 										</a>
+										<a onclick="supplement(${coure.getId() })">
+											<button class="ui button inverted blue">
+												补签
+											</button>
+										</a>
 									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
-						<tfoot>
+						  <script type="text/javascript">
+							  supplement = function(courId){
+							  	$('.ui.modal').modal('show');
+							  	$('#attId').val(courId);
+							  }
+							  supplementDo = function(){
+							  	var attId = $('#attId').val();
+							  	var stuId = $("#stuId").val();
+							  	$.ajax({
+							  		type:"post",
+							  		url:"${basePath}/teacher/supplementDo",
+							  		data:{"attId":attId,"stuId":stuId},
+							  		success:function(date){
+							  			
+							  		}
+							  	});
+							  }
+						  </script>
+						<div class="ui modal">
+							<i class="close icon"></i>
+							<div class="header">
+								<font style="vertical-align: inherit;"><font
+									style="vertical-align: inherit;">补签 </font></font>
+							</div>
+							<form class="ui form">
+								<div class="field" style="min-height: 100px ;padding: auto 40px">
+									<input type="text" name="attId" id="attId" style="display: none">	
+									<div class="ui fluid icon input" style="width: 80%;margin:0 auto; margin-top: 30px;">
+										<input type="text" name="stuId" placeholder="学生Id" id="stuId">
+									</div>
+								</div>
+							</form>
+							<div class="actions">
+								<div class="ui black deny button">
+									<font style="vertical-align: inherit;"><font
+										style="vertical-align: inherit;">取消</font></font>
+								</div>
+								<div class="ui positive right labeled icon button" onclick="supplementDo();">
+									<font style="vertical-align: inherit;"><font
+										style="vertical-align: inherit;">确定</font></font><i
+										class="checkmark icon"></i>
+								</div>
+							</div>
+						</div>
+					<tfoot>
 							<tr>
 								<th colspan="7">
 									<div class="ui right floated pagination menu">

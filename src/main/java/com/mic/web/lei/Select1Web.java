@@ -32,10 +32,18 @@ import com.mic.service.lei.Select1Do;
 public class Select1Web {
 	@Autowired
 	private Select1Do select1do;
+	@Autowired
+	private HttpServletRequest re;
 	
 	@RequestMapping("/student/selectClass")
 	public ModelAndView select1(){
 		ModelAndView mo = new ModelAndView();
+		
+		Integer studentId = (Integer)re.getSession().getAttribute("studentId");
+		String studentName = (String)re.getSession().getAttribute("studentName");
+		
+		mo.addObject("studentId", studentId);
+		mo.addObject("studentName", studentName);
 		mo.setViewName("/student/select1");
 		return mo;
 	}

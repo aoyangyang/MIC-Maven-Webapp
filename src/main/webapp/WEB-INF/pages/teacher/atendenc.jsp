@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<!-- 统计表 -->
 				<div class="ui segment basic vertical t" id="tabe" style="display: none">
-					<div class="ui center aligned segment basic">
+					<div class="ui center aligned segment basic" id="msgTable">
 						<div id="chartdiv1" style=" width: 100%;height: 300px;">
 						</div>
 					</div>
@@ -105,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var mylat = 0;
 		var mylong = 0;
 		var Gtemp = 0;
-		function getGps(){
+		getGps = function(){
 			x = navigator.geolocation;
 			x.getCurrentPosition(success,failure,{
 				enableHighAccuracy:true,
@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 		var temp = 0;
 		/*开始点到*/
-		function play() {
+		play = function() {
 			var state = $('#cBox').is(":checked") ? 1:0;
 			getGps();
 			temp = 1;
@@ -146,18 +146,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					success: function(data) {
 						$("#lodingMsg").remove();
 						$("#tabe").css({"display":"block"});
-				
-						var arr=new Array();
-						arr[0]=70;
-						arr[1]=10;
-						arr[2]=2;
-						show(arr,"chartdiv1");
+						getMsg();
+						
 					}
 				});
 			}
 		};
+		getMsg = function(){
+			getMsgDo();
+			setInterval("getMsgDo()", 5000);
+		}
+		
+		var tempI = 1;
+		getMsgDo = function(){
+			var arr=new Array();
+			$.ajax({
+				type: "post",
+				url:"${basePath}/teacher/atendnc/getMsg",
+				data:{},
+				success:function(date){
+					var val = eval(date);
+				
+					var arr=new Array();
+					arr[0]=val[0];
+					arr[1]=val[1];
+					arr[2]=val[2];
+					
+					//$("#msgTable").html("");
+					//$("#msgTable").html('<div id="chartdiv'+templ+'" style=" width: 100%;height: 300px;">11111</div>');
+					var ids = "chartdiv"+tempI;
+					show(arr,ids);
+					//tempI++;
+				}
+			});
+		}
+		
+		
 		/*结束点到*/
-	    function stop(){
+	   stop = function(){
 	    	var r = confirm("是否结束点到？");
 	    	if(r){
 		    	if(temp){

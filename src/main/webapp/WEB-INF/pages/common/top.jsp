@@ -15,7 +15,7 @@
 								empty adClassName && empty adDepartmentName && empty adSchoolName}">
 					<a href="${basePath}/Login">
 						<button class="ui button inverted blue  ">
-							登陆
+							登录
 						</button>
 					</a>
 				</c:if>

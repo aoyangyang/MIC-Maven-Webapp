@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.mic.dao.admin.AdminLoginDao">
+ 	<select id="adminLogin" parameterType="com.mic.bean.Admin" resultType="com.mic.bean.Admin">
+		SELECT
+			id,
+			username
+		FROM
+			admin
+		WHERE
+			username = #{username}
+			AND
+			`password` = #{password}
+ 	</select>
+ 	
+ 	<select id="getLeaderList" resultType="com.mic.bean.Leader" parameterType="Integer">
+	 	SELECT
+			id,
+			username
+		FROM
+			leader
+		LIMIT #{page},10
+ 	</select>
+ 	
+ 	<select id="getStuList" resultType="com.mic.bean.student.Student"  parameterType="Integer">
+	 	SELECT
+			id,
+			username
+		FROM
+			student
+		LIMIT #{page},10
+ 	</select>
+ 	
+ 	<select id="getTeaList"  resultType="com.mic.bean.Teacher" parameterType="Integer">
+ 		SELECT
+			id,
+			username
+		FROM
+			teacher
+		LIMIT #{page},10
+ 	</select>
+ 	
+ 	<select id="getSchList"  resultType="com.mic.bean.school.School" parameterType="Integer">
+ 		SELECT
+			id,
+			s_name
+		FROM
+			school
+		LIMIT #{page},10
+ 	</select>
+ 	
+ 	<select id="getLeaderPage" resultType="Integer">
+ 		SELECT
+			COUNT(id)
+		FROM
+			leader
+ 	</select>
+ 	<select id="getStuPage" resultType="Integer">
+ 		SELECT
+			COUNT(id)
+		FROM
+			student
+ 	</select>
+ 	<select id="getTeaPage" resultType="Integer">
+ 		SELECT
+			COUNT(id)
+		FROM
+			teacher
+ 	</select>
+ 	<select id="getSchPage" resultType="Integer">
+ 		SELECT
+			COUNT(id)
+		FROM
+			school
+ 	</select>
+ </mapper>
