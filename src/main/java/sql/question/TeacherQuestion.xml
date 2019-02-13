@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.mic.dao.question.TeacherQuestionDao">
+  		<select id="getCourseNote"  parameterType="Integer"  resultType="com.mic.bean.course.CourseNote">
+  			SELECT
+				id,
+				course_id,
+				name,
+				Introduction,
+				begin_time,
+				end_time,
+				courseware,
+				ppt
+			FROM
+				course_note
+			WHERE	
+				id = #{no}
+  		</select>
+  		
+  		<update id="addPPt" parameterType="Map">
+	  		UPDATE
+				course_note
+			SET
+				ppt = #{src}
+			WHERE
+				id = #{courseNoteId};
+  		</update>
+  		
+  		<select id="getPptPath" parameterType="Integer" resultType="String">
+  			SELECT
+				ppt
+			FROM
+				course_note
+			WHERE
+				id = #{no};
+  		</select>
+  		
+  		<update id="deletePpt" parameterType="Integer">
+  				UPDATE
+					course_note
+				SET
+					ppt = NULL
+				WHERE
+					id = #{no};
+  		</update>
+  		
+  		<insert id="addQu" parameterType="com.mic.bean.db.Problems">
+  				INSERT INTO
+					problem(
+						course_note_id,
+						problem,
+						answer,
+						imgsrc,
+						anonymity,
+						dispark
+					)
+				VALUES(
+					#{course_note_id},
+					#{problem},
+					#{answer},
+					#{imgsrc},
+					#{anonymity},
+					0
+				);
+  		</insert>
+  		
+  		<select id="getProList"  parameterType="Integer"  resultType="com.mic.bean.db.Problems">
+	  		SELECT
+				id,
+				course_note_id,
+				problem,
+				answer,
+				imgsrc,
+				anonymity,
+				dispark
+			FROM
+				problem
+			WHERE
+				course_note_id = #{no}
+			order by id desc
+  		</select>
+  		
+  		<update id="doQu" parameterType="Integer">
+  			UPDATE
+				problem
+			SET
+				dispark = 1
+			WHERE
+				id = #{no};
+  		</update>
+  </mapper>

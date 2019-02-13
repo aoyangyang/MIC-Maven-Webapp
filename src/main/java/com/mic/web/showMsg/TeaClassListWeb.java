@@ -261,22 +261,4 @@ public class TeaClassListWeb {
 	}
 	
 	
-	/**
-	 * 开发中------------------------------------------------------------------------
-	 * 方法名：upClassMsg
-	 * 创建人：chenPeng
-	 * 时间：2018年11月19日-下午1:01:15 
-	 * 手机:17673111810
-	 * @param no
-	 * @return ModelAndView
-	 * @exception 
-	 * @since  1.0.0
-	 */
-	@RequestMapping("/teacher/problem/{no}")
-	public ModelAndView problem(@PathVariable Integer no){
-		ModelAndView andView = new ModelAndView();
-		System.out.println("TeaClassListWeb最后一个函数"+no);
-		return andView;
-	}
-	
 }

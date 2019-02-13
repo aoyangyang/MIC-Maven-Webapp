@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+ <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
@@ -201,10 +201,7 @@ function gotoUpdate(id) {
         	}
         	/* 跳转到设置问题页面 */
         	function gotoQu(id){
-        		var temp = confirm("gotoQu"+id);
-        		if(temp){
-	        		window.location.replace("${basePath}/teacher/problem/"+id);
-        		}
+        		window.location.replace("${basePath}/teacher/problem/"+id);
         	}
         	
         	/* 跳转到点到页面 */

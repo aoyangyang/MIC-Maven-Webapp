@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>学生首页</title>
+    <title>学生课堂</title>
 	<%@include file="../common/context.jsp" %>
     <link rel="stylesheet" type="text/css" href="${basePath}/css/mic/sutIndex.css"/>
     
@@ -41,37 +41,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!--中间-->
 		<div class="main">
 			<div class="ui raised very padded segment">
-				<h2>学生首页</h2>
+				<h2>学生课堂</h2>
 				<div class="ui divider"></div>
 				<div class="myBox">
-					<img class="ui  rounded image" src="${basePath}/img/stu/stu1.jpg"></img>
-					<p>
-						<a href="${basePath }/student/stuClassroom"><button class="ui primary fluid  button" >进入课堂</button></a>
-					</p>
-				</div>
-				<div class="myBox">
-					<img class="ui  rounded image" src="${basePath}/img/stu/stu2.jpg"></img>
-					<p>
-						<a><button class="ui primary fluid  button" >课后交流</button></a>
-					</p>
-				</div>
-				<div class="myBox">
-					<img class="ui  rounded image" src="${basePath}/img/stu/stu4.jpg"></img>
-					<p>
-						<a href="${basePath}/student/selectClass"><button class="ui primary fluid  button" >选课</button></a>
-					</p>
-				</div>
-				<div class="myBox">
-					<img class="ui  rounded image" src="${basePath}/img/stu/stu3.jpg"></img>
-					<p>
-						<a href="${basePath}/student/pVacation"><button class="ui red fluid  button" >请假</button></a>
-					</p>
+				<table class="ui celled table">
+					<thead>
+						<tr>
+							<th>课程名</th>
+							<th>开始时间</th>
+							<th>结束时间</th>
+							<th>上课内容</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="tbo">
+						<c:forEach items="${couNoteList}" var="classs" >
+							<tr>
+								<td>${classs.getIntroduction() }</td>
+								<td>${classs.begin_time }</td>
+								<td>${classs.end_time }</td>
+								<td>${classs.name }</td>
+								<td>
+									<a onclick="gotoClass(${classs.id })">
+										<button class="ui button inverted blue">
+											进入课堂
+										</button>
+									</a>
+								</td>
+							</tr>
+						</c:forEach>
+					
+					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="5">
+								<div class="ui right floated pagination menu">
+									<c:forEach begin="1" end="${pageNub}" var="i">
+										<a class="item" onclick="doIt(${i})">${i}</a> 
+									</c:forEach>
+								</div>
+							</th>
+						</tr>
+					</tfoot>
+				</table>
 				</div>
 				
 			</div>
 		</div>
         <%@include file="../common/food.jsp" %>
         <script type="text/javascript">
+        	gotoClass = function(no){
+        		post('${basePath}/student/class/page',{"no":no});
+        	}
+        
+        
+        
 			$('.ui.radio.checkbox')
 			  .checkbox()
 			;
