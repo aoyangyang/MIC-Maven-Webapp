@@ -89,4 +89,42 @@ public interface StudentClassroomDao {
 	*/
 	List<Integer> getStuAnsProb(Integer stuId);
 
+	/**
+	 * 得到正确答案
+	 * 方法名：getAns
+	 * 创建人：chenPeng
+	 * 时间：2019年2月13日-下午8:30:22 
+	 * 手机:17673111810
+	 * @param no
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	String getAns(Integer no);
+
+	/**
+	 * (这里用一句话描述这个方法的作用)
+	 * 方法名：addIntegral
+	 * 创建人：chenPeng
+	 * 时间：2019年2月13日-下午8:58:16 
+	 * 手机:17673111810
+	 * @param map void
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	void addIntegral(Map<String, Integer> map);
+
+	/**
+	 * (这里用一句话描述这个方法的作用)
+	 * 方法名：getEndTime
+	 * 创建人：chenPeng
+	 * 时间：2019年2月13日-下午9:09:28 
+	 * 手机:17673111810
+	 * @param no
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	String getEndTime(Integer no);
+
 }

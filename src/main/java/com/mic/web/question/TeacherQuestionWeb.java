@@ -31,7 +31,6 @@ import com.mic.bean.course.CourseNote;
 import com.mic.bean.db.Problems;
 import com.mic.core.ppt.PptToImg;
 import com.mic.service.question.TeacherQuestionDo;
-import com.sun.org.glassfish.external.statistics.annotations.Reset;
 
 /**
  * 
@@ -93,6 +92,39 @@ public class TeacherQuestionWeb {
 		andView.addObject("courseNote", courseNote);
 		andView.setViewName("question/teaQuestion");
 		return andView;
+	}
+	
+	/**
+	 * 统计答题结果
+	 * 方法名：getQuStatistics
+	 * 创建人：chenPeng
+	 * 时间：2019年2月15日-下午5:39:04 
+	 * 手机:17673111810
+	 * @param no
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@PostMapping(value = "/teacher/problem/quStatistics",produces = "application/String; charset=utf-8")
+	@ResponseBody
+	public String getQuStatistics(Integer no){
+		return teacherQuestionDo.getQuStatistics(no);
+	}
+	
+	/**
+	 * 老师查看回答详情 
+	 * 方法名：showAnsDetails
+	 * 创建人：chenPeng
+	 * 时间：2019年2月15日-下午11:08:04 
+	 * 手机:17673111810
+	 * @param no
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@PostMapping("/teacher/problem/showAnsDetails")
+	public ModelAndView showAnsDetails(Integer no){
+		return teacherQuestionDo.getDetailsList(no);
 	}
 	
 	

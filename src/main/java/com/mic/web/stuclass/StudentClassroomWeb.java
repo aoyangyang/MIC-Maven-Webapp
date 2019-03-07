@@ -9,6 +9,7 @@
 package com.mic.web.stuclass;
 
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -161,14 +162,36 @@ public class StudentClassroomWeb {
 	 * @param ans
 	 * @param no
 	 * @return String
+	 * @throws ParseException 
 	 * @exception 
 	 * @since  1.0.0
 	 */
 	@PostMapping("/student/class/page/answer")
 	@ResponseBody
-	public String stuAnswer(String ans,Integer no){
+	public String stuAnswer(String ans,Integer no) throws ParseException{
 		Integer studentId = (Integer) se.getAttribute("studentId");
+		
+		//判断是否可以答题
+		boolean temp = studentClassroomDo.canAnswer(no);
+		if (!temp) {
+			return "error";
+		}
+		
+		//答题
 		studentClassroomDo.stuAnswer(studentId,ans,no);
+		
+		//判断是否答对
+		String tAns = studentClassroomDo.getAns(no);
+		//设置分值
+		Integer integralNub = 2;
+		Integer noIntegralNub = 1;
+		
+		if (tAns.toUpperCase().equals(ans.toUpperCase())) {
+			studentClassroomDo.addIntegral(studentId,no,integralNub);
+		}else{
+			studentClassroomDo.addIntegral(studentId,no,noIntegralNub);
+		}
+		
 		return "success";
 	}
 }

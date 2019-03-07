@@ -112,6 +112,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								if(date == "success"){
 									froms.parentNode.removeChild(froms.previousElementSibling);
 									froms.parentNode.removeChild(froms);
+								}else{
+									alert("以及错过答题时间了！");
 								}
 							}						
 						});

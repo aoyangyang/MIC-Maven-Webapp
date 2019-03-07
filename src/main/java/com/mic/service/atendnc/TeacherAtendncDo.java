@@ -9,10 +9,13 @@
 package com.mic.service.atendnc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mic.bean.atendnc.Attendance;
 import com.mic.bean.atendnc.Leave;
@@ -321,4 +324,127 @@ public class TeacherAtendncDo {
 			
 		}
 	}
+
+	/**
+	 * 是否可以签到
+	 * 方法名：getCan
+	 * 创建人：chenPeng
+	 * 时间：2019年2月17日-下午9:21:03 
+	 * 手机:17673111810
+	 * @param noteId
+	 * @return Integer
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public Integer getCan(Integer noteId) {
+		// TODO Auto-generated method stub
+		return teacherAtendncDao.getCan(noteId);
+	}
+
+
+	/**
+	 * 查询点到的id
+	 * 方法名：getAMsgId
+	 * 创建人：chenPeng
+	 * 时间：2019年2月17日-下午9:48:18 
+	 * 手机:17673111810
+	 * @param couNoteId
+	 * @return Integer
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public Integer getAMsgId(Integer couNoteId) {
+		// TODO Auto-generated method stub
+		return teacherAtendncDao.getAMsgId(couNoteId);
+	}
+
+
+	/**
+	 * 判断两种状态
+	 * 方法名：JudgeMode
+	 * 创建人：chenPeng
+	 * 时间：2019年2月18日-下午5:39:30 
+	 * 手机:17673111810
+	 * @param andView void
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public void JudgeMode(ModelAndView andView,Integer atendncId, Integer noteId){
+		//查询是那种点到
+		Integer mode = teacherAtendncDao.getMode(atendncId);
+		andView.addObject("teaTemp", "1");
+		andView.addObject("noteId", noteId);
+		
+		if (mode == 1) {
+			andView.setViewName("teacher/atendenc");
+		}else{
+			//取密码
+			Integer timeKey = teacherAtendncDao.getTimeKey(atendncId);
+			andView.addObject("timeKeys", timeKey);
+			andView.setViewName("teacher/atendenc2");
+		}
+		
+		
+	}
+	
+
+
+	/**
+	 * 停止点到
+	 * 方法名：stopAtendnc
+	 * 创建人：chenPeng
+	 * 时间：2019年2月18日-下午9:07:02 
+	 * 手机:17673111810
+	 * @param noteId void
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public void stopAtendnc(Integer noteId) {
+		// TODO Auto-generated method stub
+		teacherAtendncDao.stopAtendnc(noteId);
+	}
+
+
+	/**
+	 * 将密码写入数据库
+	 * 方法名：setPword
+	 * 创建人：chenPeng
+	 * 时间：2019年2月18日-下午11:54:03 
+	 * 手机:17673111810
+	 * @param timeKey void
+	 * @param noteId 
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public void setPword(Integer timeKey, Integer noteId) {
+		// TODO Auto-generated method stub
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("timeKey", timeKey);
+		map.put("noteId", noteId);
+		teacherAtendncDao.setPword(map);
+	}
+
+
+	/**
+	 * (这里用一句话描述这个方法的作用)
+	 * 方法名：setCanAndMode
+	 * 创建人：chenPeng
+	 * 时间：2019年2月19日-上午12:44:43 
+	 * 手机:17673111810
+	 * @param can
+	 * @param mode void
+	 * @param noteId 
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public void setCanAndMode(Integer can, Integer mode, Integer noteId) {
+		// TODO Auto-generated method stub
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("can", can);
+		map.put("mode", mode);
+		map.put("noteId", noteId);
+		teacherAtendncDao.setCanAndMode(map);
+	}
+
 }

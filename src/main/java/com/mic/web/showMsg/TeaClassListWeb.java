@@ -112,6 +112,8 @@ public class TeaClassListWeb {
 		//拿到信息列表
 		List<CourseNote> coureList = teacherClassDo.getCourList(no,1);
 		
+		//将信息存起来
+		re.getSession().setAttribute("C_id", no);
 		
 		//判断老师是否也权限
 		if (coureList == null) {

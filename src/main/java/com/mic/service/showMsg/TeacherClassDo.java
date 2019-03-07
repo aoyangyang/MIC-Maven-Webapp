@@ -138,7 +138,7 @@ public class TeacherClassDo {
 
 
 	/**
-	 * (这里用一句话描述这个方法的作用)
+	 * 补签功能
 	 * 方法名：supplementDo
 	 * 创建人：chenPeng
 	 * 时间：2018年12月29日-上午1:11:52 

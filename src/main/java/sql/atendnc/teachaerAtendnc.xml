@@ -13,6 +13,16 @@
 					course_note_id = #{noteId};
   		</select>
   		
+  		<select id="getCan" parameterType="Integer" resultType="Integer">
+	  		SELECT
+				can
+			FROM
+				attendance
+			WHERE
+				course_note_id = #{noteId};
+  		
+  		</select>
+  		
   		<!-- 通过考勤id拿到考情信息 -->
   		<select id="getAMsg"  parameterType="Integer"  resultType="com.mic.bean.departments.Information">
 	  			SELECT
@@ -22,6 +32,15 @@
 					information
 				WHERE
 					attendance_id = #{atendncId}
+  		</select>
+  		
+  		<select id="getAMsgId" parameterType="Integer" resultType="Integer">
+				SELECT
+					id
+				FROM
+					attendance
+				WHERE
+					course_note_id = #{couNoteId};
   		</select>
   		<!-- 拿到全部选了这门课的学生的id -->
   		<select id="getStuIdList" parameterType="Integer"  resultType="Integer">
@@ -102,5 +121,52 @@
 					id =#{student_id}
   		</select>
   		
+  		<!-- 得到模式 -->
+  		<select id="getMode" resultType="Integer" parameterType="Integer">
+	  			SELECT
+					`mode`
+				FROM
+					attendance
+				WHERE
+					id = #{atendncId};
+  		</select>
   		
+  		<update id="stopAtendnc" parameterType="Integer">
+	  			UPDATE
+					attendance
+				SET
+					can = 0
+				WHERE
+					course_note_id = #{noteId};
+  		</update>
+  		
+  		<!-- 将密码写入数据库 -->
+  		<update id="setPword" parameterType="Map">
+  				UPDATE
+					attendance
+				SET
+					pword = #{timeKey}
+				WHERE
+					course_note_id = #{noteId};
+  		</update>
+  		
+  		<!-- 得到密码 -->
+  		<select id="getTimeKey" resultType="Integer" parameterType="Integer">
+	  			SELECT
+					pword
+				FROM
+					attendance
+				WHERE
+					id = #{atendncId};
+  		</select>
+  		
+  		<update id="setCanAndMode" parameterType="Map">
+  				UPDATE
+					attendance
+				SET
+					can = #{can},
+					mode = #{mode}
+				WHERE
+					course_note_id = #{noteId};
+  		</update>
   </mapper>

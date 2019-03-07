@@ -8,6 +8,10 @@
  */
 package com.mic.service.stuclass;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,7 +110,7 @@ public class StudentClassroomDo {
 	}
 
 	/**
-	 * (这里用一句话描述这个方法的作用)
+	 * 得到一个学生的回答记录
 	 * 方法名：getStuAnsProb
 	 * 创建人：chenPeng
 	 * 时间：2019年2月13日-下午5:34:24 
@@ -120,5 +124,77 @@ public class StudentClassroomDo {
 		// TODO Auto-generated method stub
 		return studentClassroomDao.getStuAnsProb(stuId);
 	}
+
+	/**
+	 * 得到正确答案
+	 * 方法名：getAns
+	 * 创建人：chenPeng
+	 * 时间：2019年2月13日-下午8:25:40 
+	 * 手机:17673111810
+	 * @param no
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public String getAns(Integer no) {
+		// TODO Auto-generated method stub
+		return studentClassroomDao.getAns(no);
+	}
+
+	/**
+	 * 加分
+	 * 方法名：addIntegral
+	 * 创建人：chenPeng
+	 * 时间：2019年2月13日-下午8:52:59 
+	 * 手机:17673111810
+	 * @param studentId
+	 * @param no
+	 * @param integralNub void
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public void addIntegral(Integer studentId, Integer no, Integer integralNub) {
+		// TODO Auto-generated method stub
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("studentId",studentId);
+		map.put("no",no);
+		map.put("integralNub",integralNub);
+		
+		studentClassroomDao.addIntegral(map);
+	}
+
+	/**
+	 * 判断是否可以答题
+	 * 方法名：canAnswer
+	 * 创建人：chenPeng
+	 * 时间：2019年2月13日-下午9:03:29 
+	 * 手机:17673111810
+	 * @param no
+	 * @return boolean
+	 * @throws ParseException 
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public boolean canAnswer(Integer no) throws ParseException {
+		// TODO Auto-generated method stub
+		//拿到课堂时间
+		String endTime = studentClassroomDao.getEndTime(no).split("/")[0];
+		//2018-12-29/2
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = dateFormat.parse(endTime);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH, 2);
+		
+		Long now = new Date().getTime();
+		Long end = calendar.getTime().getTime();
+		
+		if (end>now) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 
 }

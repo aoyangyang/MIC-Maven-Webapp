@@ -135,10 +135,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<button class="ui button right floated" onclick="doQu('${pro.id }')">提问</button>
 						</c:if>
 						<c:if test="${pro.dispark ==1}">
-							<button class="ui button right floated" onclick="showQuBack('${pro.id }')">查看答题结果</button>
+							<button class="ui button right floated" onclick="showQuBack('${pro.id }','${pro.anonymity}')">查看答题结果</button>
 						</c:if>
 						<button class="ui button red right floated" onclick="deleteQu('${pro.id }')">删除问题</button>
-						<br /><br />
+						<br /><br /><br /><br /><br />
 					</div>
 				</c:forEach>
 				
@@ -156,34 +156,100 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						});
 					}
 					
-					showQuBack = function(){
-						$(".ui.modal.statistical").modal("show");
+					/* 展示回答结果 */
+					showQuBack = function(no ,anonymity){
+						$.ajax({
+							type:"post",
+							url:"${basePath}/teacher/problem/quStatistics",
+							data:{
+								"no":no
+							},	
+							success:function(data){
+								if(data != "error"){
+									/* 解析数据 */
+									val = eval(data);
+									var datas = val[0];
+									
+									var peopleNub = datas.peopleNub;
+									var ansNub = datas.ansNub;
+
+									//应回答人数  
+									var clsStu = peopleNub.clsStu;
+									//回答人数
+									var replyList = peopleNub.replyList;
+									//答对人数
+									var isYse = peopleNub.isYse;
+									//答错人数
+									var isNo = peopleNub.isNo;
+									
+									/*        */
+									/* 设置表 */
+									/*        */
+									$('#clsStu_id').text(clsStu);
+									$('#replyList_id').text(replyList);
+									$('#isYse_id').text(isYse);
+									$('#isNo_id').text(isNo);
+									
+									/*          */
+									/* 设置按钮 */
+									/*          */
+									if(anonymity == 0){
+										var htmls = '<button class="ui button right floated" onclick="showAnsDetails('+no+')">'+
+														'查看详情'+
+													'</button>';
+										$('#showAnsDetailsButton').html(htmls);
+									}
+									
+									/*            */
+									/* 设置统计图 */
+									/*            */
+									var nameArray = new Array();
+									var valueArray = new Array();	
+															
+									for(i in ansNub){
+										nameArray.push(i);
+										valueArray.push(ansNub[i]);
+									}					
+									
+									// 基于准备好的dom，初始化echarts实例
+							        var myChart = echarts.init(document.getElementById('containers'));
+							
+							        // 指定图表的配置项和数据
+							        var option = {
+							            title: {
+							                text: '统计结果'
+							            },
+							            tooltip: {},
+							            legend: {
+							                data:['人数']
+							            },
+							            xAxis: {
+							                data: nameArray
+							            },
+							            yAxis: {},
+							            series: [{
+							                name: '数量',
+							                type: 'bar',
+							                data: valueArray
+							            }]
+							        };
+							
+							        // 使用刚指定的配置项和数据显示图表。
+							        myChart.setOption(option);
+							        
+							        $(".ui.modal.statistical").modal("show");
+																	
+								}else{
+									alert("统计失败，请重试！");
+								}
+							}					
+						});
 						
-						 // 基于准备好的dom，初始化echarts实例
-				        var myChart = echarts.init(document.getElementById('containers'));
-				
-				        // 指定图表的配置项和数据
-				        var option = {
-				            title: {
-				                text: '统计结果'
-				            },
-				            tooltip: {},
-				            legend: {
-				                data:['人数']
-				            },
-				            xAxis: {
-				                data: ["A","B","C","D"]
-				            },
-				            yAxis: {},
-				            series: [{
-				                name: '销量',
-				                type: 'bar',
-				                data: [5, 20, 36, 10]
-				            }]
-				        };
-				
-				        // 使用刚指定的配置项和数据显示图表。
-				        myChart.setOption(option);
+					};
+					
+					/* 跳到详情页面 */
+					showAnsDetails = function(no){
+						post('${basePath}/teacher/problem/showAnsDetails',{"no":no});
 					}
 				</script>
 				
@@ -193,10 +259,86 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<!-- 弹出统计图 -->
 		<div class="ui modal statistical">
-			<div class="ui segment basic" >
-				<div id="containers" style="width: 400px;height:300px;margin:0 ,auto;margin-top: 60px"></div>
+		<div class="ui placeholder segment">
+			<div class="ui two column very relaxed stackable grid">
+				<div class="column">
+					<!-- 统计图 -->
+					<div class="ui segment basic" >
+						<div id="containers" style="width: 400px;height:300px;margin:0 ,auto;margin-top: 60px"></div>
+					</div>
+				</div>
+				<div class="middle aligned column">
+					<!-- 表 -->
+					<table class="ui very basic collapsing celled table">
+						<thead>
+							<tr>
+								<th><font style="vertical-align: inherit;"><font
+										style="vertical-align: inherit;"></font></font></th>
+								<th><font style="vertical-align: inherit;"><font
+										style="vertical-align: inherit;">人数</font></font></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<h4 class="ui image header">
+										应答
+									</h4>
+								</td>
+								<td>
+									<font style="vertical-align: inherit;">
+										<font style="vertical-align: inherit;" id="clsStu_id"> 
+										</font>
+									</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4 class="ui image header">
+										实答
+									</h4>
+								</td>
+								<td>
+									<font style="vertical-align: inherit;">
+										<font style="vertical-align: inherit;" id="replyList_id"> 
+										</font>
+									</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4 class="ui image header">
+										正确
+									</h4>
+								</td>
+								<td>
+									<font style="vertical-align: inherit;">
+										<font style="vertical-align: inherit;" id="isYse_id"> 
+										</font>
+									</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4 class="ui image header">
+										错误
+									</h4>
+								</td>
+								<td>
+									<font style="vertical-align: inherit;">
+										<font style="vertical-align: inherit;" id="isNo_id"> 
+										</font>
+									</font>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div id="showAnsDetailsButton"></div>
+				</div>
 			</div>
+			<div class="ui vertical divider">AND</div>
 		</div>
+	</div>
 		
 		<!-- 上传ppt弹出层 -->
 		<div class="ui modal ppt">

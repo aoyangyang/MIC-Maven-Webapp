@@ -89,4 +89,63 @@
 			WHERE
 				id = #{no};
   		</update>
+  		
+  		
+  		<select id="getQuStatistics"  resultType="com.mic.bean.student.Student" parameterType="Integer">
+	  		SELECT
+				student.id,
+				username
+			FROM
+				elective INNER JOIN
+				student ON
+				student.id = student_id
+			WHERE
+				course_id = (
+					SELECT
+						course_id
+					FROM
+						course_note
+					WHERE
+						id = (
+							SELECT
+								course_note_id
+							FROM	
+								problem
+							WHERE
+								id = #{no}
+						)
+				);
+  		</select>
+  		
+  		<select id="getReplyList" resultType="com.mic.bean.db.Reply" parameterType="Integer">
+  			SELECT
+				student_id,
+				answer
+			FROM
+				reply
+			WHERE
+				problem_id = #{no};
+  		</select>
+  		
+  		<select id="getAns" resultType="String" parameterType="Integer">
+			SELECT
+				answer
+			FROM	
+				problem
+			WHERE
+				id = #{no};
+  		</select>
+  		
+  		<select id="getDetailsList" resultType="com.mic.bean.teacher.ShowAnsDetails">
+	  		SELECT
+				student.id,
+				username,
+				answer
+			FROM
+				reply INNER JOIN
+				student ON
+				student.id = reply.student_id
+			WHERE
+				problem_id = #{no};
+  		</select>
   </mapper>

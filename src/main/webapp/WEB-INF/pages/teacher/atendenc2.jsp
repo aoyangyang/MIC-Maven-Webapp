@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script src="${basePath}/js/amcharts/amcharts.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${basePath}/js/amcharts/serial.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${basePath}/js/amcharts/light.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${basePath}/js/qrcode.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="${basePath}/js/cp.js"></script>
 
 		<meta http-equiv="pragma" content="no-cache">
@@ -56,12 +57,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<button class="ui massive circular red facebook icon button" onclick="stop()" >
 					  	<i class="stop icon"></i>&nbsp;结束点到 
 					</button>
-					<div class="inline field">
-					    <div class="ui toggle checkbox"><br>
-					    <input type="checkbox" tabindex="0" class="hidden" id="cBox"  >
-					    <label>开启人脸识别</label>
-						</div>
-					</div>
 				</div>
 				<div class="ui segment" id="lodingMsg">
 					<div class="ui active dimmer">
@@ -83,7 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ui img">
 						<img class="ui fluid image" src="img/short-paragraph.png">
 					</div>
-					
+				</div>
+						<div id="qrcode" style="width:500px; margin: 0 auto;"></div>
 				</div>
 				<!-- 统计表 -->
 				<div class="ui segment basic vertical t" id="tabe" style="display: none">
@@ -99,28 +95,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<%@include file="../common/food.jsp" %>
 		<script type="text/javascript">
 			$('.ui.checkbox').checkbox();
-			/* 得到GPS信号 */
-			var mylat = 0;
-			var mylong = 0;
-			var Gtemp = 0;
-			getGps = function(){
-				x = navigator.geolocation;
-				x.getCurrentPosition(success,failure,{
-					enableHighAccuracy:true,
-			    	timeout:5000,
-			    	maximumAge:0
-				});
-				function success(position){
-					mylat = position.coords.latitude;
-					mylong = position.coords.longitude;
-					Gtemp = position.coords.accuracy;
-				}
-				function failure(err){
-					alert( err.code );
-					alert("请打开定位功能！！");
-				}
-			};
-	
 		
 			var temp = 0;
 			/*开始点到*/
@@ -130,26 +104,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					return 0;
 				}
 				var state = $('#cBox').is(":checked") ? 1:0;
-				getGps();
 				temp = 1;
 				var r = confirm("是否开始点到？");
 				if(r){
 					$.ajax({
 						type: "post",
-						url: "${basePath}/teacher/atendnc/play",
+						url: "${basePath}/teacher/atendnc/play/qc",
 						data: {
-							"noteId": ${noteId},
-							"mylat":mylat,
-							"mylong":mylong,
-							"temp":Gtemp,
-							"state":state
-							
+							"noteId": ${noteId}
 						},
 						success: function(data) {
 							$("#lodingMsg").remove();
 							$("#tabe").css({"display":"block"});
 							getMsg();
 							
+							/* 展示二维码 */
+							var qrcode = new QRCode(document.getElementById("qrcode"),{
+						    	width: 500,
+		    					height: 500
+						    });
+						    setInterval("doit();",1);
+						    var timeTemp = parseInt(data);
+							var datess;
+							
+						    doit = function () {
+						    	datess = new Date();
+						        qrcode.makeCode("test"+datess.getTime()*timeTemp);
+						    }
+						    
 						}
 					});
 				}
@@ -197,13 +179,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	}
 		    };
 		</script>
-		<c:if test="${teaTemp == 1}">
+		<c:if test="${teaTemp ==1 }">
 			<script type="text/javascript">
 				//如果是已经开始点到的那么久展示点到
 				$("#lodingMsg").remove();
 				$("#tabe").css({"display":"block"});
 				temp = 1;
 				getMsg();
+				
+				/* 二维码 */
+				var qrcode = new QRCode(document.getElementById("qrcode"),{
+			    	width: 500,
+   					height: 500
+			    });
+			    setInterval("doit();",1);
+			    var datess;
+			    
+				var timeTemp = parseInt('${timeKeys}');
+			    doit = function () {
+			    	datess = new Date();
+			        qrcode.makeCode("test"+datess.getTime()*timeTemp);
+			    }
 			</script>
 		</c:if>
 	</body>

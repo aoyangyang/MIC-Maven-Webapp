@@ -13,6 +13,9 @@ import java.util.Map;
 
 import com.mic.bean.course.CourseNote;
 import com.mic.bean.db.Problems;
+import com.mic.bean.db.Reply;
+import com.mic.bean.student.Student;
+import com.mic.bean.teacher.ShowAnsDetails;
 
 /**
  * 
@@ -101,7 +104,7 @@ public interface TeacherQuestionDao {
 	List<Problems> getProList(Integer no);
 
 	/**
-	 * (这里用一句话描述这个方法的作用)
+	 * 问题
 	 * 方法名：doQu
 	 * 创建人：chenPeng
 	 * 时间：2019年2月11日-下午10:23:32 
@@ -111,5 +114,57 @@ public interface TeacherQuestionDao {
 	 * @since  1.0.0
 	*/
 	void doQu(Integer no);
+
+	/**
+	 *  获取全部应该答题人
+	 * 方法名：getQuStatistics
+	 * 创建人：chenPeng
+	 * 时间：2019年2月15日-下午6:58:06 
+	 * 手机:17673111810
+	 * @param no
+	 * @return List<Integer>
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	List<Student> getQuStatistics(Integer no);
+
+	/**
+	 * 获取已答题人数以及答案
+	 * 方法名：getReplyList
+	 * 创建人：chenPeng
+	 * 时间：2019年2月15日-下午7:03:40 
+	 * 手机:17673111810
+	 * @param no
+	 * @return List<Reply>
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	List<Reply> getReplyList(Integer no);
+
+	/**
+	 * 获取答案
+	 * 方法名：getAns
+	 * 创建人：chenPeng
+	 * 时间：2019年2月15日-下午7:05:58 
+	 * 手机:17673111810
+	 * @param no
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	String getAns(Integer no);
+
+	/**
+	 * 获取详情答题
+	 * 方法名：getDetailsList
+	 * 创建人：chenPeng
+	 * 时间：2019年2月15日-下午11:29:57 
+	 * 手机:17673111810
+	 * @param no
+	 * @return List<ShowAnsDetails>
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	List<ShowAnsDetails> getDetailsList(Integer no);
 
 }

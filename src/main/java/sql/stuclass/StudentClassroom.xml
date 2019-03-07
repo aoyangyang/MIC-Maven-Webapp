@@ -71,4 +71,53 @@
 				WHERE
 					student_id = #{stuId};
   		</select>
+  		
+  		<select id="getAns" parameterType="Integer" resultType="String">
+  				SELECT
+					answer
+				FROM
+					problem
+				WHERE
+					id = #{no};
+  		</select>
+  		
+  		<update id="addIntegral" parameterType="Map">
+				UPDATE
+					elective
+				SET
+					integral = integral + #{integralNub}
+				WHERE
+					student_id = #{studentId} AND
+					course_id = (
+						SELECT
+							course_id
+						FROM
+							course_note
+						WHERE
+							id = (
+								SELECT
+									course_note_id
+								FROM
+									problem
+								WHERE
+									id = #{no}
+							)
+					);
+  		</update>
+  		
+  		<select id="getEndTime"  resultType="String" parameterType="Integer">
+  			SELECT	
+				end_time
+			FROM	
+				course_note
+			WHERE
+				id = (
+					SELECT
+						course_note_id
+					FROM
+						problem
+					WHERE
+						id = #{no}
+				)
+  		</select>
   </mapper>

@@ -9,15 +9,23 @@
 package com.mic.service.question;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mic.bean.course.CourseNote;
 import com.mic.bean.db.Problems;
+import com.mic.bean.db.Reply;
+import com.mic.bean.student.Student;
+import com.mic.bean.teacher.ShowAnsDetails;
 import com.mic.dao.question.TeacherQuestionDao;
+
+import net.sf.json.JSONArray;
 
 /**
  * 
@@ -113,7 +121,7 @@ public class TeacherQuestionDo {
 	public void addQu(Integer no, String quText, String quAns, String exampleQu, String newFilePath) {
 		// TODO Auto-generated method stub
 		int temp = 0;
-		if(exampleQu.equals("true")){
+		if("true".equals(exampleQu)){
 			temp = 1;
 		}
 		teacherQuestionDao.addQu(new Problems(no, quText, quAns, newFilePath, temp));
@@ -134,7 +142,7 @@ public class TeacherQuestionDo {
 		return teacherQuestionDao.getProList(no);
 	}
 	/**
-	 * (这里用一句话描述这个方法的作用)
+	 * 提问
 	 * 方法名：doQu
 	 * 创建人：chenPeng
 	 * 时间：2019年2月11日-下午10:23:11 
@@ -146,6 +154,121 @@ public class TeacherQuestionDo {
 	public void doQu(Integer no) {
 		// TODO Auto-generated method stub
 		teacherQuestionDao.doQu(no);
+	}
+	/**
+	 * 得到统计图
+	 * （有每个选项的人数，正确答案的人数，错误的人数，总人数，答题人数）
+	 * 方法名：getQuStatistics
+	 * 创建人：chenPeng
+	 * 时间：2019年2月15日-下午6:49:45 
+	 * 手机:17673111810
+	 * @param no
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public String getQuStatistics(Integer no) {
+		// TODO Auto-generated method stub
+		// 获取应该答题人数，也就是选课人数
+		List<Student> clsStu = teacherQuestionDao.getQuStatistics(no);
+		
+		// 获取已答题人数以及答案
+		List<Reply> replyList = teacherQuestionDao.getReplyList(no);
+		
+		// 获取正确答案
+		String ans = teacherQuestionDao.getAns(no);
+		
+		// 对比答案 正确的与错误的 分别计数
+		// 分别统计各种答案 以及各种答案 的个数
+		int isYes = 0;
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for (Reply reply : replyList) {
+			//将结果计入set
+			String stuAns = reply.getAnswer();
+			Integer ansSum = map.get(stuAns);
+			if (ansSum == null) {
+				map.put(stuAns, 1);
+			}else{
+				map.put(stuAns, ansSum+1);
+			}
+			//对比答案
+			if (ans.equals(reply.getAnswer())) {
+				isYes++;
+			}
+		}
+		
+		//返回数据
+		JSONArray json = new JSONArray();
+		Map<String, Map<String, Integer>> jsonMap = new HashMap<String, Map<String,Integer>>();
+		Map<String, Integer> tempMap = new HashMap<String, Integer>();
+		
+		//应回答人数
+		tempMap.put("clsStu", clsStu.size());
+		//回答人数
+		tempMap.put("replyList", replyList.size());
+		//答对人数
+		tempMap.put("isYse", isYes);
+		//答错人数
+		tempMap.put("isNo",replyList.size() - isYes);
+		
+		jsonMap.put("peopleNub", tempMap);
+		jsonMap.put("ansNub", map);
+		
+		json.add(jsonMap);
+		
+		return json.toString();
+	}
+	/**
+	 * 得到详细的答题情况
+	 * 方法名：getDetailsList
+	 * 创建人：chenPeng
+	 * 时间：2019年2月15日-下午11:26:43 
+	 * 手机:17673111810
+	 * @param no
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public ModelAndView getDetailsList(Integer no) {
+		// TODO Auto-generated method stub
+		ModelAndView andView = new ModelAndView();
+		// 获取应该答题人数，也就是选课人数
+		List<Student> clsStu = teacherQuestionDao.getQuStatistics(no);
+		
+		//答题详情
+		List<ShowAnsDetails> detailsList = teacherQuestionDao.getDetailsList(no);
+		
+		// 获取正确答案
+		String ans = teacherQuestionDao.getAns(no);
+		
+		Set<Integer> stuIdSet = new HashSet<Integer>();
+		for (ShowAnsDetails showAnsDetails : detailsList) {
+			//判断答案
+			String stuAns = showAnsDetails.getAnswer();
+			if (ans.equals(stuAns)) {
+				showAnsDetails.setCorrect(1);
+			}else{
+				showAnsDetails.setCorrect(0);
+			}
+			
+			//弄出没有答题的学生
+			stuIdSet.add(showAnsDetails.getId());
+		}
+		
+		//弄出没有答题的学生
+		ShowAnsDetails sad;
+		for (Student stuID : clsStu) {
+			if (!stuIdSet.contains(stuID.getId())) {
+				sad = new ShowAnsDetails();
+				sad.setAnswer("未答题");
+				sad.setUsername(stuID.getUsername());
+				detailsList.add(sad);
+			}
+		}
+		
+		andView.addObject("detailsList", detailsList);
+		andView.setViewName("question/teaShowAnsDetails");
+		return andView;
 	}
 
 }
