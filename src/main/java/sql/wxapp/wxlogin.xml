@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.mic.dao.wxapp.WxLoginDao">
+  		<select id="login" parameterType="Map"  resultType="com.mic.bean.student.Student" >	
+				SELECT
+					s.id,s.username,classname password,email,phone,point
+				FROM
+					student s INNER JOIN
+					class  c ON
+					s.class_id = c.id
+				WHERE
+					username = #{username}
+				AND
+					`password` = #{password}
+  		</select>
+  		
+  		
+  		
+  		<select id="getQCpwd" parameterType="Integer" resultType="String">
+  				SELECT
+  					pword
+  				FROM
+  					attendance
+  				WHERE
+  					course_note_id = #{courseId};
+  		</select>
+		
+		<update id="upInfoStatrt" parameterType="com.mic.bean.wxapp.WxAppQc" >
+				UPDATE
+					information
+				SET
+					`status` = '到课'
+				WHERE
+					attendance_id = (
+						SELECT
+							id
+						FROM
+							attendance
+						WHERE
+							course_note_id = #{course_note_id} AND
+							pword = #{pword}
+					)
+				AND
+					student_id = (
+						SELECT
+							id
+						FROM
+							student
+						WHERE
+							username = #{username}
+					);
+		</update>
+		
+		<select id="getWxUser"  parameterType="String" resultType="com.mic.bean.wxapp.WxUser">
+				SELECT
+					id,pic
+				FROM
+					student
+				WHERE
+					username = #{username}
+		</select>
+		
+		<select id="getWxClass" parameterType="Integer"  resultType="com.mic.bean.wxapp.WxClass">
+				SELECT
+					id,classroom,state,can
+				FROM	
+					attendance
+				WHERE
+					course_note_id = #{parseInt};
+		</select>
+  </mapper>

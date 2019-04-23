@@ -1,10 +1,10 @@
 /**
  * chenPeng
  * com.mic.core
- * FaseTest.java
+ * FaceComp.java
  * 创建人:chenpeng
- * 时间：2018年8月22日-下午8:17:39 
- * 2018陈鹏-版权所有
+ * 时间：2019年4月22日-下午10:53:17 
+ * 2019陈鹏-版权所有
  */
 package com.mic.core;
 
@@ -13,17 +13,16 @@ import java.util.HashMap;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
-
 /**
  * 
- * FaseTest
+ * FaceComp
  * 创建人:chenPeng
- * 时间：2018年8月22日-下午8:17:39 
+ * 时间：2019年4月22日-下午10:53:17 
  * @version 1.0.0
  * 
  */
-public class FaseTest {
-	public static void main(String[] args) {
+public class FaceComp {
+	public static String faceComp(String imgSrc1,String imgSrc2){
 		ImgBeat64 imgBeat64 = new ImgBeat64();
 		
 	    String host = "http://rlsbbd.market.alicloudapi.com";
@@ -32,13 +31,13 @@ public class FaseTest {
 	    String appcode = "b400dde4904541f2b832975111886291";
 	    
 	    
-	    String img01 = imgBeat64.getBeat64("C:/Users/81022/Desktop/1.jpg");
-	    String img02 = imgBeat64.getBeat64("C:/Users/81022/Desktop/3.jpg");
+	    String img01 = imgBeat64.getBeat64(imgSrc1);
+	    String img02 = imgBeat64.getBeat64(imgSrc2);
 	    
 	    
 	    String img1 = ""; 
 	    String img2 = "";
-	    
+	    String returnStr = "";
 	    HashMap<String, String> headers = new HashMap<String, String>();
 	    //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
 	    headers.put("Authorization", "APPCODE " + appcode);
@@ -66,9 +65,12 @@ public class FaseTest {
 	    	HttpResponse response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
 	    	//System.out.println(response.toString());
 	    	//获取response的body
-	    	System.out.println(EntityUtils.toString(response.getEntity()));
+	    	returnStr = EntityUtils.toString(response.getEntity());
+	    	System.out.println(returnStr);
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    }
+	    
+	    return returnStr;
 	}
 }

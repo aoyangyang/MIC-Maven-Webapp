@@ -269,6 +269,10 @@ public class TeacherAtendncWeb {
 	 */
 	@RequestMapping(value="/teacher/atendnc",method = RequestMethod.POST)
 	public ModelAndView initAtendnc(Integer noteId){
+		
+		//写入课堂编号
+		se.setAttribute("classname", noteId);
+		
 		ModelAndView andView = new ModelAndView();
 		
 		//初始化值
@@ -330,6 +334,10 @@ public class TeacherAtendncWeb {
 	 */
 	@PostMapping("/teacher/atendnc2")
 	public ModelAndView initAtendnc2(Integer noteId){
+		
+		//写入课堂编号
+		se.setAttribute("classname", noteId);
+		
 		ModelAndView andView = new ModelAndView();
 		
 		//初始化值

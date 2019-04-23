@@ -48,6 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="main">
 			<div class="ui raised very padded segment">
 				<h2>教师点到</h2>
+				<h3>课堂编号：${classname }</h3>
 				<div class="ui divider"></div>
 				<div class="ui segment basic  center aligned">
 					<button class="ui massive circular facebook icon button" onclick="play()" >
