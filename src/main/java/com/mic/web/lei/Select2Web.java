@@ -37,6 +37,7 @@ public class Select2Web {
 		Integer t2 = Integer.parseInt(re.getSession().getAttribute("C_id").toString());
     	ModelAndView modelandview = new ModelAndView();
     	select2do.Select2(t1, t2);
+    	modelandview.setViewName("student/stuIndex");
 		return modelandview;
 	}
 	

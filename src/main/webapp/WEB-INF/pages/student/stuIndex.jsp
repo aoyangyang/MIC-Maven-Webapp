@@ -25,37 +25,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
     </head>
-  
+  <style>
+  	.myBox{
+  		width: 100%;
+  	}
+  	.myBox img{
+  		margin-bottom: 5px;
+  	}
+  	.myBox p{
+  		margin-bottom: 10%;
+  	}
+  </style>
     <body id="box">
         <%@include file="../common/top.jsp" %>
             <!--中间-->
 		<div class="main">
 			<div class="ui raised very padded segment">
 				<h2>学生首页</h2>
-				<div class="boxs">
-					<div class="ui img">
-						<img alt="" src="${basePath}/img/logo.png" class="ui img">
-					</div>
-					<a>
-						<input class="ui primary button" value="进入课堂">
-					</a>
+				<div class="ui divider"></div>
+				<div class="myBox">
+					<img class="ui  rounded image" src="${basePath}/img/stu/stu1.jpg"></img>
+					<p>
+						<a href="${basePath }/student/stuClassroom"><button class="ui primary fluid  button" >进入课堂</button></a>
+					</p>
 				</div>
-				<div class="boxs">
-					<div class="ui img">
-						<img alt="" src="${basePath}/img/logo.png" class="ui img">
-					</div>
-					<a>
-						<input class="ui primary button" value="课后交流">
-					</a>
+				<div class="myBox">
+					<img class="ui  rounded image" src="${basePath}/img/stu/stu2.jpg"></img>
+					<p>
+						<a><button class="ui primary fluid  button" >课后交流</button></a>
+					</p>
 				</div>
-				<div class="boxs">
-					<div class="ui img">
-						<img alt="" src="${basePath}/img/logo.png" class="ui img">
-					</div>
-					<a href="${basePath}/pVacation">
-						<input class="ui  red button" value="请假">
-					</a>
+				<div class="myBox">
+					<img class="ui  rounded image" src="${basePath}/img/stu/stu4.jpg"></img>
+					<p>
+						<a href="${basePath}/student/selectClass"><button class="ui primary fluid  button" >选课</button></a>
+					</p>
 				</div>
+				<div class="myBox">
+					<img class="ui  rounded image" src="${basePath}/img/stu/stu3.jpg"></img>
+					<p>
+						<a href="${basePath}/student/pVacation"><button class="ui red fluid  button" >请假</button></a>
+					</p>
+				</div>
+				
 			</div>
 		</div>
         <%@include file="../common/food.jsp" %>

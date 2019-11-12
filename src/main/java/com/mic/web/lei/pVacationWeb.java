@@ -33,29 +33,36 @@ import com.mic.service.lei.pVacationDo;
 public class pVacationWeb {
     @Autowired
     private pVacationDo pVacationdo;
+    @Autowired
+    private HttpServletRequest re;
     
-    @RequestMapping("/pVacation")
+    @RequestMapping("/student/pVacation")
 	public ModelAndView pVacation(){
-		ModelAndView mo = new ModelAndView();
+    	ModelAndView mo = new ModelAndView();
+    	
+    	Integer studentId = (Integer) re.getSession().getAttribute("studentId");
+    	String studentName = (String) re.getSession().getAttribute("studentName");
+    	
+    	/*得到tel*/
+    	String phone = pVacationdo.getPhone(studentId);
+    	
+    	mo.addObject("phone", phone);
+    	mo.addObject("studentId", studentId);
+    	mo.addObject("studentName", studentName);
 		mo.setViewName("/student/pVacation");
 		return mo;
 	}
     
-    @RequestMapping(value="/pVacation", method = RequestMethod.POST)
+    @RequestMapping(value="/student/pVacationDo", method = RequestMethod.POST)
 	public ModelAndView eClassDo(HttpServletRequest re){
     	ModelAndView modelandview = new ModelAndView();
-    	String Sname = re.getParameter("Sname");
-    	Integer Sid = Integer.parseInt(re.getParameter("Sid"));
+    	String Sname = (String) re.getSession().getAttribute("studentName");
+    	Integer Sid = (Integer) re.getSession().getAttribute("studentId");
     	String reason = re.getParameter("reson");
     	String Pnum = re.getParameter("Pnum");
     	String Btime = re.getParameter("Btime");
     	String Etime = re.getParameter("Etime");	
-    	pVacationdo.pVacationDo(Sid, reason, Pnum, Btime, Etime);
-    	modelandview.addObject("Sid", Sid);
-    	modelandview.addObject("reson", reason);
-    	modelandview.addObject("Pnum", Pnum);
-    	modelandview.addObject("Btime", Btime);
-    	modelandview.addObject("Etime", Etime);
+    	pVacationdo.pVacationdo(Sid, reason, Pnum, Btime, Etime);
     	
     	modelandview.setViewName("student/stuIndex");
 		return modelandview;

@@ -48,16 +48,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="main">
 			<div class="ui raised very padded segment">
 				<h2>教师点到</h2>
+				<h3>课堂编号：${classname }</h3>
 				<div class="ui divider"></div>
 				<div class="ui segment basic  center aligned">
-					<button class="ui massive circular facebook icon button" onclick="play()">
+					<button class="ui massive circular facebook icon button" onclick="play()" >
 					  	<i class="play icon"></i>&nbsp;开始点到 
 					</button>
-					<button class="ui massive circular red facebook icon button" onclick="stop()">
+					<button class="ui massive circular red facebook icon button" onclick="stop()" >
 					  	<i class="stop icon"></i>&nbsp;结束点到 
 					</button>
+					<div class="inline field">
+					    <div class="ui toggle checkbox"><br>
+					    <input type="checkbox" tabindex="0" class="hidden" id="cBox"  >
+					    <label>开启人脸识别</label>
+						</div>
+					</div>
 				</div>
-				
 				<div class="ui segment" id="lodingMsg">
 					<div class="ui active dimmer">
 						<div class="ui text loader">
@@ -82,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<!-- 统计表 -->
 				<div class="ui segment basic vertical t" id="tabe" style="display: none">
-					<div class="ui center aligned segment basic">
+					<div class="ui center aligned segment basic" id="msgTable">
 						<div id="chartdiv1" style=" width: 100%;height: 300px;">
 						</div>
 					</div>
@@ -90,47 +96,116 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!-- 统计表 -->
 			</div>
 		</div>
+		
 		<%@include file="../common/food.jsp" %>
 		<script type="text/javascript">
-		</script>
-	</body>
-	<script type="text/javascript">
-		var temp = 0;
+			$('.ui.checkbox').checkbox();
+			/* 得到GPS信号 */
+			var mylat = 0;
+			var mylong = 0;
+			var Gtemp = 0;
+			getGps = function(){
+				x = navigator.geolocation;
+				x.getCurrentPosition(success,failure,{
+					enableHighAccuracy:true,
+			    	timeout:5000,
+			    	maximumAge:0
+				});
+				function success(position){
+					mylat = position.coords.latitude;
+					mylong = position.coords.longitude;
+					Gtemp = position.coords.accuracy;
+				}
+				function failure(err){
+					alert( err.code );
+					alert("请打开定位功能！！");
+				}
+			};
+	
+		
+			var temp = 0;
+			/*开始点到*/
+			play = function() {
+				if(temp == 1){
+					alert("点到已经开始");
+					return 0;
+				}
+				var state = $('#cBox').is(":checked") ? 1:0;
+				getGps();
+				temp = 1;
+				var r = confirm("是否开始点到？");
+				if(r){
+					$.ajax({
+						type: "post",
+						url: "${basePath}/teacher/atendnc/play",
+						data: {
+							"noteId": ${noteId},
+							"mylat":mylat,
+							"mylong":mylong,
+							"temp":Gtemp,
+							"state":state
+							
+						},
+						success: function(data) {
+							$("#lodingMsg").remove();
+							$("#tabe").css({"display":"block"});
+							getMsg();
+							
+						}
+					});
+				}
+			};
 			
-		/*开始点到*/
-		function play() {
-			temp = 1;
-			var r = confirm("是否开始点到？");
-			if(r){
+			getMsg = function(){
+				getMsgDo();
+				setInterval("getMsgDo()", 5000);
+			}
+			
+			var tempI = 1;
+			getMsgDo = function(){
+				var arr=new Array();
 				$.ajax({
 					type: "post",
-					url: "${basePath}/teacher/atendnc/play",
-					data: {
-						"noteId": ${noteId}
-					},
-					success: function(data) {
-						$("#lodingMsg").remove();
-						$("#tabe").css({"display":"block"});
-				
+					url:"${basePath}/teacher/atendnc/getMsg",
+					data:{},
+					success:function(date){
+						var val = eval(date);
+					
 						var arr=new Array();
-						arr[0]=70;
-						arr[1]=10;
-						arr[2]=2;
-						show(arr,"chartdiv1");
+						arr[0]=val[0];
+						arr[1]=val[1];
+						arr[2]=val[2];
+						
+						//$("#msgTable").html("");
+						//$("#msgTable").html('<div id="chartdiv'+templ+'" style=" width: 100%;height: 300px;">11111</div>');
+						var ids = "chartdiv"+tempI;
+						show(arr,ids);
+						//tempI++;
 					}
 				});
 			}
-		};
-		/*结束点到*/
-	    function stop(){
-	    	var r = confirm("是否结束点到？");
-	    	if(r){
-		    	if(temp){
-			    	post("${basePath}/teacher/atendnc",{"noteId":${noteId}});
-		    	}else{
-		    		alert("请先开始点到")
+			
+			
+			/*结束点到*/
+		   stop = function(){
+		    	var r = confirm("是否结束点到？");
+		    	if(r){
+			    	if(temp){
+				    	post("${basePath}/teacher/atendnc/stop",{"noteId":${noteId}});
+			    	}else{
+			    		alert("请先开始点到")
+			    	}
 		    	}
-	    	}
-	    };
-	</script>
+		    };
+		</script>
+		<c:if test="${teaTemp == 1}">
+			<script type="text/javascript">
+				//如果是已经开始点到的那么久展示点到
+				$("#lodingMsg").remove();
+				$("#tabe").css({"display":"block"});
+				temp = 1;
+				getMsg();
+			</script>
+		</c:if>
+	</body>
 </html>

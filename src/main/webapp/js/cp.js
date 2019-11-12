@@ -1,4 +1,5 @@
 /*发起post请求*/
+/*post('pages/statisticsJsp/excel.action', {html :prnhtml,cm1:'sdsddsd',cm2:'haha'});*/
 function post(URL, PARAMS){
      var temp = document.createElement("form");
      temp.action = URL;

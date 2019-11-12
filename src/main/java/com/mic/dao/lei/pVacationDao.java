@@ -32,4 +32,19 @@ public interface pVacationDao {
 	 * @since  1.0.0
 	 */
 	public void addPVacation(pVacationBean pvacationbean);
+	
+	
+	/**
+	 * 
+	 * 通过id得到stirng
+	 * 方法名：fondTel
+	 * 创建人：chenPeng
+	 * 时间：2018年11月26日-下午10:45:33 
+	 * 手机:17673111810
+	 * @param sId
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public String fondTel(Integer sId);
 }

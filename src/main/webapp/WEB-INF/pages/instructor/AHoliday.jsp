@@ -45,26 +45,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:if>
 				
 				<c:if test="${!empty aholidaybean}">
-					<form class="ui form" action="${basePath}/AHolidayWeb" method="post">
-						<c:forEach items="${aholidaybean}" var="aholidaybean">
-							<div class="field">
-								<div class="ui input">
-									<input name="id" type="hidden" value="${aholidaybean.id}">
-								</div>
-								<div class="ui fluid left icon input">
-									<i class="ui icon user"></i> <input name="teacherName"
-										type="submit"
-										value="姓名:${aholidaybean.studentname} 班级：${aholidaybean.classname}">
-								</div>
+					<c:forEach items="${aholidaybean}" var="aholiday">
+						<div class="field">
+							<div class="ui fluid left icon input">
+								<i class="ui icon user"></i> <input name="teacherName"
+									type="button" onclick="doIt(${aholiday.id})"
+									value="姓名:${aholiday.studentname} 班级：${aholiday.classname}">
 							</div>
-							<br>
-						</c:forEach>
-					</form>
+						</div>
+						<br>
+					</c:forEach>
 				</c:if>
 				
 			</div>  
         </div>
     </div>
-        <%@include file="../common/food.jsp" %>
+    <%@include file="../common/food.jsp" %>
+    <script type="text/javascript">
+    	function doIt(ids){
+    		post("${basePath}/AHolidayWeb", {"id":ids});
+    	}
+    
+    </script>    
     </body>
 </html>

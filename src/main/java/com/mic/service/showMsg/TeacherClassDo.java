@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.mic.bean.course.Course;
 import com.mic.bean.course.CourseNote;
+import com.mic.bean.departments.Information;
 import com.mic.bean.other.IdAndNo;
 import com.mic.dao.showMsg.TeacherClassDao;
 
@@ -133,6 +134,35 @@ public class TeacherClassDo {
 	*/
 	public Integer getClsLenth(Integer no) {
 		return teacherClassDao.getMsgLength(no);
+	}
+
+
+	/**
+	 * 补签功能
+	 * 方法名：supplementDo
+	 * 创建人：chenPeng
+	 * 时间：2018年12月29日-上午1:11:52 
+	 * 手机:17673111810
+	 * @param attId
+	 * @param stuId
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public String supplementDo(Integer attId, Integer stuId) {
+		// TODO Auto-generated method stub
+		Information information  = new Information();
+		information.setAttendance_id(attId);
+		information.setStudent_id(stuId);
+		
+		try {
+			teacherClassDao.supplementDo(information);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			return "error";
+		}
+		return "success";
 	}
 	
 	

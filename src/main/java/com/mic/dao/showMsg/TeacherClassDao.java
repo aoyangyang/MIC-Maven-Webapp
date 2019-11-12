@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.mic.bean.course.Course;
 import com.mic.bean.course.CourseNote;
+import com.mic.bean.departments.Information;
 import com.mic.bean.other.IdAndNo;
 
 /**
@@ -104,4 +105,17 @@ public interface TeacherClassDao {
 	 * @since  1.0.0
 	 */
 	public Integer getMsgLength(Integer claId);
+
+
+	/**
+	 * (这里用一句话描述这个方法的作用)
+	 * 方法名：supplementDo
+	 * 创建人：chenPeng
+	 * 时间：2018年12月29日-上午1:14:55 
+	 * 手机:17673111810
+	 * @param information void
+	 * @exception 
+	 * @since  1.0.0
+	*/
+	public void supplementDo(Information information);
 }

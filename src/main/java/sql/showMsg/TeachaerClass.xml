@@ -89,5 +89,21 @@
 				course_id = #{claId}
 	</select>
 
-
+	<update id="supplementDo" parameterType="com.mic.bean.departments.Information">
+	UPDATE
+		information
+	SET
+		`status` = '到课'
+	WHERE
+		student_id = #{student_id}
+	AND
+		attendance_id = (
+			SELECT
+				id
+			FROM
+				attendance
+			WHERE
+				course_note_id = #{attendance_id}
+		)
+	</update>
 </mapper>  

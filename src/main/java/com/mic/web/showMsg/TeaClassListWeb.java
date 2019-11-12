@@ -112,6 +112,8 @@ public class TeaClassListWeb {
 		//拿到信息列表
 		List<CourseNote> coureList = teacherClassDo.getCourList(no,1);
 		
+		//将信息存起来
+		re.getSession().setAttribute("C_id", no);
 		
 		//判断老师是否也权限
 		if (coureList == null) {
@@ -133,6 +135,27 @@ public class TeaClassListWeb {
 		
 		return andView;
 	}
+	
+	/**
+	 * 老师补签
+	 * 方法名：supplementDo
+	 * 创建人：chenPeng
+	 * 时间：2018年12月29日-上午1:11:20 
+	 * 手机:17673111810
+	 * @param attId
+	 * @param stuId
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping(value="/teacher/supplementDo",method = RequestMethod.POST, 
+								produces = "application/String; charset=utf-8")
+	@ResponseBody
+	public String supplementDo(Integer attId,Integer stuId){
+		return teacherClassDo.supplementDo(attId,stuId);
+	}
+	
+	
 	
 	/**
 	 * ajax刷新得到某门课程信息列表
@@ -239,23 +262,5 @@ public class TeaClassListWeb {
 		return andView;
 	}
 	
-	
-	/**
-	 * 开放中------------------------------------------------------------------------
-	 * 方法名：upClassMsg
-	 * 创建人：chenPeng
-	 * 时间：2018年11月19日-下午1:01:15 
-	 * 手机:17673111810
-	 * @param no
-	 * @return ModelAndView
-	 * @exception 
-	 * @since  1.0.0
-	 */
-	@RequestMapping("/teacher/problem/{no}")
-	public ModelAndView problem(@PathVariable Integer no){
-		ModelAndView andView = new ModelAndView();
-		System.out.println("TeaClassListWeb最后一个函数"+no);
-		return andView;
-	}
 	
 }

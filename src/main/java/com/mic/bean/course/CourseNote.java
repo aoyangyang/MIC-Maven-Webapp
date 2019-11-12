@@ -24,6 +24,15 @@ public class CourseNote {
 	private String	begin_time;
 	private String end_time;
 	private String courseware;
+	private String ppt;
+	
+	
+	public String getPpt() {
+		return ppt;
+	}
+	public void setPpt(String ppt) {
+		this.ppt = ppt;
+	}
 	public Integer getId() {
 		return id;
 	}

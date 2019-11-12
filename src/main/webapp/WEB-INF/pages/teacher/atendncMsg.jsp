@@ -42,24 +42,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</button>
 		  			<div class="ui clearing divider"></div>
 					<div class="ui center aligned segment vertical basic">
-						<!--  =================  -->
-						<!--       = 统图 =       -->
-						<!--  =================  -->
-						<c:if test="${pancakeDate.getAttendance()==0
-								&&pancakeDate.getLeave()==0
-								&&pancakeDate.getAbsence()==0}">
-							<h3 class="ui  header">
-								次节课未点到或此节课无课
-							</h3>
-						</c:if>
-						<c:if test="${pancakeDate.getAttendance()!=0
-								&&pancakeDate.getLeave()!=0
-								&&pancakeDate.getAbsence()!=0}">
-							<div id="chartdiv" 
-								style=" width: 100%;
-				 				height: 500px;"
-				 				></div>
-						</c:if>
+						<div id="chartdiv" style=" width: 100%;height: 500px;">
+						</div>
 					</div>
 				</div>
 				<!--  ==========  -->
@@ -71,7 +55,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<thead>
 						<tr>
 							<th>姓名</th>
-							<th>时间</th>
 							<th>电话</th>
 						</tr>
 					</thead>
@@ -79,7 +62,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<c:forEach items="${absenceList}" var="absence">
 							<tr>
 								<td>${absence.getUsername() }</td>
-								<td>${absence.getTime() }</td>
 								<td>${absence.getPhone() }</td>
 							</tr>
 						</c:forEach>
@@ -92,7 +74,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<thead>
 						<tr>
 							<th>姓名</th>
-							<th>时间</th>
 							<th>电话</th>
 						</tr>
 					</thead>
@@ -100,7 +81,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<c:forEach items="${leaveList}" var="leave">
 							<tr>
 								<td>${leave.getUsername() }</td>
-								<td>${leave.getTime() }</td>
 								<td>${leave.getPhone() }</td>
 							</tr>
 						</c:forEach>

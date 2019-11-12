@@ -25,28 +25,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
     </head>
-  
+  <style>
+  	.myBox{
+  		width: 100%;
+  	}
+  	.myBox img{
+  		margin-bottom: 5px;
+  	}
+  	.myBox p{
+  		margin-bottom: 10%;
+  	}
+  	</style>
     <body id="box">
         <%@include file="../common/top.jsp" %>
             <!--中间-->
 		<div class="main">
 			<div class="ui raised very padded segment">
 				<h2>学工组首页</h2>
-				<div class="boxs">
-					<div class="ui img">
-						<img alt="" src="${basePath}/img/logo.png" class="ui img">
-					</div>
-					<a>
-						<input class="ui primary button" value="查看请假情况">
-					</a>
-				</div>
-				<div class="boxs">
-					<div class="ui img">
-						<img alt="" src="${basePath}/img/logo.png" class="ui img">
-					</div>
-					<a href="${basePath}/work">
-						<input class="ui primary button" value="查看到课情况">
-					</a>
+				<div class="ui divider"></div>
+				<div class="myBox">
+					<img class="ui  rounded image" src="${basePath}/img/work/work.jpg"></img>
+					<p>
+						<a href="${basePath}/work">
+							<button class="ui primary fluid   button" >查看到课情况</button>
+						</a>
+					</p>
 				</div>
 			</div>
 		</div>

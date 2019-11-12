@@ -6,17 +6,17 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:task="http://www.springframework.org/schema/task" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans   
-  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+  http://www.springframework.org/schema/beans/spring-beans.xsd  
   http://www.springframework.org/schema/aop   
-  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+  http://www.springframework.org/schema/aop/spring-aop.xsd
   http://www.springframework.org/schema/tx   
-  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+  http://www.springframework.org/schema/tx/spring-tx.xsd
   http://www.springframework.org/schema/context   
-  http://www.springframework.org/schema/context/spring-context-3.0.xsd
+  http://www.springframework.org/schema/context/spring-context.xsd
   http://www.springframework.org/schema/util   
-  http://www.springframework.org/schema/util/spring-util-3.2.xsd
+  http://www.springframework.org/schema/util/spring-util.xsd
   http://www.springframework.org/schema/task  
-  http://www.springframework.org/schema/task/spring-task-3.2.xsd 
+  http://www.springframework.org/schema/task/spring-task.xsd 
 ">
 <!-- 读取配置文件 -->
 	<bean 
@@ -44,13 +44,13 @@
 		<property name="houseKeepingTestSql" value="SELECT count(1) from dual"></property>
 		<!-- 如果housekeeper 检测到某个线程的活动时间大于这个数值.它将会杀掉这个线程.所以确认一下你的服务器的带宽.然后定一个合适的值.默认是5分钟. 
 			现在设置 10 秒 -->
-		<property name="maximumActiveTime" value="10000"></property>
+		<property name="maximumActiveTime" value="1"></property>
 		<!-- 最少保持的空闲连接数 （现在设置20个） -->
-		<property name="prototypeCount" value="20"></property>
+		<property name="prototypeCount" value="1"></property>
 		<!-- 最大连接数 （现在设置100个） -->
-		<property name="maximumConnectionCount" value="100"></property>
+		<property name="maximumConnectionCount" value="50"></property>
 		<!-- 最小连接数 （现在设置50个） -->
-		<property name="minimumConnectionCount" value="50"></property>
+		<property name="minimumConnectionCount" value="1"></property>
 		<!-- 如果为true,那么每个被执行的SQL语句将会在执行期被log记录(DEBUG LEVEL).你也可以注册一个ConnectionListener 
 			(参看ProxoolFacade)得到这些信息. -->
 		<property name="trace" value="false"></property>

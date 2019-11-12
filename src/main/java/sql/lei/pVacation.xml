@@ -9,5 +9,14 @@
 				student_id, reason, s_phone, begin_time, end_time, state)
 			VALUE(#{student_id},#{reason}, #{s_phone}, #{begin_time}, #{end_time}, #{state});
 	</insert>
-
+	
+	<!-- 查到手机号码 -->
+	<select id="fondTel" parameterType="Integer" resultType="String">
+		SELECT
+			phone
+		FROM
+			student
+		WHERE
+			id = #{sId}
+	</select>
 </mapper>

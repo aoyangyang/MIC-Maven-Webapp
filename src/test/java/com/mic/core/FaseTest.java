@@ -32,8 +32,8 @@ public class FaseTest {
 	    String appcode = "b400dde4904541f2b832975111886291";
 	    
 	    
-	    String img01 = imgBeat64.getBeat64("C:/Users/81022/Desktop/3.jpg");
-	    String img02 = imgBeat64.getBeat64("C:/Users/81022/Desktop/4.jpg");
+	    String img01 = imgBeat64.getBeat64("C:/Users/81022/Desktop/1.jpg");
+	    String img02 = imgBeat64.getBeat64("C:/Users/81022/Desktop/3.jpg");
 	    
 	    
 	    String img1 = ""; 
@@ -64,7 +64,7 @@ public class FaseTest {
 	    	* https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
 	    	*/
 	    	HttpResponse response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
-	    	System.out.println(response.toString());
+	    	//System.out.println(response.toString());
 	    	//获取response的body
 	    	System.out.println(EntityUtils.toString(response.getEntity()));
 	    } catch (Exception e) {

@@ -13,6 +13,16 @@
 					course_note_id = #{noteId};
   		</select>
   		
+  		<select id="getCan" parameterType="Integer" resultType="Integer">
+	  		SELECT
+				can
+			FROM
+				attendance
+			WHERE
+				course_note_id = #{noteId};
+  		
+  		</select>
+  		
   		<!-- 通过考勤id拿到考情信息 -->
   		<select id="getAMsg"  parameterType="Integer"  resultType="com.mic.bean.departments.Information">
 	  			SELECT
@@ -24,5 +34,139 @@
 					attendance_id = #{atendncId}
   		</select>
   		
+  		<select id="getAMsgId" parameterType="Integer" resultType="Integer">
+				SELECT
+					id
+				FROM
+					attendance
+				WHERE
+					course_note_id = #{couNoteId};
+  		</select>
+  		<!-- 拿到全部选了这门课的学生的id -->
+  		<select id="getStuIdList" parameterType="Integer"  resultType="Integer">
+  				SELECT
+					student_id
+				FROM	
+					elective
+				WHERE
+					course_id = (
+						SELECT
+							course_id
+						FROM
+							course_note 
+						WHERE
+							id = #{noteId}
+					)
+  		</select>
+  		<!-- 通过课堂id拿到课堂时间信息  -->
+  		<select id="getTimeMsg" parameterType="Integer" resultType="com.mic.bean.course.CourseNote">
+	  			SELECT
+					begin_time,
+					end_time
+				FROM	
+					course_note
+				WHERE
+					id = #{noteId}
+  		</select>
+  		<!-- 新建考勤 -->
+  		<insert id="addAtendnc" parameterType="com.mic.bean.atendnc.Attendance" 
+  				flushCache="true" useGeneratedKeys="true" keyProperty="id"> 
+  			INSERT 
+			INTO attendance(
+				course_note_id,
+				time,
+				classroom,
+				state
+			)VALUES(
+				#{course_note_id},
+				#{time},
+				#{classroom},
+				#{state}
+			)
+  		</insert>
+  		<!-- 得到考情信息 -->
+  		<select id="getStuLeave" parameterType="Integer"  resultType="com.mic.bean.atendnc.Leave">
+  			SELECT
+				begin_time,
+				end_time
+			FROM
+				`leave`
+			WHERE
+				student_id = #{stu}
+				AND
+				state = 1
+  		</select>
   		
+  		<!-- 将单个学生信息写入考情信息中去 -->
+  		<insert id="addInformation" parameterType="com.mic.bean.departments.Information" flushCache="true">
+  				INSERT INTO
+				information(
+					attendance_id,
+					student_id,
+					`status`
+				)VALUES(
+					#{attendance_id},
+					#{student_id},
+					#{status}
+				)
+  		</insert>
+  		
+  		<select id="getStuArrive"  parameterType="Integer"  resultType="com.mic.bean.student.StudentArrive">
+				SELECT
+					username,
+					phone
+				FROM
+					student
+				WHERE
+					id =#{student_id}
+  		</select>
+  		
+  		<!-- 得到模式 -->
+  		<select id="getMode" resultType="Integer" parameterType="Integer">
+	  			SELECT
+					`mode`
+				FROM
+					attendance
+				WHERE
+					id = #{atendncId};
+  		</select>
+  		
+  		<update id="stopAtendnc" parameterType="Integer">
+	  			UPDATE
+					attendance
+				SET
+					can = 0
+				WHERE
+					course_note_id = #{noteId};
+  		</update>
+  		
+  		<!-- 将密码写入数据库 -->
+  		<update id="setPword" parameterType="Map">
+  				UPDATE
+					attendance
+				SET
+					pword = #{timeKey}
+				WHERE
+					course_note_id = #{noteId};
+  		</update>
+  		
+  		<!-- 得到密码 -->
+  		<select id="getTimeKey" resultType="Integer" parameterType="Integer">
+	  			SELECT
+					pword
+				FROM
+					attendance
+				WHERE
+					id = #{atendncId};
+  		</select>
+  		
+  		<update id="setCanAndMode" parameterType="Map">
+  				UPDATE
+					attendance
+				SET
+					can = #{can},
+					mode = #{mode}
+				WHERE
+					course_note_id = #{noteId};
+  		</update>
   </mapper>
